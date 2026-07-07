@@ -1,0 +1,164 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Check script syntax
+        run: |
+          node --check scripts/prepare-digest.js
+          node --check scripts/generate-feed.js
+          node --check scripts/check-feed-quality.js
+          node scripts/generate-feed.js --self-test
+
+      - name: Validate static artifacts
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const requiredFiles = [
+            'README.md',
+            'SKILL.md',
+            'config/sources.json',
+            'feed-peptides.json',
+            'state-feed.json',
+            'scripts/prepare-digest.js',
+            'scripts/generate-feed.js',
+            'scripts/check-feed-quality.js',
+            'prompts/digest-intro.md',
+            'prompts/summarize-papers.md',
+            'prompts/summarize-official.md',
+            'prompts/summarize-news.md',
+            'prompts/translate.md'
+          ];
+
+          for (const file of requiredFiles) {
+            if (!fs.existsSync(file)) throw new Error(`Missing required file: ${file}`);
+          }
+
+          const allowedCategories = new Set([
+            'company_official',
+            'clinical_registry',
+            'regulatory',
+            'literature',
+            'conference',
+            'patent',
+            'industry_news',
+            'knowledgebase'
+          ]);
+
+          const catalog = JSON.parse(fs.readFileSync('config/sources.json', 'utf8'));
+          if (catalog.schema_version == null) throw new Error('config/sources.json missing schema_version');
+          if (!catalog.primary_rss || typeof catalog.primary_rss !== 'object') {
+            throw new Error('config/sources.json missing primary_rss');
+          }
+          for (const key of Object.keys(catalog.primary_rss)) {
+            if (!allowedCategories.has(key)) throw new Error(`Unsupported primary_rss bucket: ${key}`);
+          }
+
+          function walkCategories(node, path) {
+            if (Array.isArray(node)) {
+              for (let i = 0; i < node.length; i++) walkCategories(node[i], `${path}[${i}]`);
+              return;
+            }
+            if (!node || typeof node !== 'object') return;
+            for (const [key, value] of Object.entries(node)) {
+              if ((key === 'category' || key === 'sourceCategory') && typeof value === 'string' && !allowedCategories.has(value)) {
+                throw new Error(`Unsupported ${key} value "${value}" at ${path}.${key}`);
+              }
+              walkCategories(value, `${path}.${key}`);
+            }
+          }
+          walkCategories(catalog, 'catalog');
+
+          const feed = JSON.parse(fs.readFileSync('feed-peptides.json', 'utf8'));
+          if (feed.schemaVersion == null) throw new Error('feed-peptides.json missing schemaVersion');
+          if (!Array.isArray(feed.items)) throw new Error('feed-peptides.json items must be an array');
+          if (!feed.healthcheck || typeof feed.healthcheck !== 'object') throw new Error('feed-peptides.json missing healthcheck');
+
+          const state = JSON.parse(fs.readFileSync('state-feed.json', 'utf8'));
+          if (!state || typeof state !== 'object') throw new Error('state-feed.json must be an object');
+          NODE
+
+      - name: Check feed quality
+        run: node scripts/check-feed-quality.js
+
+      - name: Smoke test local fallback
+        run: |
+          node <<'NODE'
+          const { spawnSync } = require('child_process');
+
+          const result = spawnSync(process.execPath, [
+            'scripts/prepare-digest.js',
+            '--no-remote',
+            '--days=30'
+          ], {
+            encoding: 'utf8',
+            maxBuffer: 20 * 1024 * 1024
+          });
+
+          if (result.status !== 0) {
+            console.error(result.stderr || result.stdout);
+            process.exit(result.status || 1);
+          }
+
+          const payload = JSON.parse(result.stdout);
+          if (payload.status !== 'ok') throw new Error(`Unexpected status: ${payload.status}`);
+          if (payload.config?.language !== 'zh') throw new Error(`Expected default language zh, got ${payload.config?.language}`);
+          if (payload.windowDays !== 30) throw new Error(`Expected windowDays 30, got ${payload.windowDays}`);
+          if (payload.healthcheck?.feed_source !== 'local_feed') throw new Error(`Expected local_feed, got ${payload.healthcheck?.feed_source}`);
+          if (!payload.prompts?.digest_intro) throw new Error('Missing digest_intro prompt');
+          if (!Array.isArray(payload.items)) throw new Error('items must be an array');
+
+          console.log(JSON.stringify({
+            feed_source: payload.healthcheck.feed_source,
+            keptItems: payload.stats?.keptItems,
+            sourceFeedItems: payload.stats?.sourceFeedItems
+          }));
+          NODE
+
+      - name: Reject invalid categories
+        run: |
+          node <<'NODE'
+          const { spawnSync } = require('child_process');
+
+          const result = spawnSync(process.execPath, [
+            'scripts/prepare-digest.js',
+            '--category=academics',
+            '--days=30',
+            '--no-remote'
+          ], {
+            encoding: 'utf8',
+            maxBuffer: 1024 * 1024
+          });
+
+          if (result.status === 0) {
+            console.error(result.stdout);
+            throw new Error('Expected invalid category to fail');
+          }
+          const payload = JSON.parse(result.stderr || result.stdout);
+          if (!String(payload.message || '').includes('unsupported category')) {
+            throw new Error(`Unexpected invalid category error: ${payload.message}`);
+          }
+          NODE

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #f5f4ed;
+  --ivory: #faf9f5;
+  --terracotta: #c96442;
+  --terracotta-dim: #c9644220;
+  --terracotta-light: #c964421a;
+  --near-black: #141413;
+  --olive-gray: #5e5d59;
+  --stone-gray: #87867f;
+  --charcoal: #4d4c48;
+  --border-cream: #f0eee6;
+  --border-warm: #e8e6dc;
+  --warm-silver: #b0aea5;
+  --serif: 'Noto Serif SC', Georgia, serif;
+  --sans: 'Noto Sans SC', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--terracotta); text-decoration: none; border-bottom: 1px solid var(--terracotta-dim); transition: border-color 0.2s; }
+a:hover { border-bottom-color: var(--terracotta); }
+
+.deck { width: 100%; height: 100%; position: relative; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 4.5vh 7vw;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  overflow-y: auto;
+  background: var(--parchment);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-warm) transparent;
+}
+
+.slide.v-center { justify-content: center; }
+
+.slide::-webkit-scrollbar { width: 6px; }
+.slide::-webkit-scrollbar-track { background: transparent; }
+.slide::-webkit-scrollbar-thumb { background: var(--border-warm); border-radius: 3px; }
+
+.slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.slide.exit-up { opacity: 0; transform: translateY(-24px); }
+
+h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.2rem, 4.5vw, 3.2rem); line-height: 1.15; color: var(--near-black); margin-bottom: 1.2rem; letter-spacing: 0; }
+h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.4rem, 2.8vw, 2rem); line-height: 1.25; color: var(--near-black); margin-bottom: 0.8rem; letter-spacing: 0; }
+h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.3; color: var(--charcoal); margin-bottom: 0.5rem; }
+
+p { color: var(--olive-gray); font-size: clamp(0.86rem, 1.5vw, 0.96rem); line-height: 1.75; max-width: 76ch; }
+
+.subtitle { font-family: var(--mono); font-size: clamp(0.7rem, 1vw, 0.8rem); color: var(--stone-gray); letter-spacing: 0.03em; margin-bottom: 1.2rem; }
+.accent { color: var(--terracotta); }
+
+.tag { display: inline-block; font-family: var(--mono); font-size: 0.65rem; color: var(--terracotta); background: var(--terracotta-dim); padding: 0.18em 0.5em; border-radius: 4px; letter-spacing: 0.02em; margin-right: 0.3rem; vertical-align: middle; }
+
+.card {
+  background: var(--ivory);
+  border: 1px solid var(--border-cream);
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+}
+.card h3 { margin-bottom: 0.4rem; }
+.card p { font-size: 0.88rem; }
+.card .source-ref { margin-top: auto; padding-top: 0.6rem; }
+
+.signal-star { color: var(--terracotta); font-size: 1.1em; margin-right: 0.2rem; }
+
+.score { font-family: var(--mono); font-size: 0.75rem; color: var(--stone-gray); margin-top: 0.4rem; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.stat-box {
+  background: var(--ivory);
+  border: 1px solid var(--border-warm);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  text-align: center;
+}
+.stat-box .number { font-family: var(--serif); font-weight: 500; font-size: 2rem; color: var(--terracotta); line-height: 1; }
+.stat-box .label { font-size: 0.75rem; color: var(--stone-gray); margin-top: 0.3rem; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.8rem; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 0.8rem; }
+
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .slide { padding: 3vh 5vw; } .grid-2 { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; } }
+
+.bullet-list { list-style: none; padding: 0; }
+.bullet-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 1.3rem;
+  font-size: clamp(0.84rem, 1.4vw, 0.93rem);
+  color: var(--olive-gray);
+  line-height: 1.75;
+}
+.bullet-list li::before { content: ''; position: absolute; left: 0; top: 0.7em; width: 5px; height: 5px; background: var(--terracotta); border-radius: 50%; }
+.bullet-list li strong { color: var(--near-black); font-weight: 500; }
+
+.section-label { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--terracotta); margin-bottom: 0.4rem; }
+.divider { width: 48px; height: 2px; background: var(--terracotta); margin: 1rem 0; border-radius: 1px; }
+
+.progress-bar { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--terracotta); transition: width 0.4s ease; z-index: 100; }
+.slide-counter { position: fixed; bottom: 1.2rem; right: 1.8rem; font-family: var(--mono); font-size: 0.7rem; color: var(--stone-gray); z-index: 100; }
+.nav-hint { position: fixed; bottom: 1.2rem; left: 1.8rem; font-family: var(--mono); font-size: 0.65rem; color: var(--stone-gray); opacity: 0.5; z-index: 100; }
+
+.stagger > * { opacity: 0; transform: translateY(10px); transition: opacity 0.45s ease, transform 0.45s ease; }
+.slide.active .stagger > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.06s; }
+.slide.active .stagger > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+.slide.active .stagger > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
+.slide.active .stagger > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+.slide.active .stagger > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.30s; }
+.slide.active .stagger > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
+.slide.active .stagger > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.42s; }
+.slide.active .stagger > *:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 0.48s; }
+.slide.active .stagger > *:nth-child(9) { opacity: 1; transform: translateY(0); transition-delay: 0.54s; }
+.slide.active .stagger > *:nth-child(10) { opacity: 1; transform: translateY(0); transition-delay: 0.60s; }
+
+.source-ref { font-family: var(--mono); font-size: 0.68rem; color: var(--stone-gray); margin-top: 0.3rem; }
+.source-ref a { font-size: inherit; }
+
+.hero-number { font-family: var(--serif); font-weight: 500; font-size: clamp(3.5rem, 9vw, 6rem); color: var(--terracotta); line-height: 1; letter-spacing: 0; }
+
+.link-arrow::after { content: ' ↗'; font-size: 0.8em; opacity: 0.7; }
+
+.highlight-box { background: var(--terracotta-light); border-left: 3px solid var(--terracotta); padding: 0.7rem 1.1rem; margin-top: 0.8rem; border-radius: 0 6px 6px 0; }
+.highlight-box p { font-size: 0.86rem; color: var(--charcoal); }
+
+@page { size: 960px 540px; margin: 0; }
+
+@media print {
+  html,
+  body {
+    width: 960px;
+    height: auto !important;
+    overflow: visible !important;
+    background: var(--parchment);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .deck { height: auto !important; }
+
+  .slide {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    page-break-after: always;
+    break-after: page;
+    width: 960px;
+    height: 540px;
+    padding: 30px 48px !important;
+    overflow: hidden;
+  }
+
+  .slide.v-center { justify-content: center !important; }
+  .slide.stats-slide { justify-content: flex-start !important; }
+
+  .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    height: 340px !important;
+    align-items: stretch !important;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    height: 320px !important;
+    align-items: stretch !important;
+  }
+
+  h1 { font-size: 44px !important; line-height: 1.08 !important; margin-bottom: 12px !important; }
+  h2 { font-size: 31px !important; line-height: 1.12 !important; margin-bottom: 8px !important; }
+  h3 { font-size: 19px !important; line-height: 1.18 !important; margin-bottom: 6px !important; }
+  p { font-size: 13px !important; line-height: 1.42 !important; max-width: 76ch !important; }
+
+  .subtitle { font-size: 11px !important; margin-bottom: 12px !important; }
+  .section-label { font-size: 9px !important; margin-bottom: 5px !important; }
+  .divider { margin: 8px 0 14px !important; width: 48px !important; }
+  .hero-number { font-size: 58px !important; }
+  .progress-bar,
+  .slide-counter,
+  .nav-hint { display: none !important; }
+
+  .card {
+    padding: 14px 16px !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .card h3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card p {
+    display: -webkit-box !important;
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .top-signals-slide .card p { -webkit-line-clamp: 5; }
+  .card .source-ref { padding-top: 6px !important; }
+  .source-ref { font-size: 10px !important; line-height: 1.25 !important; }
+  .score { font-size: 10px !important; line-height: 1.25 !important; margin-top: 6px !important; }
+  .tag { font-size: 9px !important; }
+
+  .detail-slide h2 { font-size: 27px !important; line-height: 1.08 !important; }
+  .detail-slide .divider { margin-bottom: 12px !important; }
+  .detail-slide p { font-size: 12.5px !important; line-height: 1.35 !important; max-width: 70ch !important; }
+  .detail-tags { display: none !important; }
+
+  .highlight-box { margin-top: 8px !important; padding: 8px 12px !important; }
+  .highlight-box p {
+    display: -webkit-box !important;
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+  }
+
+  .stat-box { padding: 12px !important; }
+  .stat-box .number { font-size: 30px !important; }
+  .stat-box .label { font-size: 10px !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ============================================================
+     SLIDE 1: TITLE
+     ============================================================ -->
+<div class="slide v-center title-slide active">
+  <div class="stagger">
+    <p class="section-label">{{HERO_LABEL}}</p>
+    <h1>Peptide Intelligence Frontiers<br><span class="accent">{{MONTH_YEAR_LABEL}}</span></h1>
+    <div class="divider"></div>
+    <p class="subtitle">Past {{WINDOW_DAYS}} days · {{RAW_ITEMS}} raw → {{KEPT_ITEMS}} kept · {{SOURCES_QUERIED}} RSS + {{API_SOURCES}} API + {{TAVILY_SITES}} Tavily sites</p>
+    <p style="margin-top:1.2rem;">{{INTRO_DESCRIPTION}}</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 2: TOP SIGNALS OVERVIEW (3 cards)
+     ============================================================ -->
+<div class="slide top-signals-slide">
+  <div class="stagger">
+    <p class="section-label">{{TOP_SIGNALS_LABEL}}</p>
+    <h2>{{TOP_SIGNALS_TITLE}}</h2>
+    <div class="divider"></div>
+    <div class="grid-3">
+      <!-- TOP SIGNAL CARD 1 -->
+      <div class="card">
+        <h3><span class="signal-star">★</span> {{TS1_TITLE_SHORT}}</h3>
+        <p>{{TS1_SUMMARY_SHORT}}</p>
+        <p class="score">{{TS1_CATEGORY}} · {{TS1_ANCHOR}} · {{TS1_SCORE}}</p>
+        <p class="source-ref"><a href="{{TS1_URL}}" target="_blank" class="link-arrow">{{TS1_SOURCE}}</a> · {{TS1_DATE}}</p>
+      </div>
+      <!-- TOP SIGNAL CARD 2 -->
+      <div class="card">
+        <h3><span class="signal-star">★</span> {{TS2_TITLE_SHORT}}</h3>
+        <p>{{TS2_SUMMARY_SHORT}}</p>
+        <p class="score">{{TS2_CATEGORY}} · {{TS2_ANCHOR}} · {{TS2_SCORE}}</p>
+        <p class="source-ref"><a href="{{TS2_URL}}" target="_blank" class="link-arrow">{{TS2_SOURCE}}</a> · {{TS2_DATE}}</p>
+      </div>
+      <!-- TOP SIGNAL CARD 3 -->
+      <div class="card">
+        <h3><span class="signal-star">★</span> {{TS3_TITLE_SHORT}}</h3>
+        <p>{{TS3_SUMMARY_SHORT}}</p>
+        <p class="score">{{TS3_CATEGORY}} · {{TS3_ANCHOR}} · {{TS3_SCORE}}</p>
+        <p class="source-ref"><a href="{{TS3_URL}}" target="_blank" class="link-arrow">{{TS3_SOURCE}}</a> · {{TS3_DATE}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 3: TOP SIGNAL #1 DETAIL
+     ============================================================ -->
+<div class="slide detail-slide">
+  <div class="stagger">
+    <p class="section-label">Top Signal #1 · {{TS1_CATEGORY}} · Score {{TS1_SCORE}}</p>
+    <h2><span class="signal-star">★</span> {{TS1_TITLE_FULL}}</h2>
+    <div class="divider"></div>
+    <!-- Write 3-4 paragraphs: background, what happened, key data, timeline -->
+    {{TS1_RICH_CONTENT}}
+    <div class="highlight-box">
+      <p><strong>{{TS1_IMPACT_LABEL}}</strong>{{TS1_IMPACT_TEXT}}</p>
+    </div>
+    <div class="detail-tags" style="margin-top:1rem;">
+      {{TS1_TAGS}}
+    </div>
+    <p class="source-ref" style="margin-top:0.8rem;">
+      {{TS1_SOURCE_LINKS}}
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 4: TOP SIGNAL #2 DETAIL
+     ============================================================ -->
+<div class="slide detail-slide">
+  <div class="stagger">
+    <p class="section-label">Top Signal #2 · {{TS2_CATEGORY}} · Score {{TS2_SCORE}}</p>
+    <h2><span class="signal-star">★</span> {{TS2_TITLE_FULL}}</h2>
+    <div class="divider"></div>
+    {{TS2_RICH_CONTENT}}
+    <div class="highlight-box">
+      <p><strong>{{TS2_IMPACT_LABEL}}</strong>{{TS2_IMPACT_TEXT}}</p>
+    </div>
+    <div class="detail-tags" style="margin-top:1rem;">
+      {{TS2_TAGS}}
+    </div>
+    <p class="source-ref" style="margin-top:0.8rem;">
+      {{TS2_SOURCE_LINKS}}
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 5: TOP SIGNAL #3 DETAIL
+     ============================================================ -->
+<div class="slide detail-slide">
+  <div class="stagger">
+    <p class="section-label">Top Signal #3 · {{TS3_CATEGORY}} · Score {{TS3_SCORE}}</p>
+    <h2><span class="signal-star">★</span> {{TS3_TITLE_FULL}}</h2>
+    <div class="divider"></div>
+    {{TS3_RICH_CONTENT}}
+    <div class="highlight-box">
+      <p><strong>{{TS3_IMPACT_LABEL}}</strong>{{TS3_IMPACT_TEXT}}</p>
+    </div>
+    <div class="detail-tags" style="margin-top:1rem;">
+      {{TS3_TAGS}}
+    </div>
+    <p class="source-ref" style="margin-top:0.8rem;">
+      {{TS3_SOURCE_LINKS}}
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 6: INDUSTRY NEWS (grid-2 cards)
+     Replace/duplicate cards as needed. Each card: h3, p (4-6 sentences), source-ref.
+     ============================================================ -->
+<div class="slide cards-slide">
+  <div class="stagger">
+    <p class="section-label">{{SECTION_INDUSTRY_LABEL}}</p>
+    <h2>{{SECTION_INDUSTRY_TITLE}}</h2>
+    <div class="divider"></div>
+    <div class="grid-2">
+      {{INDUSTRY_CARDS_1}}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 7: INDUSTRY NEWS CONTINUED (optional, add if >4 items)
+     ============================================================ -->
+<div class="slide cards-slide">
+  <div class="stagger">
+    <p class="section-label">{{SECTION_INDUSTRY_LABEL_CONTINUED}}</p>
+    <h2>{{SECTION_INDUSTRY_TITLE_2}}</h2>
+    <div class="divider"></div>
+    <div class="grid-2">
+      {{INDUSTRY_CARDS_2}}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 8: ACADEMIC (grid-2 cards)
+     ============================================================ -->
+<div class="slide cards-slide">
+  <div class="stagger">
+    <p class="section-label">{{SECTION_ACADEMIC_LABEL}}</p>
+    <h2>{{SECTION_ACADEMIC_TITLE}}</h2>
+    <div class="divider"></div>
+    <div class="grid-2">
+      {{ACADEMIC_CARDS_1}}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 9: ACADEMIC CONTINUED (optional)
+     ============================================================ -->
+<div class="slide cards-slide">
+  <div class="stagger">
+    <p class="section-label">{{SECTION_ACADEMIC_LABEL_CONTINUED}}</p>
+    <h2>{{SECTION_ACADEMIC_TITLE_2}}</h2>
+    <div class="divider"></div>
+    <div class="grid-2">
+      {{ACADEMIC_CARDS_2}}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 10: CLINICAL / REGULATORY (grid-2 cards)
+     ============================================================ -->
+<div class="slide cards-slide">
+  <div class="stagger">
+    <p class="section-label">{{SECTION_CLINICAL_LABEL}}</p>
+    <h2>{{SECTION_CLINICAL_TITLE}}</h2>
+    <div class="divider"></div>
+    <div class="grid-2">
+      {{CLINICAL_CARDS}}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 11: STATS / SIGNAL FUNNEL
+     ============================================================ -->
+<div class="slide stats-slide">
+  <div class="stagger">
+    <p class="section-label">{{STATS_LABEL}}</p>
+    <h2>{{STATS_TITLE}}</h2>
+    <div class="divider"></div>
+    <div style="display:flex; align-items:baseline; gap:1rem; margin:1rem 0;">
+      <span class="hero-number">{{RAW_ITEMS}}</span>
+      <span style="font-size:1.5rem; color:var(--stone-gray);">→</span>
+      <span class="hero-number">{{KEPT_ITEMS}}</span>
+    </div>
+    <p style="margin-bottom:1.2rem;">{{FUNNEL_DESCRIPTION}}</p>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="number">{{RSS_RESULTS}}/{{RSS_QUERIED}}</div><div class="label">{{RSS_LABEL}}</div></div>
+      <div class="stat-box"><div class="number">{{API_RESULTS}}/{{API_QUERIED}}</div><div class="label">{{API_LABEL}}</div></div>
+      <div class="stat-box"><div class="number">{{TAVILY_RESULTS}}/{{TAVILY_QUERIED}}</div><div class="label">{{TAVILY_LABEL}}</div></div>
+      <div class="stat-box"><div class="number">{{SOURCES_FAILED}}</div><div class="label">{{SOURCES_FAILED_LABEL}}</div></div>
+      <div class="stat-box"><div class="number">{{WINDOW_DAYS}}{{DAYS_SUFFIX}}</div><div class="label">{{WINDOW_LABEL}}</div></div>
+      <div class="stat-box"><div class="number">{{TOP_SIGNALS_COUNT}}</div><div class="label">Top Signals</div></div>
+    </div>
+    <p style="margin-top:1.2rem; font-size:0.83rem;">{{TOP_SOURCES_SUMMARY}}</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 12: END
+     ============================================================ -->
+<div class="slide v-center end-slide">
+  <div class="stagger" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <h1>{{END_TITLE}}</h1>
+    <div class="divider" style="margin:1.2rem auto;"></div>
+    <p style="text-align:center; color:var(--olive-gray);">Peptide Intelligence Frontiers · {{MONTH_YEAR_LABEL}}</p>
+  </div>
+</div>
+
+</div>
+
+<div class="progress-bar" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+<div class="nav-hint">{{NAV_HINT}}</div>
+
+<script>
+const slides=document.querySelectorAll('.slide'),progress=document.getElementById('progress'),counter=document.getElementById('counter');
+let current=0;
+function goTo(n){if(n<0||n>=slides.length)return;const p=current;slides[p].classList.remove('active');slides[p].classList.add('exit-up');current=n;slides[current].classList.add('active');slides[current].scrollTop=0;setTimeout(()=>slides[p].classList.remove('exit-up'),600);updateUI()}
+function next(){goTo(current+1)}function prev(){goTo(current-1)}
+function updateUI(){progress.style.width=((current+1)/slides.length*100)+'%';counter.textContent=(current+1)+' / '+slides.length}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();prev()}if(e.key==='Home'){e.preventDefault();goTo(0)}if(e.key==='End'){e.preventDefault();goTo(slides.length-1)}});
+document.addEventListener('click',e=>{if(e.target.closest('a'))return;if(e.clientX>window.innerWidth*.6)next();else if(e.clientX<window.innerWidth*.4)prev()});
+let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});document.addEventListener('touchend',e=>{if(e.target.closest('a'))return;const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50){d>0?next():prev()}});
+updateUI();
+</script>
+</body>
+</html>

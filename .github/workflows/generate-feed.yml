@@ -1,0 +1,85 @@
+name: Generate Peptide Feed
+
+on:
+  schedule:
+    # Runs every Monday at 07:30 Beijing time (Sunday 23:30 UTC).
+    - cron: "30 23 * * 0"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to fetch"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - rss-only
+
+concurrency:
+  group: generate-peptide-feed-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Sync latest main
+        run: git pull --ff-only origin main
+
+      - name: Generate feed
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.mode }}" = "rss-only" ]; then
+            node scripts/generate-feed.js --rss-only
+          else
+            node scripts/generate-feed.js
+          fi
+
+      - name: Check feed quality
+        run: node scripts/check-feed-quality.js --strict
+
+      - name: Write run summary
+        run: |
+          node <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const feed = require('./feed-peptides.json');
+          const stats = feed.stats || {};
+          const health = feed.healthcheck || {};
+          const warnings = health.warnings || [];
+          console.log('## Peptide Feed Summary');
+          console.log('');
+          console.log(`- Generated at: ${feed.generatedAt || 'unknown'}`);
+          console.log(`- Lookback days: ${feed.lookbackDays || 'unknown'}`);
+          console.log(`- Kept items: ${stats.keptItems ?? 'unknown'}`);
+          console.log(`- Raw items: ${stats.rawItems ?? 'unknown'}`);
+          console.log(`- RSS sources: ${stats.sourcesWithResults ?? 0}/${stats.sourcesQueried ?? 0} with results, ${stats.sourcesFailed ?? 0} failed`);
+          console.log(`- API sources: ${stats.apiSourcesWithResults ?? 0}/${stats.apiSourcesQueried ?? 0} with results, ${stats.apiSourcesFailed ?? 0} failed`);
+          console.log(`- Tavily sites: ${stats.tavilySitesWithResults ?? 0}/${stats.tavilySitesQueried ?? 0} with results, ${stats.tavilySitesFailed ?? 0} failed`);
+          if (warnings.length) {
+            console.log('');
+            console.log('### Warnings');
+            for (const warning of warnings) console.log(`- ${warning}`);
+          }
+          NODE
+
+      - name: Commit and push feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash origin main
+          git add feed-peptides.json state-feed.json
+          git diff --cached --quiet || git commit -m "chore: update peptide feed [skip ci]"
+          git push origin HEAD:main

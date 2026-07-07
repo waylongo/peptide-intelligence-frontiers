@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "generatedAt": "2026-07-07",
+  "note": "Peptide drug development intelligence sources. Active V1 sources are public/free RSS and APIs. Key-required, paid, or fragile sources are documented under inactive_sources and not fetched by default.",
+  "categories": [
+    "company_official",
+    "clinical_registry",
+    "regulatory",
+    "literature",
+    "conference",
+    "patent",
+    "industry_news",
+    "knowledgebase"
+  ],
+  "signal_taxonomy": {
+    "categories": [
+      "pipeline_update",
+      "clinical_trial",
+      "regulatory",
+      "paper",
+      "preprint",
+      "conference_abstract",
+      "patent_signal",
+      "bd_deal",
+      "company_news"
+    ]
+  },
+  "global_filters": {
+    "inclusion_keywords": [
+      "peptide drug",
+      "therapeutic peptide",
+      "peptide therapeutic",
+      "peptide drug discovery",
+      "cyclic peptide",
+      "macrocyclic peptide",
+      "macrocycle",
+      "stapled peptide",
+      "constrained peptide",
+      "peptidomimetic",
+      "non-natural amino acid",
+      "oral peptide",
+      "oral peptide delivery",
+      "peptide bioavailability",
+      "permeation enhancer",
+      "absorption enhancer",
+      "SNAC",
+      "GLP-1",
+      "GIP",
+      "glucagon",
+      "amylin",
+      "incretin",
+      "radiolabeled peptide",
+      "PRRT",
+      "radioligand therapy",
+      "radionuclide drug conjugate",
+      "RDC",
+      "peptide-drug conjugate",
+      "PDC",
+      "tumor-targeting peptide",
+      "tolerogenic peptide",
+      "antigen-specific immunotherapy"
+    ],
+    "required_context_keywords": [
+      "drug",
+      "therapeutic",
+      "clinical",
+      "treatment",
+      "patient",
+      "phase",
+      "candidate",
+      "development",
+      "indication",
+      "pharmacokinetic",
+      "dose",
+      "trial",
+      "approval",
+      "pipeline"
+    ],
+    "exclude_keywords": [
+      "signal peptide",
+      "transit peptide",
+      "peptide mapping",
+      "peptide identification",
+      "proteomics",
+      "proteomic",
+      "mass spectrometry method",
+      "collagen peptide",
+      "food peptide",
+      "cosmetic peptide",
+      "peptide bond",
+      "self-assembling peptide",
+      "author index",
+      "front matter",
+      "table of contents",
+      "call for papers",
+      "editorial board"
+    ],
+    "soft_exclude_keywords": [
+      "antimicrobial peptide",
+      "vaccine peptide",
+      "computational prediction",
+      "erratum",
+      "correction"
+    ],
+    "company_entities": [
+      "Eli Lilly",
+      "Lilly",
+      "Novo Nordisk",
+      "Roche",
+      "Genentech",
+      "Merck",
+      "MSD",
+      "Amgen",
+      "AstraZeneca",
+      "Pfizer",
+      "Sanofi",
+      "Novartis",
+      "GSK",
+      "Johnson & Johnson",
+      "Janssen",
+      "Boehringer Ingelheim",
+      "Takeda",
+      "Bayer",
+      "Bristol Myers Squibb",
+      "BMS",
+      "AbbVie",
+      "Regeneron",
+      "Zealand Pharma",
+      "Crinetics",
+      "RayzeBio",
+      "Point Biopharma",
+      "Advanced Accelerator Applications"
+    ]
+  },
+  "primary_rss": {
+    "company_official": [
+      {
+        "name": "Eli Lilly News Releases",
+        "category": "company_official",
+        "priority": "P0",
+        "rssUrl": "https://investor.lilly.com/rss/news-releases.xml",
+        "homeUrl": "https://investor.lilly.com/news-releases",
+        "lang": "en",
+        "why": "Official press and IR updates for incretin and peptide-adjacent pipeline signals",
+        "keywordFilter": ["peptide", "GLP-1", "GIP", "glucagon", "amylin", "incretin", "obesity", "diabetes", "MASH"],
+        "keywordScope": "title_summary"
+      }
+    ],
+    "literature": [
+      {
+        "name": "Nature Medicine RSS",
+        "category": "literature",
+        "priority": "P1",
+        "rssUrl": "https://www.nature.com/nm.rss",
+        "homeUrl": "https://www.nature.com/nm/",
+        "lang": "en",
+        "why": "High-signal translational and clinical peptide-adjacent research",
+        "keywordFilter": ["peptide", "GLP-1", "incretin", "amylin", "radioligand", "PRRT", "macrocycle", "obesity", "diabetes"],
+        "requiredKeywordFilter": ["clinical", "trial", "treatment", "patient", "therapeutic", "drug", "phase", "dose"],
+        "keywordScope": "title_summary"
+      },
+      {
+        "name": "Journal of Nuclear Medicine RSS",
+        "category": "literature",
+        "priority": "P1",
+        "rssUrl": "https://jnm.snmjournals.org/rss/current.xml",
+        "homeUrl": "https://jnm.snmjournals.org/",
+        "lang": "en",
+        "why": "PRRT, RLT, RDC, and radiolabeled peptide signals",
+        "keywordFilter": ["peptide", "PRRT", "radioligand", "radionuclide", "RDC", "177Lu", "225Ac", "somatostatin"],
+        "keywordScope": "title_summary"
+      },
+      {
+        "name": "bioRxiv: new results",
+        "category": "literature",
+        "priority": "P2",
+        "rssUrl": "https://connect.biorxiv.org/biorxiv_xml.php?subject=all",
+        "homeUrl": "https://www.biorxiv.org/",
+        "lang": "en",
+        "why": "Preprint leads for peptide discovery and delivery",
+        "keywordFilter": ["therapeutic peptide", "cyclic peptide", "macrocyclic peptide", "peptidomimetic", "oral peptide", "peptide drug", "GLP-1"],
+        "requiredKeywordFilter": ["drug", "therapeutic", "candidate", "treatment", "clinical", "delivery", "bioavailability"],
+        "excludeKeywordFilter": ["signal peptide", "peptide mapping", "proteomics", "collagen peptide", "food peptide"],
+        "keywordScope": "title_summary"
+      },
+      {
+        "name": "medRxiv: new results",
+        "category": "literature",
+        "priority": "P2",
+        "rssUrl": "https://connect.medrxiv.org/medrxiv_xml.php?subject=all",
+        "homeUrl": "https://www.medrxiv.org/",
+        "lang": "en",
+        "why": "Clinical preprint leads for peptide therapeutics",
+        "keywordFilter": ["GLP-1", "GIP", "glucagon", "amylin", "peptide", "incretin", "obesity", "diabetes", "MASH"],
+        "requiredKeywordFilter": ["trial", "patient", "treatment", "dose", "phase", "clinical"],
+        "keywordScope": "title_summary"
+      }
+    ],
+    "conference": [],
+    "industry_news": [
+      {
+        "name": "Fierce Biotech",
+        "category": "industry_news",
+        "priority": "P2",
+        "rssUrl": "https://www.fiercebiotech.com/rss/xml",
+        "homeUrl": "https://www.fiercebiotech.com/",
+        "lang": "en",
+        "why": "Biotech R&D, BD, trials, and deal leads",
+        "keywordFilter": ["peptide", "GLP-1", "GIP", "glucagon", "amylin", "incretin", "obesity", "radioligand", "PRRT", "RDC", "PDC"],
+        "keywordScope": "title_summary"
+      },
+      {
+        "name": "Fierce Pharma",
+        "category": "industry_news",
+        "priority": "P2",
+        "rssUrl": "https://www.fiercepharma.com/rss/xml",
+        "homeUrl": "https://www.fiercepharma.com/",
+        "lang": "en",
+        "why": "Regulatory, commercial, and large pharma leads",
+        "keywordFilter": ["peptide", "GLP-1", "GIP", "glucagon", "amylin", "incretin", "obesity", "radioligand", "PRRT", "RDC", "PDC"],
+        "keywordScope": "title_summary"
+      },
+      {
+        "name": "BioPharma Dive",
+        "category": "industry_news",
+        "priority": "P2",
+        "rssUrl": "https://www.biopharmadive.com/feeds/news/",
+        "homeUrl": "https://www.biopharmadive.com/",
+        "lang": "en",
+        "why": "Regulatory, trial, and BD news leads",
+        "keywordFilter": ["peptide", "GLP-1", "GIP", "glucagon", "amylin", "incretin", "obesity", "radioligand", "PRRT", "RDC", "PDC"],
+        "keywordScope": "title_summary"
+      }
+    ]
+  },
+  "api_sources": {
+    "clinical_trials": [
+      {
+        "name": "ClinicalTrials.gov Peptide Therapeutics",
+        "category": "clinical_registry",
+        "priority": "P0",
+        "endpoint": "https://clinicaltrials.gov/api/v2/studies",
+        "query": "(peptide OR GLP-1 OR GIP OR glucagon OR amylin OR incretin OR PRRT OR radioligand)",
+        "signalType": "clinical_trial",
+        "why": "Primary public registry API for peptide therapeutic trials"
+      },
+      {
+        "name": "ClinicalTrials.gov Obesity Incretins",
+        "category": "clinical_registry",
+        "priority": "P0",
+        "endpoint": "https://clinicaltrials.gov/api/v2/studies",
+        "query": "(obesity OR diabetes OR MASH) AND (GLP-1 OR GIP OR glucagon OR amylin OR incretin)",
+        "signalType": "clinical_trial",
+        "why": "Metabolic peptide and incretin trial watch"
+      }
+    ],
+    "pubmed": [
+      {
+        "name": "PubMed Peptide Drug Development",
+        "category": "literature",
+        "priority": "P0",
+        "query": "((\"Peptides/therapeutic use\"[Mesh]) OR \"peptide drug\"[tiab] OR \"therapeutic peptide\"[tiab] OR \"cyclic peptide\"[tiab] OR \"macrocyclic peptide\"[tiab] OR \"peptidomimetic\"[tiab] OR \"oral peptide\"[tiab] OR \"GLP-1\"[tiab] OR incretin[tiab] OR amylin[tiab] OR PRRT[tiab] OR \"peptide-drug conjugate\"[tiab]) NOT (\"signal peptide\"[tiab] OR \"peptide mapping\"[tiab] OR proteomic*[ti] OR \"collagen peptide\"[tiab] OR \"food peptide\"[tiab])",
+        "signalType": "paper",
+        "why": "Peer-reviewed literature backbone for peptide drug development"
+      }
+    ],
+    "europe_pmc": [
+      {
+        "name": "Europe PMC Peptide Drug Development",
+        "category": "literature",
+        "priority": "P0",
+        "endpoint": "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
+        "query": "(\"therapeutic peptide\" OR \"peptide drug\" OR \"cyclic peptide\" OR \"macrocyclic peptide\" OR \"oral peptide\" OR \"GLP-1\" OR incretin OR PRRT OR \"peptide-drug conjugate\") NOT \"signal peptide\" NOT \"peptide mapping\"",
+        "signalType": "paper",
+        "why": "Article, preprint, funder, and affiliation metadata"
+      }
+    ],
+    "crossref": [
+      {
+        "name": "Crossref Peptide Drug Metadata",
+        "category": "literature",
+        "priority": "P1",
+        "endpoint": "https://api.crossref.org/works",
+        "query": "\"therapeutic peptide\" OR \"peptide drug\" OR \"macrocyclic peptide\" OR GLP-1 OR PRRT",
+        "signalType": "paper",
+        "why": "DOI metadata and early online records"
+      }
+    ],
+    "openfda": [
+      {
+        "name": "openFDA Drug Labels Peptide Watch",
+        "category": "regulatory",
+        "priority": "P0",
+        "endpoint": "https://api.fda.gov/drug/label.json",
+        "dateField": "effective_time",
+        "limit": 100,
+        "signalType": "regulatory",
+        "why": "FDA label updates mentioning peptide-relevant assets or modalities",
+        "keywordFilter": ["peptide", "GLP-1", "GIP", "glucagon", "amylin", "incretin", "lutetium", "radioligand", "somatostatin"]
+      }
+    ],
+    "sec": [
+      {
+        "name": "SEC EDGAR Peptide Full Text",
+        "category": "company_official",
+        "priority": "P1",
+        "endpoint": "https://efts.sec.gov/LATEST/search-index",
+        "query": "peptide OR GLP-1 OR GIP OR glucagon OR amylin OR radioligand OR PRRT",
+        "forms": ["8-K", "10-Q", "10-K", "20-F"],
+        "signalType": "company_news",
+        "why": "Official public company filings and deal/pipeline disclosures"
+      }
+    ],
+    "preprints": [
+      {
+        "name": "bioRxiv API Peptide Drug Leads",
+        "category": "literature",
+        "priority": "P2",
+        "server": "biorxiv",
+        "endpoint": "https://api.biorxiv.org/details/biorxiv",
+        "signalType": "preprint",
+        "why": "Preprint API fallback for peptide discovery and delivery"
+      },
+      {
+        "name": "medRxiv API Peptide Clinical Leads",
+        "category": "literature",
+        "priority": "P2",
+        "server": "medrxiv",
+        "endpoint": "https://api.biorxiv.org/details/medrxiv",
+        "signalType": "preprint",
+        "why": "Clinical preprint API fallback for peptide therapeutics"
+      }
+    ]
+  },
+  "websearch_sites": [
+    {
+      "name": "Novo Nordisk Pipeline",
+      "site": "novonordisk.com",
+      "sourceCategory": "company_official",
+      "priority": "P0",
+      "query": "site:novonordisk.com pipeline GLP-1 amylin peptide obesity diabetes",
+      "maxItems": 3
+    },
+    {
+      "name": "Eli Lilly Pipeline and IR",
+      "site": "lilly.com",
+      "sourceCategory": "company_official",
+      "priority": "P0",
+      "query": "site:lilly.com OR site:investor.lilly.com GLP-1 GIP glucagon amylin peptide pipeline obesity diabetes",
+      "maxItems": 3
+    },
+    {
+      "name": "Novartis Radioligand Pipeline",
+      "site": "novartis.com",
+      "sourceCategory": "company_official",
+      "priority": "P1",
+      "query": "site:novartis.com radioligand PRRT peptide pipeline Pluvicto Lutathera",
+      "maxItems": 3
+    },
+    {
+      "name": "FDA Peptide Regulatory",
+      "site": "fda.gov",
+      "sourceCategory": "regulatory",
+      "priority": "P1",
+      "query": "site:fda.gov peptide GLP-1 amylin radioligand approval label",
+      "maxItems": 3
+    }
+  ],
+  "inactive_sources": [
+    {
+      "name": "The Lens Patent API",
+      "category": "patent",
+      "priority": "P1",
+      "url": "https://api.lens.org/patent/search",
+      "accessType": "api-key-required",
+      "why": "Patent and scholarly cross-linking; enable when token is available"
+    },
+    {
+      "name": "EPO OPS",
+      "category": "patent",
+      "priority": "P1",
+      "url": "https://ops.epo.org/3.2/rest-services",
+      "accessType": "registration",
+      "why": "INPADOC family and legal status; enable after OAuth setup"
+    },
+    {
+      "name": "OpenAlex API",
+      "category": "literature",
+      "priority": "P1",
+      "url": "https://api.openalex.org/works",
+      "accessType": "api-key-required",
+      "why": "Institution-level MNC matching; inactive until key policy is configured"
+    },
+    {
+      "name": "PatentsView / data.uspto.gov",
+      "category": "patent",
+      "priority": "P1",
+      "url": "https://data.uspto.gov/",
+      "accessType": "api-key-required",
+      "why": "US patent structured search; inactive until current endpoint/key policy is configured"
+    },
+    {
+      "name": "BioCentury",
+      "category": "industry_news",
+      "priority": "P2",
+      "url": "https://www.biocentury.com/",
+      "accessType": "paid",
+      "why": "High-end BD and strategy context; use only as licensed lead source"
+    },
+    {
+      "name": "Evaluate Pharma",
+      "category": "knowledgebase",
+      "priority": "P2",
+      "url": "https://www.evaluate.com/",
+      "accessType": "paid",
+      "why": "Commercial diligence and catalyst intelligence; not active in public V1"
+    },
+    {
+      "name": "China CDE Trial Registry",
+      "category": "clinical_registry",
+      "priority": "P1",
+      "url": "https://www.chinadrugtrials.org.cn/index.html",
+      "accessType": "free-fragile",
+      "why": "Important China trial source; left inactive until a compliant parser and review workflow exist"
+    }
+  ]
+}
