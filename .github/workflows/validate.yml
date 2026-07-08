@@ -30,6 +30,8 @@ jobs:
           node --check scripts/prepare-digest.js
           node --check scripts/generate-feed.js
           node --check scripts/check-feed-quality.js
+          node --check scripts/archive-feed.js
+          node --check scripts/build-site.js
           node scripts/generate-feed.js --self-test
 
       - name: Validate static artifacts
@@ -46,6 +48,8 @@ jobs:
             'scripts/prepare-digest.js',
             'scripts/generate-feed.js',
             'scripts/check-feed-quality.js',
+            'scripts/archive-feed.js',
+            'scripts/build-site.js',
             'prompts/digest-intro.md',
             'prompts/summarize-papers.md',
             'prompts/summarize-official.md',
@@ -103,6 +107,11 @@ jobs:
 
       - name: Check feed quality
         run: node scripts/check-feed-quality.js
+
+      - name: Build static site
+        run: |
+          node scripts/archive-feed.js --archive-dir=/tmp/pif-archive
+          node scripts/build-site.js --archive-dir=/tmp/pif-archive --out=/tmp/pif-site --strict
 
       - name: Smoke test local fallback
         run: |

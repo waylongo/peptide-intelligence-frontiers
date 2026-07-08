@@ -25,6 +25,11 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - uses: actions/checkout@v6
@@ -51,6 +56,12 @@ jobs:
 
       - name: Check feed quality
         run: node scripts/check-feed-quality.js --strict
+
+      - name: Archive feed snapshot
+        run: node scripts/archive-feed.js
+
+      - name: Build public site
+        run: node scripts/build-site.js --strict --out=_site
 
       - name: Write run summary
         run: |
@@ -80,6 +91,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase --autostash origin main
-          git add feed-peptides.json state-feed.json
+          git add feed-peptides.json state-feed.json archive/feeds
           git diff --cached --quiet || git commit -m "chore: update peptide feed [skip ci]"
           git push origin HEAD:main
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy site
+        id: deployment
+        uses: actions/deploy-pages@v4
