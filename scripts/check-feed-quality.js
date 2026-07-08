@@ -24,6 +24,26 @@ function parseDateMs(value) {
   return Number.isFinite(ms) ? ms : null;
 }
 
+function hasDayPrecision(value) {
+  if (!value) return false;
+  const raw = String(value).trim();
+  if (!raw) return false;
+  if (/^\d{4}$/.test(raw)) return false;
+  if (/^\d{4}[-/]\d{1,2}$/.test(raw)) return false;
+  return [
+    /^\d{4}\d{2}\d{2}$/,
+    /^\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\b|T|\s)/,
+    /^\d{1,2}[-/]\d{1,2}[-/]\d{2,4}(?:\b|T|\s)/,
+    /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
+    /^\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
+    /^[A-Za-z]{3,}\s+\d{1,2},?\s+\d{4}\b/i
+  ].some(re => re.test(raw));
+}
+
+function isNearGeneratedTimestamp(itemMs, generatedAtMs) {
+  return Math.abs(itemMs - generatedAtMs) <= 30 * 60 * 1000;
+}
+
 function normalizedTitle(item) {
   return `${item.sourceName || ''}|${item.title || ''}`
     .toLowerCase()
@@ -57,6 +77,11 @@ function scanFeed(feed) {
 
   if (generatedAtMs == null) addFinding(findings, 'bad_generated_at', {}, 'generatedAt must be parseable');
   if (!Number.isFinite(lookbackDays) || lookbackDays < 1) addFinding(findings, 'bad_lookback', {}, 'lookbackDays must be positive');
+  if (generatedAtMs != null && Number.isFinite(lookbackDays)) {
+    const now = Date.now();
+    if (generatedAtMs > now + DAY_MS) addFinding(findings, 'future_feed', {}, 'feed generatedAt is in the future');
+    if (generatedAtMs < now - lookbackDays * DAY_MS) addFinding(findings, 'stale_feed', {}, 'feed generatedAt is older than lookbackDays');
+  }
 
   for (const item of items) {
     const body = `${item.title || ''} ${item.summary || ''}`;
@@ -72,13 +97,20 @@ function scanFeed(feed) {
     if (entityRe.test(body)) addFinding(findings, 'entity_residue', item, 'Title or summary contains HTML entities');
 
     const itemMs = parseDateMs(item.publishedAt);
-    const exempt = item.retrievalMethod === 'tavily' || item.retrievalMethod === 'manual';
-    if (itemMs == null && !exempt) {
+    if (!item.publishedAt) {
+      addFinding(findings, 'bad_published_at', item, 'publishedAt must be parseable');
+    } else if (!hasDayPrecision(item.publishedAt)) {
+      addFinding(findings, 'imprecise_published_at', item, 'publishedAt must include at least a calendar day');
+    } else if (itemMs == null) {
       addFinding(findings, 'bad_published_at', item, 'publishedAt must be parseable');
     }
-    if (itemMs != null && generatedAtMs != null) {
-      if (itemMs > generatedAtMs + DAY_MS) addFinding(findings, 'future_item', item, 'Item is dated in the future');
-      if (itemMs < generatedAtMs - lookbackDays * DAY_MS) addFinding(findings, 'outside_window', item, 'Item is outside lookback window');
+    if (itemMs != null) {
+      const now = Date.now();
+      if (itemMs > now + DAY_MS) addFinding(findings, 'future_item', item, 'Item is dated in the future');
+      if (itemMs < now - lookbackDays * DAY_MS) addFinding(findings, 'outside_window', item, 'Item is outside lookback window');
+      if (item.retrievalMethod === 'tavily' && generatedAtMs != null && isNearGeneratedTimestamp(itemMs, generatedAtMs)) {
+        addFinding(findings, 'suspect_generated_timestamp', item, 'Tavily item timestamp is too close to feed generation time');
+      }
     }
   }
 

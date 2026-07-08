@@ -169,23 +169,64 @@ async function loadCatalog(noRemote, healthcheck) {
   return JSON.parse(await readFile(LOCAL_CATALOG, 'utf-8'));
 }
 
+function feedFreshness(feed, windowDays) {
+  const generatedAt = feed?.generatedAt || null;
+  const generatedAtMs = parseDateMs(generatedAt);
+  if (generatedAtMs == null) {
+    return { generatedAt, ageDays: null, stale: true };
+  }
+  const ageDays = (Date.now() - generatedAtMs) / DAY_MS;
+  return {
+    generatedAt,
+    ageDays: Number(ageDays.toFixed(2)),
+    stale: ageDays > windowDays || generatedAtMs > Date.now() + DAY_MS
+  };
+}
+
+function annotateFeedFreshness(healthcheck, feed, fallbackReason = null) {
+  const freshness = feedFreshness(feed, healthcheck.windowDays || 30);
+  healthcheck.feed_generatedAt = freshness.generatedAt;
+  healthcheck.feed_age_days = freshness.ageDays;
+  healthcheck.feed_stale = freshness.stale;
+  healthcheck.feed_fallback_reason = fallbackReason;
+  if (freshness.stale) {
+    const age = freshness.ageDays == null ? 'unknown age' : `${freshness.ageDays} days old`;
+    healthcheck.warnings.push(`Selected ${healthcheck.feed_source} is stale: generatedAt ${freshness.generatedAt || 'missing'} (${age}) exceeds the ${healthcheck.windowDays}-day window`);
+  }
+}
+
+async function loadLocalFeed(healthcheck, fallbackReason = null) {
+  healthcheck.feed_source = 'local_feed';
+  const feed = JSON.parse(await readFile(LOCAL_FEED, 'utf-8'));
+  annotateFeedFreshness(healthcheck, feed, fallbackReason);
+  return feed;
+}
+
 async function loadFeed(noRemote, healthcheck) {
   if (!noRemote && !existsSync(USER_CATALOG)) {
     const r = await httpGet(REMOTE_FEED, 10000);
     if (r.ok) {
       try {
         const feed = JSON.parse(r.text);
+        const freshness = feedFreshness(feed, healthcheck.windowDays || 30);
+        if (freshness.stale) {
+          const age = freshness.ageDays == null ? 'unknown age' : `${freshness.ageDays} days old`;
+          healthcheck.warnings.push(`Remote feed stale: generatedAt ${freshness.generatedAt || 'missing'} (${age}) exceeds the ${healthcheck.windowDays}-day window; falling back to local_feed`);
+          return await loadLocalFeed(healthcheck, 'remote_feed_stale');
+        }
         healthcheck.feed_source = 'remote_feed';
+        annotateFeedFreshness(healthcheck, feed);
         return feed;
       } catch (err) {
         healthcheck.warnings.push(`Remote feed unreadable: ${err.message}`);
+        return await loadLocalFeed(healthcheck, 'remote_feed_unreadable');
       }
     } else {
       healthcheck.warnings.push(`Remote feed unavailable: HTTP ${r.status}${r.error ? ` ${r.error}` : ''}`);
+      return await loadLocalFeed(healthcheck, 'remote_feed_unavailable');
     }
   }
-  healthcheck.feed_source = 'local_feed';
-  return JSON.parse(await readFile(LOCAL_FEED, 'utf-8'));
+  return await loadLocalFeed(healthcheck);
 }
 
 async function loadPromptFile(filename, noRemote, healthcheck) {
@@ -211,28 +252,38 @@ function parseDateMs(value) {
   return Number.isFinite(ms) ? ms : null;
 }
 
-function withinWindow(item, generatedAt, days) {
+function withinWindow(item, days) {
   const itemMs = parseDateMs(item.publishedAt);
-  if (itemMs == null) {
-    return item.retrievalMethod === 'tavily' || item.retrievalMethod === 'manual';
-  }
-  const generatedMs = parseDateMs(generatedAt) || Date.now();
-  if (itemMs > generatedMs + DAY_MS) return false;
-  return itemMs >= generatedMs - days * DAY_MS;
+  if (itemMs == null) return false;
+  const now = Date.now();
+  if (itemMs > now + DAY_MS) return false;
+  return itemMs >= now - days * DAY_MS;
+}
+
+function hasGeneratedTimestampFallback(item, feed) {
+  if (item.retrievalMethod !== 'tavily') return false;
+  const itemMs = parseDateMs(item.publishedAt);
+  const generatedAtMs = parseDateMs(feed.generatedAt);
+  if (itemMs == null || generatedAtMs == null) return false;
+  return Math.abs(itemMs - generatedAtMs) <= 30 * 60 * 1000;
 }
 
 function filterItems(feed, config, healthcheck) {
   const wanted = new Set(config.categories);
-  const generatedAt = feed.generatedAt || new Date().toISOString();
   const items = Array.isArray(feed.items) ? feed.items : [];
+  if (healthcheck.feed_stale) return [];
   const filtered = [];
   for (const item of items) {
     if (!wanted.has(item.sourceCategory)) {
       healthcheck.filtered_out_by_category++;
       continue;
     }
-    if (!withinWindow(item, generatedAt, config.windowDays)) {
+    if (!withinWindow(item, config.windowDays)) {
       healthcheck.filtered_out_by_window++;
+      continue;
+    }
+    if (hasGeneratedTimestampFallback(item, feed)) {
+      healthcheck.filtered_out_by_suspect_timestamp++;
       continue;
     }
     if (!item.url) {
@@ -271,13 +322,20 @@ async function main() {
     warnings: [],
     catalog_source: null,
     feed_source: null,
+    windowDays: null,
+    feed_generatedAt: null,
+    feed_age_days: null,
+    feed_stale: false,
+    feed_fallback_reason: null,
     filtered_out_by_category: 0,
     filtered_out_by_window: 0,
+    filtered_out_by_suspect_timestamp: 0,
     filtered_out_missing_url: 0
   };
 
   const userConfig = await loadUserConfig(healthcheck);
   const config = buildConfig(args, userConfig);
+  healthcheck.windowDays = config.windowDays;
   const catalog = await loadCatalog(args.noRemote, healthcheck);
   const feed = await loadFeed(args.noRemote, healthcheck);
   const prompts = {};
