@@ -1,5 +1,6 @@
 .DS_Store
 node_modules/
+_site/
 
 # Local research/reference material; not part of the published skill.
 references/

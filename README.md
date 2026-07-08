@@ -48,9 +48,34 @@ V1 prioritizes public/free sources. Key-required, paid, or fragile sources are d
 6. Optional slide report
    templates/slides.html -> pif-YYYY-MM-slides.html
    scripts/export-slides-pdf.sh -> pif-YYYY-MM-slides.pdf
+
+7. Public web digest
+   archive/feeds/YYYY-MM-DD.json -> scripts/build-site.js -> GitHub Pages
 ```
 
 By default, `/pif` reads the central feed through the GitHub raw CDN. Use `--no-remote` for local fallback.
+
+## Public Web Digest
+
+The weekly feed is also published as a static GitHub Pages site:
+
+https://waylongo.github.io/peptide-intelligence-frontiers/
+
+The site is generated without model calls. It renders the structured feed into a Chinese-first intelligence page with Top Signals, category sections, client-side filtering, source links, evidence metadata, score reasons, and feed healthcheck details.
+
+Generated public data:
+
+- `/data/latest.json`: latest `feed-peptides.json` schema.
+- `/data/archive/YYYY-MM-DD.json`: archived weekly feed snapshots.
+- `/archive/`: dated archive index.
+- `/archive/YYYY-MM-DD/`: rendered historical weekly page.
+
+Local web build:
+
+```bash
+node scripts/archive-feed.js
+node scripts/build-site.js --strict --out=_site
+```
 
 ## Install
 
@@ -97,7 +122,10 @@ Markdown, HTML, and PDF files are written to the current directory; existing nam
 node --check scripts/generate-feed.js
 node --check scripts/prepare-digest.js
 node --check scripts/check-feed-quality.js
+node --check scripts/archive-feed.js
+node --check scripts/build-site.js
 node scripts/generate-feed.js --self-test
 node scripts/prepare-digest.js --no-remote --days=30
 node scripts/check-feed-quality.js --feed=feed-peptides.json
+node scripts/build-site.js --strict --out=_site
 ```
