@@ -40,15 +40,25 @@ CFGEOF
 
 Then run the digest.
 
-## Digest Run
+## Digest Workflow
 
-Run:
+Run the digest in this order:
 
-```bash
-node "${CLAUDE_SKILL_DIR:-$PWD}/scripts/prepare-digest.js"
-```
+1. Resolve user configuration and one-time overrides.
+2. Run `prepare-digest.js` exactly once.
+3. Stop on empty results.
+4. Build `Top Signals`.
+5. Build the body sections from non-Top-Signal items.
+6. Add the fixed `Healthcheck`.
+7. Offer optional Markdown save, then optional HTML slides.
 
-One-time overrides:
+Keep the JSON returned by the script in memory for the whole turn. Reuse it for optional Markdown and slides decisions. Do not rerun the script, run web search, or refetch article URLs unless the user explicitly asks for `debug` or a fresh run.
+
+### 1. Resolve Configuration
+
+Use `~/.pif/config.json` defaults unless the user's current request includes a one-time override.
+
+Supported one-time overrides:
 
 - `past N days` -> `--days=N`
 - `clinical only` -> `--category=clinical_registry`
@@ -56,50 +66,109 @@ One-time overrides:
 - `literature only` -> `--category=literature`
 - `local only` or `skip remote` -> `--no-remote`
 
+Do not persist one-time overrides to `~/.pif/config.json`.
+
+### 2. Run Prepare Digest
+
+Run:
+
+```bash
+node "${CLAUDE_SKILL_DIR:-$PWD}/scripts/prepare-digest.js"
+```
+
 The script output contains:
 
 - `items` and `groupedByCategory`
 - `prompts`
 - `healthcheck`
 - `signalTaxonomy`
+- `stats`
+- `config`
 
 If `stats.keptItems == 0`, say:
 
-```text
-过去 [windowDays] 天没有匹配当前筛选条件的多肽药物研发信号。可以扩大分类或时间窗口。
-```
+Reply in `config.language` with one short sentence stating that the past `[windowDays]` days have no peptide drug development signals matching the current filters, and suggest expanding the categories or time window.
 
 Then stop.
 
-## Remix
+### 3. Remix Contract
 
-Follow the prompts returned by the script:
+Follow the prompts returned by the script and treat them as the source-specific instruction set:
 
 - `prompts.digest_intro`: section order, Top Signals, evidence discipline, healthcheck footer
 - `prompts.summarize_news`: Company / Pipeline, Regulatory, Industry News, BD leads
 - `prompts.summarize_official`: official company, registry, regulator, and patent-like source handling
 - `prompts.summarize_papers`: Literature, preprint, and conference items
-- `prompts.translate`: apply when `config.language` is `en` or `bilingual`
+- `prompts.translate`: language handling rules for `zh`, `en`, and `bilingual`
 - `prompts.slides_report`: optional HTML slide report generation after the digest has been produced
 
-Use this body order after Top Signals:
+Use only fields present in `items`, `stats`, `config`, `healthcheck`, and `signalTaxonomy`. If an item does not support a claim, omit that claim instead of filling the gap with outside knowledge.
+
+### 4. Top Signals
+
+Select 3 to 7 highest-signal items from `items`, preferring:
+
+1. official company, registry, regulatory, and filing-backed items
+2. peer-reviewed literature
+3. preprint and conference evidence
+4. patent, BD, industry media, and websearch leads
+
+For each Top Signal, include:
+
+- what happened
+- why it matters
+- evidence level
+- next watch item
+- URL
+
+Track the Top Signal URLs and titles. Do not repeat those same items in the later body sections.
+
+### 5. Body Sections
+
+Use this body order after Top Signals, using only non-Top-Signal items:
 
 1. Company / Pipeline
 2. Clinical & Regulatory
 3. Literature & Conferences
 4. Patents / BD / Industry Leads
 
-Populate:
+Section mapping:
 
-- `healthcheck.top3_categories`
-- `healthcheck.top3_scores`
-- `healthcheck.top3_rejected_candidates`
+- `company_official` -> Company / Pipeline unless the item is clearly regulatory or BD.
+- `clinical_registry` and `regulatory` -> Clinical & Regulatory.
+- `literature` and `conference` -> Literature & Conferences.
+- `patent`, `industry_news`, and `knowledgebase` -> Patents / BD / Industry Leads.
+- Industry media and Tavily/websearch items are leads. State what primary source should be checked next when possible.
+
+If a section has no qualifying non-Top-Signal items, write one short no-results sentence in `config.language`. Do not create filler bullets.
+
+Every signal bullet must include:
+
+- what happened
+- why it matters
+- evidence level
+- next watch item
+- URL
+
+### 6. Healthcheck
+
+Always end with a `Healthcheck` section that reports these exact fields from the current JSON:
+
+- `generatedAt`
+- `windowDays`
+- `stats.keptItems`
+- `stats.selectedByCategory`
+- `healthcheck.feed_source`
+- `healthcheck.catalog_source`
+- `healthcheck.warnings`
+
+If present, also include `healthcheck.top3_categories`. Do not summarize Tavily, RSS, or API failures unless those values are present in `healthcheck.warnings`, `healthcheck.feed_stats`, or `stats`.
 
 Language behavior:
 
-- `zh`: Chinese only, keeping company names, asset names, indications, trial IDs, PMIDs, DOIs, and abbreviations in English
-- `en`: English only
-- `bilingual`: Chinese first, paired with English where useful
+- `zh`: Chinese prose and localized Chinese field labels, while keeping company names, asset names, indications, trial IDs, PMIDs, DOIs, and abbreviations in English.
+- `en`: English prose and English field labels only.
+- `bilingual`: Chinese-first prose and labels, with English only where it prevents ambiguity for technical terms, asset names, or section headings.
 
 ## Optional Markdown Digest
 
@@ -167,7 +236,16 @@ If the user says `debug` or `dump JSON`, rerun:
 node "${CLAUDE_SKILL_DIR:-$PWD}/scripts/prepare-digest.js"
 ```
 
-Output the full JSON, then briefly note feed source, failed RSS/API sources, Tavily stats, and filter counts.
+Output the full JSON, then briefly note these exact diagnostic fields when present:
+
+- `healthcheck.feed_source`
+- `healthcheck.catalog_source`
+- `stats`
+- `healthcheck.feed_stats`
+- `healthcheck.warnings`
+- `healthcheck.filtered_out_by_category`
+- `healthcheck.filtered_out_by_window`
+- `healthcheck.filtered_out_missing_url`
 
 ## Absolute Rules
 
@@ -178,3 +256,4 @@ Output the full JSON, then briefly note feed source, failed RSS/API sources, Tav
 - Industry media and websearch items are leads, not final evidence, unless they link to an official or primary source.
 - Do not use hype.
 - Top Signals category labels must match `signalTaxonomy.categories`.
+- Healthcheck must use the exact JSON values from the current run, not a narrative estimate.

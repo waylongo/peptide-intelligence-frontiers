@@ -2,7 +2,9 @@
 
 `/pif` stands for Peptide Intelligence Frontiers.
 
-It is an on-demand intelligence skill for following peptide drug development signals across company pipelines, clinical registries, regulators, literature, conferences, patents, and industry news. It follows the lightweight WTF model: GitHub Actions builds a central feed, and Codex or Claude turns that feed into a concise Chinese R&D / investment-research brief.
+It is an on-demand intelligence skill for following peptide drug development signals across company pipelines, clinical registries, regulators, literature, conferences, patents, and industry news. It follows the lightweight WTF model: GitHub Actions builds a central feed, and Codex or Claude turns that feed into a concise R&D / investment-research brief whose language follows `config.language`.
+
+Repository documentation and prompt source files are maintained in English. Generated digest output is localized at runtime: the current default is `zh`, with `en` and `bilingual` available through user configuration or one-time requests.
 
 ## Information Sources
 
