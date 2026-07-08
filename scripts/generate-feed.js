@@ -161,10 +161,27 @@ async function httpRequest(url, options = {}, timeoutMs = 20000) {
   }
 }
 
+function hasDayPrecision(value) {
+  if (!value) return false;
+  const raw = String(value).trim();
+  if (!raw) return false;
+  if (/^\d{4}$/.test(raw)) return false;
+  if (/^\d{4}[-/]\d{1,2}$/.test(raw)) return false;
+  return [
+    /^\d{4}\d{2}\d{2}$/,
+    /^\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\b|T|\s)/,
+    /^\d{1,2}[-/]\d{1,2}[-/]\d{2,4}(?:\b|T|\s)/,
+    /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
+    /^\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
+    /^[A-Za-z]{3,}\s+\d{1,2},?\s+\d{4}\b/i
+  ].some(re => re.test(raw));
+}
+
 function parseDateMs(dateStr) {
   if (!dateStr) return null;
   const raw = String(dateStr).trim();
   if (!raw) return null;
+  if (!hasDayPrecision(raw)) return null;
   const candidates = [
     raw,
     raw.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'),
@@ -196,6 +213,12 @@ function withinDays(dateStr, days) {
   const now = Date.now();
   if (ms > now + DAY_MS) return false;
   return ms >= now - days * DAY_MS;
+}
+
+function dateFilterReason(dateStr, days) {
+  if (!dateStr) return 'missing_date';
+  if (!hasDayPrecision(dateStr)) return 'imprecise_date';
+  return withinDays(dateStr, days) ? null : 'date';
 }
 
 function normalizeText(s) {
@@ -428,7 +451,7 @@ async function fetchClinicalTrials(source, days) {
       items.push({
         title: clinicalTrialTitle(protocol),
         url: id ? `https://clinicaltrials.gov/study/${id}` : 'https://clinicaltrials.gov/',
-        publishedAt: normalizePublishedAt(updated) || new Date().toISOString(),
+        publishedAt: normalizePublishedAt(updated),
         summary: clinicalTrialSummary(protocol),
         nctId: id || null,
         trialPhase: protocol?.designModule?.phases?.join(', ') || null,
@@ -494,7 +517,7 @@ async function fetchEuropePmc(source, days) {
       items: rows.map(row => ({
         title: row.title || `Europe PMC ${row.id}`,
         url: row.doi ? `https://doi.org/${row.doi}` : (row.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${row.pmid}/` : `https://europepmc.org/article/${row.source || 'MED'}/${row.id}`),
-        publishedAt: normalizePublishedAt(row.firstPublicationDate || row.firstIndexDate || row.pubYear),
+        publishedAt: normalizePublishedAt(row.firstPublicationDate || row.firstIndexDate),
         summary: [row.journalTitle, row.authorString, row.pubType].filter(Boolean).join(' | '),
         pmid: row.pmid || null,
         doi: row.doi || null
@@ -521,11 +544,10 @@ async function fetchCrossref(source, days) {
     return {
       source,
       items: rows.map(row => {
-        const dateParts = row.published?.['date-parts']?.[0] || row.created?.['date-parts']?.[0] || [];
         return {
           title: Array.isArray(row.title) ? row.title[0] : row.title,
           url: row.URL || (row.DOI ? `https://doi.org/${row.DOI}` : null),
-          publishedAt: normalizePublishedAt(dateParts.length ? dateParts.join('-') : null),
+          publishedAt: crossrefPublishedAt(row),
           summary: [row['container-title']?.[0], row.publisher, row.type].filter(Boolean).join(' | '),
           doi: row.DOI || null
         };
@@ -535,6 +557,11 @@ async function fetchCrossref(source, days) {
   } catch (err) {
     return { source, items: [], error: `parse: ${err.message}` };
   }
+}
+
+function crossrefPublishedAt(row) {
+  const dateParts = row?.published?.['date-parts']?.[0] || [];
+  return normalizePublishedAt(dateParts.length ? dateParts.join('-') : null);
 }
 
 async function fetchOpenFda(source, days) {
@@ -586,7 +613,7 @@ async function fetchSec(source, days) {
         return {
           title: src.display_names?.[0] || src.companyName || src.file_type || 'SEC filing peptide signal',
           url: filingUrl,
-          publishedAt: normalizePublishedAt(src.filedAt || src.file_date || src.period_ending || src.form_date) || new Date().toISOString(),
+          publishedAt: normalizePublishedAt(src.filedAt || src.file_date || src.period_ending || src.form_date),
           summary: [src.form, src.file_type, src.biz_states?.join(', ')].filter(Boolean).join(' | '),
           company: src.display_names?.[0] || src.companyName || null
         };
@@ -647,7 +674,7 @@ async function fetchTavilySite(site, apiKey, days) {
       items: (data.results || []).map(row => ({
         title: row.title,
         url: row.url,
-        publishedAt: row.published_date ? normalizePublishedAt(row.published_date) : new Date().toISOString(),
+        publishedAt: row.published_date ? normalizePublishedAt(row.published_date) : null,
         summary: row.content || row.snippet || ''
       })).filter(x => x.title && x.url),
       error: null
@@ -662,12 +689,9 @@ function pushCandidate(candidates, rawItem, source, retrievalMethod, catalog, se
     recordHardFilter(healthcheck, retrievalMethod, source.name, 'missing_url');
     return;
   }
-  if (!rawItem.publishedAt && retrievalMethod !== 'tavily' && retrievalMethod !== 'manual') {
-    recordHardFilter(healthcheck, retrievalMethod, source.name, 'missing_date');
-    return;
-  }
-  if (rawItem.publishedAt && !withinDays(rawItem.publishedAt, days)) {
-    recordHardFilter(healthcheck, retrievalMethod, source.name, 'date');
+  const dateReason = dateFilterReason(rawItem.publishedAt, days);
+  if (dateReason) {
+    recordHardFilter(healthcheck, retrievalMethod, source.name, dateReason);
     return;
   }
   const filterReason = passesCatalogFilters(rawItem, source, catalog);
@@ -759,6 +783,13 @@ function runSelfTest() {
     }
   };
   const src = { name: 'fixture', category: 'literature', priority: 'P0' };
+  const newHealthcheck = () => ({
+    filtered_by_source_reason: {},
+    filtered_out_by_missing_url: 0,
+    filtered_out_by_missing_date: 0,
+    filtered_out_by_imprecise_date: 0,
+    filtered_out_by_date: 0
+  });
   const keep = [
     { title: 'Phase 2 GLP-1 clinical trial in obesity', url: 'https://example.com/a', summary: 'patients and dose' },
     { title: 'Peptide-drug conjugate paper reports tumor response', url: 'https://example.com/b', summary: 'therapeutic candidate' },
@@ -781,6 +812,46 @@ function runSelfTest() {
     const reason = passesCatalogFilters(item, src, fakeCatalog);
     if (!reason) throw new Error(`expected reject fixture to fail: ${item.title}`);
   }
+
+  const tavilySource = { name: 'tavily-fixture', category: 'company_official', priority: 'P0', keywordFilter: ['GLP-1'] };
+  const missingDateHealth = newHealthcheck();
+  pushCandidate([], {
+    title: 'GLP-1 pipeline update',
+    url: 'https://example.com/no-date',
+    summary: 'therapeutic peptide drug candidate'
+  }, tavilySource, 'tavily', fakeCatalog, { keys: new Set(), titles: new Set() }, missingDateHealth, 30);
+  if (missingDateHealth.filtered_out_by_missing_date !== 1) throw new Error('expected Tavily item without published_date to be rejected');
+
+  const oldDateHealth = newHealthcheck();
+  pushCandidate([], {
+    title: 'GLP-1 pipeline update',
+    url: 'https://example.com/old-date',
+    publishedAt: normalizePublishedAt('2000-01-01'),
+    summary: 'therapeutic peptide drug candidate'
+  }, tavilySource, 'tavily', fakeCatalog, { keys: new Set(), titles: new Set() }, oldDateHealth, 30);
+  if (oldDateHealth.filtered_out_by_date !== 1) throw new Error('expected Tavily item outside the window to be rejected');
+
+  const clinicalHealth = newHealthcheck();
+  pushCandidate([], {
+    title: 'ClinicalTrials.gov GLP-1 study',
+    url: 'https://clinicaltrials.gov/study/NCT00000000',
+    summary: 'clinical trial therapeutic peptide'
+  }, { ...src, name: 'clinical-fixture', category: 'clinical_registry' }, 'api_clinical_trials', fakeCatalog, { keys: new Set(), titles: new Set() }, clinicalHealth, 30);
+  if (clinicalHealth.filtered_out_by_missing_date !== 1) throw new Error('expected ClinicalTrials.gov item without update/first-posted date to be rejected');
+
+  const currentYear = new Date().getUTCFullYear();
+  const createdOnly = crossrefPublishedAt({ created: { 'date-parts': [[currentYear, 7, 8]] } });
+  if (createdOnly !== null) throw new Error('expected Crossref created-only date to be ignored');
+
+  const impreciseHealth = newHealthcheck();
+  pushCandidate([], {
+    title: 'GLP-1 publication with imprecise date',
+    url: 'https://example.com/imprecise-date',
+    publishedAt: `${currentYear}-07`,
+    summary: 'therapeutic peptide drug candidate'
+  }, src, 'api_pubmed', fakeCatalog, { keys: new Set(), titles: new Set() }, impreciseHealth, 30);
+  if (impreciseHealth.filtered_out_by_imprecise_date !== 1) throw new Error('expected month-level date to be rejected as imprecise');
+
   console.log(JSON.stringify({ status: 'ok', fixtures: { keep: keep.length, reject: reject.length } }));
 }
 
@@ -803,6 +874,7 @@ async function main() {
     filtered_by_source_reason: {},
     filtered_out_by_missing_url: 0,
     filtered_out_by_missing_date: 0,
+    filtered_out_by_imprecise_date: 0,
     filtered_out_by_date: 0,
     filtered_out_by_global_exclude: 0,
     filtered_out_by_source_exclude: 0,

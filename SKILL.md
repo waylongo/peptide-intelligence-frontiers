@@ -159,6 +159,10 @@ Always end with a `Healthcheck` section that reports these exact fields from the
 - `stats.keptItems`
 - `stats.selectedByCategory`
 - `healthcheck.feed_source`
+- `healthcheck.feed_generatedAt`
+- `healthcheck.feed_age_days`
+- `healthcheck.feed_stale`
+- `healthcheck.feed_fallback_reason`
 - `healthcheck.catalog_source`
 - `healthcheck.warnings`
 
@@ -239,12 +243,17 @@ node "${CLAUDE_SKILL_DIR:-$PWD}/scripts/prepare-digest.js"
 Output the full JSON, then briefly note these exact diagnostic fields when present:
 
 - `healthcheck.feed_source`
+- `healthcheck.feed_generatedAt`
+- `healthcheck.feed_age_days`
+- `healthcheck.feed_stale`
+- `healthcheck.feed_fallback_reason`
 - `healthcheck.catalog_source`
 - `stats`
 - `healthcheck.feed_stats`
 - `healthcheck.warnings`
 - `healthcheck.filtered_out_by_category`
 - `healthcheck.filtered_out_by_window`
+- `healthcheck.filtered_out_by_suspect_timestamp`
 - `healthcheck.filtered_out_missing_url`
 
 ## Absolute Rules
