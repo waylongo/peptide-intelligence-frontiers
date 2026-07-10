@@ -66,6 +66,8 @@ const SECTION_DEFS = [
   }
 ];
 
+const DEFAULT_SITE_URL = 'https://waylongo.github.io/peptide-intelligence-frontiers';
+
 function parseArgs() {
   const args = {
     feedPath: join(REPO_ROOT, 'feed-peptides.json'),
@@ -73,6 +75,7 @@ function parseArgs() {
     feedArchiveDir: join(REPO_ROOT, 'archive', 'feeds'),
     digestArchiveDir: join(REPO_ROOT, 'archive', 'digests'),
     outDir: join(REPO_ROOT, '_site'),
+    siteUrl: DEFAULT_SITE_URL,
     strict: false,
     clean: true
   };
@@ -83,6 +86,7 @@ function parseArgs() {
     else if (arg.startsWith('--archive-dir=')) args.feedArchiveDir = arg.slice('--archive-dir='.length);
     else if (arg.startsWith('--digest-archive-dir=')) args.digestArchiveDir = arg.slice('--digest-archive-dir='.length);
     else if (arg.startsWith('--out=')) args.outDir = arg.slice('--out='.length);
+    else if (arg.startsWith('--site-url=')) args.siteUrl = arg.slice('--site-url='.length).replace(/\/+$/, '');
     else if (arg === '--strict') args.strict = true;
     else if (arg === '--no-clean') args.clean = false;
     else {
@@ -320,16 +324,19 @@ function renderHealthcheck(digest) {
     ['RSS 有结果', `${stats.sourcesWithResults ?? 0} / ${stats.sourcesQueried ?? 0}`],
     ['API 有结果', `${stats.apiSourcesWithResults ?? 0} / ${stats.apiSourcesQueried ?? 0}`],
     ['站点搜索有结果', `${stats.tavilySitesWithResults ?? 0} / ${stats.tavilySitesQueried ?? 0}`],
-    ['中文整理状态', modelStatus(digest)],
-    ['数据提醒', warnings.length ? warnings.join('；') : '无']
+    ['中文整理状态', modelStatus(digest)]
   ];
+  const warningBlock = warnings.length
+    ? `<div class="source-warnings"><dt>数据提醒 <em>${warnings.length}</em></dt>
+        <dd><ul>${warnings.map(warning => `<li>${escapeHtml(warning)}</li>`).join('')}</ul></dd></div>`
+    : '<div><dt>数据提醒</dt><dd>无</dd></div>';
   return `<section class="data-note" id="data-note">
     <div>
       <p class="eyebrow">Data note</p>
       <h2>数据说明</h2>
       <p>页面完整呈现通过数据清洗的记录，不进行重要性排名或用户侧筛选。来源事实、标识符和链接保持不变。</p>
     </div>
-    <dl>${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
+    <dl>${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}${warningBlock}</dl>
   </section>`;
 }
 
@@ -338,6 +345,7 @@ function renderNav(paths) {
     <a class="brand" href="${escapeAttr(paths.home)}"><span class="brand-mark">P</span><span>Peptide Intelligence Frontiers</span></a>
     <div class="nav-links">
       <a href="${escapeAttr(paths.archive)}">历史周报</a>
+      <a href="${escapeAttr(paths.feed)}">RSS 订阅</a>
       <a href="${escapeAttr(paths.digestData)}">周报数据</a>
       <a href="${escapeAttr(paths.rawData)}">原始数据</a>
       <a href="https://github.com/waylongo/peptide-intelligence-frontiers" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -358,9 +366,10 @@ function pageCss() {
       --forest: #1f5b4c;
       --oxide: #b84d31;
       --gold: #bb9341;
-      --serif: "Noto Serif SC", "Songti SC", Georgia, serif;
-      --sans: "Noto Sans SC", "PingFang SC", sans-serif;
-      --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+      /* System stacks only: hosted webfonts are unreachable in mainland China. */
+      --serif: "Songti SC", "SimSun", "Source Han Serif SC", "Noto Serif CJK SC", Georgia, serif;
+      --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono: ui-monospace, "SFMono-Regular", "Menlo", Consolas, "Liberation Mono", monospace;
     }
 
     * { box-sizing: border-box; }
@@ -520,6 +529,10 @@ function pageCss() {
     .data-note dl div:nth-child(odd) { padding-right: 18px; }
     .data-note dt { color: #8fa097; font: .62rem/1.2 var(--mono); }
     .data-note dd { margin: 5px 0 0; font-size: .78rem; line-height: 1.5; overflow-wrap: anywhere; }
+    .source-warnings { grid-column: 1 / -1; padding-right: 0 !important; }
+    .source-warnings dt em { margin-left: 6px; padding: 1px 5px; border-radius: 2px; background: var(--gold); color: var(--ink); font-style: normal; }
+    .source-warnings ul { margin: 0; padding-left: 16px; }
+    .source-warnings li { margin-top: 6px; color: #d8cfb4; }
 
     .archive-panel { margin-top: 54px; }
     .archive-heading { display: flex; justify-content: space-between; align-items: end; padding-bottom: 16px; border-bottom: 1px solid var(--ink); }
@@ -552,7 +565,7 @@ function pageCss() {
       .top-nav { align-items: flex-start; padding: 10px 0 14px; }
       .brand span:last-child { display: none; }
       .nav-links { max-width: calc(100% - 42px); justify-content: flex-end; gap: 13px; font-size: .62rem; }
-      .nav-links a:nth-child(2), .nav-links a:nth-child(3) { display: none; }
+      .nav-links a:nth-child(3), .nav-links a:nth-child(4) { display: none; }
       .masthead { grid-template-columns: 1fr; gap: 24px; padding-top: 38px; }
       .masthead h1 { font-size: clamp(2.7rem, 16vw, 4.6rem); }
       .edition { min-width: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 18px; }
@@ -577,15 +590,13 @@ function pageCss() {
   `;
 }
 
-function documentHead(title, description) {
+function documentHead(title, description, feedUrl) {
   return `<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeAttr(description)}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+    <link rel="alternate" type="application/atom+xml" title="多肽药物研发情报周报" href="${escapeAttr(feedUrl)}">
     <style>${pageCss()}</style>
   </head>`;
 }
@@ -597,7 +608,7 @@ function renderDigestPage(digest, paths) {
   const fallback = digest.model?.status === 'not_configured';
   return `<!doctype html>
 <html lang="zh-CN">
-${documentHead(`${digest.overview?.titleZh || '多肽药物研发周报'} - ${digest.issueDate}`, '每周自动更新的中文多肽药物研发情报周报。')}
+${documentHead(`${digest.overview?.titleZh || '多肽药物研发周报'} - ${digest.issueDate}`, '每周自动更新的中文多肽药物研发情报周报。', paths.feed)}
 <body>
   <main class="page">
     ${renderNav(paths)}
@@ -658,10 +669,10 @@ function renderArchiveIndex(latestDigest, archives) {
   }).join('');
   return `<!doctype html>
 <html lang="zh-CN">
-${documentHead('历史周报 - Peptide Intelligence Frontiers', '多肽药物研发中文周报历史归档。')}
+${documentHead('历史周报 - Peptide Intelligence Frontiers', '多肽药物研发中文周报历史归档。', '../feed.xml')}
 <body>
   <main class="page">
-    ${renderNav({ home: '../', archive: './', digestData: '../data/digest-latest.json', rawData: '../data/latest.json' })}
+    ${renderNav({ home: '../', archive: './', feed: '../feed.xml', digestData: '../data/digest-latest.json', rawData: '../data/latest.json' })}
     <header class="masthead">
       <div class="issue-stamp">
         <p class="eyebrow">Weekly archive</p>
@@ -678,6 +689,44 @@ ${documentHead('历史周报 - Peptide Intelligence Frontiers', '多肽药物研
   </main>
 </body>
 </html>`;
+}
+
+// One entry per issue: subscribers to a weekly digest expect one update a week,
+// not a dozen. Each entry summarizes the issue and links to its page.
+function renderAtomFeed(archives, siteUrl) {
+  const updated = archives.length
+    ? new Date(`${archives[0].date}T00:00:00Z`).toISOString()
+    : new Date().toISOString();
+  const entries = archives.map(({ date, digest }) => {
+    const url = `${siteUrl}/archive/${date}/`;
+    const counts = SECTION_DEFS
+      .map(section => [section, itemsForSection(digest, section).length])
+      .filter(([, count]) => count > 0)
+      .map(([section, count]) => `${section.labelZh} ${count} 条`)
+      .join('，');
+    const summary = [
+      digest.overview?.summaryZh,
+      counts && `本期收录：${counts}。`
+    ].filter(Boolean).join(' ');
+    return `  <entry>
+    <title>${escapeHtml(digest.overview?.titleZh || '多肽药物研发周报')} (${escapeHtml(date)})</title>
+    <link href="${escapeAttr(url)}"/>
+    <id>${escapeAttr(url)}</id>
+    <updated>${escapeHtml(new Date(`${date}T00:00:00Z`).toISOString())}</updated>
+    <summary>${escapeHtml(compactText(summary, 900))}</summary>
+  </entry>`;
+  }).join('\n');
+  return `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Peptide Intelligence Frontiers · 多肽药物研发情报周报</title>
+  <subtitle>每周自动更新的中文多肽药物研发情报周报。</subtitle>
+  <link href="${escapeAttr(`${siteUrl}/feed.xml`)}" rel="self"/>
+  <link href="${escapeAttr(`${siteUrl}/`)}"/>
+  <id>${escapeAttr(`${siteUrl}/`)}</id>
+  <updated>${escapeHtml(updated)}</updated>
+${entries}
+</feed>
+`;
 }
 
 async function readArchives(dir) {
@@ -727,6 +776,7 @@ async function validateOutput(outDir, archives, latestDigest) {
   const required = [
     join(outDir, 'index.html'),
     join(outDir, 'archive', 'index.html'),
+    join(outDir, 'feed.xml'),
     join(outDir, 'data', 'latest.json'),
     join(outDir, 'data', 'digest-latest.json')
   ];
@@ -740,7 +790,20 @@ async function validateOutput(outDir, archives, latestDigest) {
       const html = await readFile(file, 'utf-8');
       if (html.includes('{{') || html.includes('}}')) throw new Error(`Unresolved template placeholder in ${file}`);
       if (html.includes('id="q"') || html.includes('applyFilters')) throw new Error(`Unexpected filter UI in ${file}`);
+      if (/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html)) {
+        throw new Error(`External font host is unreachable for the target audience: ${file}`);
+      }
+      if (!html.includes('type="application/atom+xml"')) throw new Error(`Missing feed autodiscovery link in ${file}`);
     }
+  }
+
+  const atom = await readFile(join(outDir, 'feed.xml'), 'utf-8');
+  const entryCount = (atom.match(/<entry>/g) || []).length;
+  if (entryCount !== archives.length) {
+    throw new Error(`feed.xml has ${entryCount} entries, expected ${archives.length}`);
+  }
+  for (const archive of archives) {
+    if (!atom.includes(`/archive/${archive.date}/`)) throw new Error(`feed.xml missing issue link for ${archive.date}`);
   }
 
   const renderedIssues = [
@@ -782,15 +845,16 @@ async function main() {
   await mkdir(args.outDir, { recursive: true });
 
   await writeText(join(args.outDir, 'index.html'), renderDigestPage(latestDigest, {
-    home: './', archive: 'archive/', digestData: 'data/digest-latest.json', rawData: 'data/latest.json'
+    home: './', archive: 'archive/', feed: 'feed.xml', digestData: 'data/digest-latest.json', rawData: 'data/latest.json'
   }));
   await writeText(join(args.outDir, 'archive', 'index.html'), renderArchiveIndex(latestDigest, archives));
+  await writeText(join(args.outDir, 'feed.xml'), renderAtomFeed(archives, args.siteUrl));
   await writeJson(join(args.outDir, 'data', 'latest.json'), latestFeed);
   await writeJson(join(args.outDir, 'data', 'digest-latest.json'), latestDigest);
 
   for (const archive of archives) {
     await writeText(join(args.outDir, 'archive', archive.date, 'index.html'), renderDigestPage(archive.digest, {
-      home: '../../', archive: '../', digestData: `../../data/digest-archive/${archive.date}.json`, rawData: `../../data/archive/${archive.date}.json`
+      home: '../../', archive: '../', feed: '../../feed.xml', digestData: `../../data/digest-archive/${archive.date}.json`, rawData: `../../data/archive/${archive.date}.json`
     }));
     await writeJson(join(args.outDir, 'data', 'digest-archive', `${archive.date}.json`), archive.digest);
     if (rawArchives.has(archive.date)) {

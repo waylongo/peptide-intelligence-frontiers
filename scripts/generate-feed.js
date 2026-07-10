@@ -14,7 +14,8 @@ const CATALOG_PATH = join(REPO_ROOT, 'config', 'sources.json');
 const FEED_PATH = join(REPO_ROOT, 'feed-peptides.json');
 const STATE_PATH = join(REPO_ROOT, 'state-feed.json');
 
-const USER_AGENT = 'peptide-intelligence-frontiers/1.0 contact: https://github.com/waylongo/peptide-intelligence-frontiers';
+// SEC EDGAR rejects (403) a User-Agent without a reachable contact address.
+const USER_AGENT = 'peptide-intelligence-frontiers/1.0 contact: wlwu1993@gmail.com';
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_LOOKBACK_DAYS = 30;
 const SELECTED_MIN_TARGET = 25;
@@ -42,10 +43,11 @@ const ALLOWED_SIGNAL_TYPES = new Set([
 ]);
 
 function parseArgs() {
-  const args = { days: DEFAULT_LOOKBACK_DAYS, rssOnly: false, selfTest: false };
+  const args = { days: DEFAULT_LOOKBACK_DAYS, rssOnly: false, selfTest: false, dedupeState: true };
   for (const arg of process.argv.slice(2)) {
     if (arg === '--rss-only') args.rssOnly = true;
     else if (arg === '--self-test') args.selfTest = true;
+    else if (arg === '--no-dedupe-state') args.dedupeState = false;
     else if (arg.startsWith('--days=')) {
       const n = Number.parseInt(arg.slice(7), 10);
       if (!Number.isFinite(n) || n < 1 || n > 365) {
@@ -167,14 +169,28 @@ function hasDayPrecision(value) {
   if (!raw) return false;
   if (/^\d{4}$/.test(raw)) return false;
   if (/^\d{4}[-/]\d{1,2}$/.test(raw)) return false;
+  if (/^\d{4}\s+[A-Za-z]{3,}$/.test(raw)) return false;
   return [
     /^\d{4}\d{2}\d{2}$/,
     /^\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\b|T|\s)/,
     /^\d{1,2}[-/]\d{1,2}[-/]\d{2,4}(?:\b|T|\s)/,
     /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
     /^\d{1,2}\s+[A-Za-z]{3,}\s+\d{4}\b/i,
-    /^[A-Za-z]{3,}\s+\d{1,2},?\s+\d{4}\b/i
+    /^[A-Za-z]{3,}\s+\d{1,2},?\s+\d{4}\b/i,
+    /^\d{4}\s+[A-Za-z]{3,}\s+\d{1,2}\b/i
   ].some(re => re.test(raw));
+}
+
+const MONTH_ABBR = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+// "2026 Jul 8" (PubMed esummary) parses as local midnight, which shifts the day
+// in positive-offset timezones. Rewrite it to an explicit UTC date instead.
+function isoFromYearMonthDay(raw) {
+  const m = raw.match(/^(\d{4})\s+([A-Za-z]{3,})\s+(\d{1,2})\b/);
+  if (!m) return null;
+  const month = MONTH_ABBR.indexOf(m[2].slice(0, 3).toLowerCase());
+  if (month < 0) return null;
+  return `${m[1]}-${String(month + 1).padStart(2, '0')}-${m[3].padStart(2, '0')}`;
 }
 
 function parseDateMs(dateStr) {
@@ -183,10 +199,11 @@ function parseDateMs(dateStr) {
   if (!raw) return null;
   if (!hasDayPrecision(raw)) return null;
   const candidates = [
+    isoFromYearMonthDay(raw),
     raw,
     raw.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'),
     raw.replace(/\s+/g, ' ')
-  ];
+  ].filter(Boolean);
   for (const candidate of candidates) {
     const ms = new Date(candidate).getTime();
     if (Number.isFinite(ms)) return ms;
@@ -487,10 +504,12 @@ async function fetchPubMed(source, days) {
     const data = JSON.parse(r.text).result || {};
     const items = ids.map(id => {
       const row = data[id] || {};
+      // pubdate is the journal issue cover date and is routinely months in the
+      // future; epubdate is when the article actually appeared online.
       return {
         title: row.title || `PubMed ${id}`,
         url: `https://pubmed.ncbi.nlm.nih.gov/${id}/`,
-        publishedAt: normalizePublishedAt(row.pubdate) || null,
+        publishedAt: normalizePublishedAt(row.epubdate) || normalizePublishedAt(row.pubdate) || null,
         summary: [row.source && `Journal: ${row.source}`, row.authors?.length && `Authors: ${row.authors.slice(0, 5).map(a => a.name).join(', ')}`].filter(Boolean).join(' | '),
         pmid: id,
         doi: row.elocationid?.match(/10\.\S+/)?.[0]?.replace(/[.)]$/, '') || null
@@ -710,9 +729,54 @@ function pushCandidate(candidates, rawItem, source, retrievalMethod, catalog, se
     recordHardFilter(healthcheck, retrievalMethod, source.name, 'duplicate_title');
     return;
   }
+  if (seen.published?.has(key)) {
+    recordHardFilter(healthcheck, retrievalMethod, source.name, 'already_published');
+    return;
+  }
   seen.keys.add(key);
   seen.titles.add(titleKey);
   candidates.push(item);
+}
+
+// Items already shipped in an earlier issue must not fill a later one. Keys are
+// kept only for the lookback window; past that an item can no longer be
+// re-selected on date grounds anyway, so retaining it would grow the file
+// without changing any outcome.
+async function readPublishedKeys(days) {
+  let state;
+  try {
+    state = JSON.parse(await readFile(STATE_PATH, 'utf-8'));
+  } catch {
+    return new Map();
+  }
+  const cutoff = Date.now() - days * DAY_MS;
+  const entries = Object.entries(state.publishedKeys || {})
+    .filter(([, isoDate]) => {
+      const ms = new Date(String(isoDate)).getTime();
+      return Number.isFinite(ms) && ms >= cutoff;
+    });
+  return new Map(entries);
+}
+
+// Re-running on a day that already has an issue recomputes that issue rather
+// than publishing a near-empty follow-up, so today's own keys must not suppress.
+function suppressionSet(publishedKeys, issueDate) {
+  const keys = new Set();
+  for (const [key, date] of publishedKeys) {
+    if (date !== issueDate) keys.add(key);
+  }
+  return keys;
+}
+
+// Today's keys are rewritten from scratch so a recomputed issue does not leave
+// behind keys for items it no longer contains.
+function mergePublishedKeys(previous, selected, issueDate) {
+  const merged = {};
+  for (const [key, date] of previous) {
+    if (date !== issueDate) merged[key] = date;
+  }
+  for (const item of selected) merged[dedupeKey(item)] = issueDate;
+  return merged;
 }
 
 function selectCandidates(candidates, healthcheck) {
@@ -749,6 +813,45 @@ function selectCandidates(candidates, healthcheck) {
     status: x.selectionStatus || 'not_selected'
   }));
   return selected;
+}
+
+// A source that fetches rows but keeps none is usually just a strict keyword
+// filter. It is only worth flagging when *every* row is dropped for a reason
+// that points at a broken integration rather than at relevance.
+const INTEGRATION_FAILURE_REASONS = ['missing_date', 'imprecise_date', 'missing_url'];
+
+function collectSourceWarnings(healthcheck) {
+  const buckets = [
+    ['RSS', healthcheck.per_source],
+    ['API', healthcheck.per_api_source],
+    ['站点搜索', healthcheck.tavily_per_site]
+  ];
+  for (const [kind, bucket] of buckets) {
+    for (const [name, stats] of Object.entries(bucket || {})) {
+      if (stats.error) {
+        healthcheck.warnings.push(`${kind} 源「${name}」抓取失败：${stats.error}`);
+        continue;
+      }
+      if (!stats.fetched || stats.candidates > 0) continue;
+      const dropped = INTEGRATION_FAILURE_REASONS
+        .map(reason => [reason, countDropsFor(healthcheck, name, reason)])
+        .filter(([, count]) => count > 0);
+      const totalDropped = dropped.reduce((sum, [, count]) => sum + count, 0);
+      if (totalDropped === stats.fetched) {
+        const detail = dropped.map(([reason, count]) => `${reason} ${count}`).join('、');
+        healthcheck.warnings.push(`${kind} 源「${name}」抓取 ${stats.fetched} 条但全部因日期/链接缺失被丢弃（${detail}）`);
+      }
+    }
+  }
+}
+
+function countDropsFor(healthcheck, sourceName, reason) {
+  let total = 0;
+  for (const [key, count] of Object.entries(healthcheck.filtered_by_source_reason || {})) {
+    const parts = key.split(':');
+    if (parts[parts.length - 1] === reason && parts.slice(1, -1).join(':') === sourceName) total += count;
+  }
+  return total;
 }
 
 function countBy(items, fn) {
@@ -843,6 +946,47 @@ function runSelfTest() {
   const createdOnly = crossrefPublishedAt({ created: { 'date-parts': [[currentYear, 7, 8]] } });
   if (createdOnly !== null) throw new Error('expected Crossref created-only date to be ignored');
 
+  // PubMed esummary returns "YYYY Mon D"; month-only "YYYY Mon" stays imprecise.
+  if (!hasDayPrecision(`${currentYear} Jul 8`)) throw new Error('expected PubMed "YYYY Mon D" date to be day-precise');
+  if (hasDayPrecision(`${currentYear} Jul`)) throw new Error('expected PubMed "YYYY Mon" date to be imprecise');
+  if (normalizePublishedAt(`${currentYear} Jul 8`)?.slice(0, 10) !== `${currentYear}-07-08`) {
+    throw new Error('expected PubMed "YYYY Mon D" date to normalize to the same day');
+  }
+  if (!/contact: \S+@\S+\.\S+/.test(USER_AGENT)) throw new Error('SEC EDGAR requires a contact email in the User-Agent');
+
+  // A future-dated journal cover date must never be used as the published date.
+  const coverDated = { epubdate: `${currentYear} Jun 30`, pubdate: `${currentYear} Dec 31` };
+  const resolved = normalizePublishedAt(coverDated.epubdate) || normalizePublishedAt(coverDated.pubdate);
+  if (resolved?.slice(0, 10) !== `${currentYear}-06-30`) throw new Error('expected PubMed epubdate to win over the cover pubdate');
+
+  // An item shipped in an earlier issue must not be selected again.
+  const republished = {
+    title: 'GLP-1 clinical trial in obesity',
+    url: 'https://example.com/already-published',
+    publishedAt: new Date().toISOString(),
+    summary: 'therapeutic peptide drug candidate phase 2 patients'
+  };
+  const republishHealth = newHealthcheck();
+  republishHealth.filtered_out_by_already_published = 0;
+  const republishSeen = { keys: new Set(), titles: new Set(), published: new Set([dedupeKey(republished)]) };
+  const republishOut = [];
+  pushCandidate(republishOut, republished, src, 'fixture', fakeCatalog, republishSeen, republishHealth, 30);
+  if (republishOut.length !== 0) throw new Error('expected an already-published item to be suppressed');
+  if (republishHealth.filtered_out_by_already_published !== 1) throw new Error('expected already_published to be counted');
+
+  // Re-running a day drops that day's stale keys but keeps earlier issues' keys.
+  const priorKeys = new Map([
+    ['url:https://example.com/earlier', '2000-01-01'],
+    ['url:https://example.com/dropped-on-rerun', '2000-01-02']
+  ]);
+  const rerun = mergePublishedKeys(priorKeys, [], '2000-01-02');
+  if (rerun['url:https://example.com/earlier'] !== '2000-01-01') throw new Error('expected earlier issue keys to survive a re-run');
+  if ('url:https://example.com/dropped-on-rerun' in rerun) throw new Error("expected the re-run day's stale keys to be dropped");
+
+  // Today's own keys must not suppress today's own items.
+  const sameDay = suppressionSet(new Map([['url:a', '2000-01-01'], ['url:b', '2000-01-02']]), '2000-01-02');
+  if (!sameDay.has('url:a') || sameDay.has('url:b')) throw new Error('expected only earlier issues to suppress');
+
   const impreciseHealth = newHealthcheck();
   pushCandidate([], {
     title: 'GLP-1 publication with imprecise date',
@@ -882,10 +1026,13 @@ async function main() {
     filtered_out_by_required_keyword: 0,
     filtered_out_by_global_keyword: 0,
     filtered_out_by_duplicate: 0,
-    filtered_out_by_duplicate_title: 0
+    filtered_out_by_duplicate_title: 0,
+    filtered_out_by_already_published: 0
   };
   const candidates = [];
-  const seen = { keys: new Set(), titles: new Set() };
+  const issueDate = generatedAt.slice(0, 10);
+  const publishedKeys = args.dedupeState ? await readPublishedKeys(args.days) : new Map();
+  const seen = { keys: new Set(), titles: new Set(), published: suppressionSet(publishedKeys, issueDate) };
 
   const rssSources = Object.values(catalog.primary_rss || {}).flat();
   const rssResults = await Promise.all(rssSources.map(fetchFeed));
@@ -940,6 +1087,8 @@ async function main() {
     }
   }
 
+  collectSourceWarnings(healthcheck);
+
   const selected = selectCandidates(candidates, healthcheck);
   const groupedByCategory = {};
   for (const item of selected) (groupedByCategory[item.sourceCategory] ||= []).push(item);
@@ -975,8 +1124,14 @@ async function main() {
   };
 
   await writeFile(FEED_PATH, `${JSON.stringify(feed, null, 2)}\n`);
-  await writeFile(STATE_PATH, `${JSON.stringify({ generatedAt, lookbackDays: args.days, lastItemCount: selected.length }, null, 2)}\n`);
-  console.error(`feed-peptides.json: ${selected.length} items (${feed.stats.sourcesFailed} RSS failures, ${feed.stats.apiSourcesFailed} API failures)`);
+  await writeFile(STATE_PATH, `${JSON.stringify({
+    generatedAt,
+    lookbackDays: args.days,
+    lastItemCount: selected.length,
+    publishedKeys: args.dedupeState ? mergePublishedKeys(publishedKeys, selected, issueDate) : {}
+  }, null, 2)}\n`);
+  const suppressed = healthcheck.filtered_out_by_already_published;
+  console.error(`feed-peptides.json: ${selected.length} items (${feed.stats.sourcesFailed} RSS failures, ${feed.stats.apiSourcesFailed} API failures, ${suppressed} already published)`);
 }
 
 main().catch(err => {
