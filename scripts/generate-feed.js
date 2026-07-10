@@ -183,14 +183,26 @@ function hasDayPrecision(value) {
 
 const MONTH_ABBR = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
+function isoDate(year, monthName, day) {
+  const month = MONTH_ABBR.indexOf(monthName.slice(0, 3).toLowerCase());
+  if (month < 0) return null;
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
 // "2026 Jul 8" (PubMed esummary) parses as local midnight, which shifts the day
 // in positive-offset timezones. Rewrite it to an explicit UTC date instead.
 function isoFromYearMonthDay(raw) {
   const m = raw.match(/^(\d{4})\s+([A-Za-z]{3,})\s+(\d{1,2})\b/);
-  if (!m) return null;
-  const month = MONTH_ABBR.indexOf(m[2].slice(0, 3).toLowerCase());
-  if (month < 0) return null;
-  return `${m[1]}-${String(month + 1).padStart(2, '0')}-${m[3].padStart(2, '0')}`;
+  return m ? isoDate(m[1], m[2], m[3]) : null;
+}
+
+// "Jul 10, 2026 8:17am" (Fierce Biotech/Pharma) is unparseable by Date because
+// of the "8:17am" time, and the bare "Jul 10, 2026" form parses as local
+// midnight. Take the date part and pin it to UTC; the pipeline only ever
+// compares at day granularity.
+function isoFromMonthDayYear(raw) {
+  const m = raw.match(/^([A-Za-z]{3,})\s+(\d{1,2}),?\s+(\d{4})\b/);
+  return m ? isoDate(m[3], m[1], m[2]) : null;
 }
 
 function parseDateMs(dateStr) {
@@ -200,6 +212,7 @@ function parseDateMs(dateStr) {
   if (!hasDayPrecision(raw)) return null;
   const candidates = [
     isoFromYearMonthDay(raw),
+    isoFromMonthDayYear(raw),
     raw,
     raw.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'),
     raw.replace(/\s+/g, ' ')
@@ -953,6 +966,20 @@ function runSelfTest() {
     throw new Error('expected PubMed "YYYY Mon D" date to normalize to the same day');
   }
   if (!/contact: \S+@\S+\.\S+/.test(USER_AGENT)) throw new Error('SEC EDGAR requires a contact email in the User-Agent');
+
+  // Fierce feeds emit "Jul 10, 2026 8:17am", which Date cannot parse at all,
+  // and the bare "Jul 10, 2026" form would otherwise shift a day westward.
+  for (const fierce of [`Jul 10, ${currentYear} 8:17am`, `Jul 10, ${currentYear} 11:45pm`, `Jul 10, ${currentYear}`]) {
+    if (!hasDayPrecision(fierce)) throw new Error(`expected Fierce date to be day-precise: ${fierce}`);
+    if (normalizePublishedAt(fierce)?.slice(0, 10) !== `${currentYear}-07-10`) {
+      throw new Error(`expected Fierce date to normalize to the same day: ${fierce}`);
+    }
+  }
+  // The rewrite must not hijack formats that already parsed correctly.
+  if (isoFromMonthDayYear('10 Jul 2026') !== null) throw new Error('expected day-first dates to be left alone');
+  if (normalizePublishedAt(`Wed, 10 Jul ${currentYear} 08:17:00 +0000`)?.slice(0, 10) !== `${currentYear}-07-10`) {
+    throw new Error('expected RFC 822 dates to keep parsing');
+  }
 
   // A future-dated journal cover date must never be used as the published date.
   const coverDated = { epubdate: `${currentYear} Jun 30`, pubdate: `${currentYear} Dec 31` };
