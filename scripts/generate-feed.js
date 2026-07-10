@@ -416,12 +416,26 @@ function recordHardFilter(healthcheck, retrievalMethod, sourceName, reason) {
   bucket[`${retrievalMethod}:${sourceName}:${reason}`] = (bucket[`${retrievalMethod}:${sourceName}:${reason}`] || 0) + 1;
 }
 
+// Consumer explainers and market commentary are on-topic by keyword but carry no
+// R&D signal. They are recognizable by headline grammar ("X vs Y", "what to know",
+// "stock price forecast") rather than by publisher, so the rule generalizes to
+// outlets we have never seen. Titles only: a paper's abstract may legitimately
+// discuss side effects. Trade press only: journal articles use none of these forms.
+function isNoiseHeadline(title, patterns) {
+  if (!patterns?.length) return false;
+  return patterns.some(pattern => new RegExp(pattern, 'i').test(String(title || '')));
+}
+
 function passesCatalogFilters(rawItem, source, catalog) {
   const global = catalog.global_filters || {};
   if (!passesExclude(rawItem, global.exclude_keywords)) return 'global_exclude';
   if (!passesExclude(rawItem, source.excludeKeywordFilter)) return 'source_exclude';
   if (!passesAny(rawItem, source.keywordFilter, source.keywordScope || 'title_summary')) return 'keyword';
   if (!passesRequired(rawItem, source.requiredKeywordFilter, source.requiredKeywordScope || source.keywordScope || 'title_summary')) return 'required_keyword';
+
+  if (source.category === 'industry_news' && isNoiseHeadline(rawItem.title, global.noise_title_patterns)) {
+    return 'noise_headline';
+  }
 
   const requiresGlobalContext = ['literature', 'industry_news'].includes(source.category);
   if (requiresGlobalContext && !passesAny(rawItem, global.inclusion_keywords, 'title_summary')) return 'global_keyword';
@@ -1014,6 +1028,45 @@ function runSelfTest() {
   const sameDay = suppressionSet(new Map([['url:a', '2000-01-01'], ['url:b', '2000-01-02']]), '2000-01-02');
   if (!sameDay.has('url:a') || sameDay.has('url:b')) throw new Error('expected only earlier issues to suppress');
 
+  // Headline grammar, not a publisher blocklist: these must hold for outlets we
+  // have never seen. Verified against invented headlines, not only observed ones.
+  const noisePatterns = [
+    '\\bwhat (to know|experts say|is|are)\\b', '\\bwhy (isn.?t|is|are|does)\\b',
+    '\\bhow (to|do|does)\\b', '\\bvs\\.?\\b|\\bversus\\b',
+    '\\bwhich [\\w-]+ (works|is|are) best\\b', '\\bstock (quote|price|forecast)\\b',
+    '\\bmarket cap\\b', '\\bshare price\\b', '\\bexplained\\b',
+    '\\beverything you need\\b', '\\bside effects\\b'
+  ];
+  const noiseHeadlines = [
+    'Ozempic vs Mounjaro: Which Is Right For You?',
+    'Does Semaglutide Increase Your Metabolism? What Experts Say',
+    'Why Isn\'t There Oral Tirzepatide?',
+    'How To Get Insurance To Cover Wegovy',
+    'Which GLP-1 works best? New meta-study puts them head-to-head',
+    'NVO Stock Quote Price and Forecast',
+    'Eli Lilly\'s Market Cap Balloons, Again',
+    'Semaglutide Side Effects Explained'
+  ];
+  for (const headline of noiseHeadlines) {
+    if (!isNoiseHeadline(headline, noisePatterns)) throw new Error(`expected noise headline to be rejected: ${headline}`);
+  }
+  const signalHeadlines = [
+    'MHRA approves semaglutide oral tablets for weight loss',
+    'Novo Nordisk to present head-to-head CagriSema data at ADA',
+    'Lilly cuts guidance after tirzepatide miss',
+    'Pfizer licenses oral GLP-1 candidate in $1.2B deal',
+    'FDA issues complete response letter for oral semaglutide',
+    'Health Canada approves Mounjaro for use in children'
+  ];
+  for (const headline of signalHeadlines) {
+    if (isNoiseHeadline(headline, noisePatterns)) throw new Error(`expected signal headline to survive: ${headline}`);
+  }
+  // The rule must never touch literature; a paper may discuss side effects.
+  const paper = { title: 'Study reports side effects of semaglutide in a randomized trial', url: 'https://example.com/p', publishedAt: new Date().toISOString(), summary: 'therapeutic peptide clinical trial patients' };
+  if (passesCatalogFilters(paper, { ...src, category: 'literature' }, { global_filters: { ...fakeCatalog.global_filters, noise_title_patterns: noisePatterns } }) === 'noise_headline') {
+    throw new Error('expected noise-headline rule to skip literature');
+  }
+
   const impreciseHealth = newHealthcheck();
   pushCandidate([], {
     title: 'GLP-1 publication with imprecise date',
@@ -1052,6 +1105,7 @@ async function main() {
     filtered_out_by_keyword: 0,
     filtered_out_by_required_keyword: 0,
     filtered_out_by_global_keyword: 0,
+    filtered_out_by_noise_headline: 0,
     filtered_out_by_duplicate: 0,
     filtered_out_by_duplicate_title: 0,
     filtered_out_by_already_published: 0
