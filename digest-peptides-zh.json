@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "issueDate": "2026-07-10",
-  "generatedAt": "2026-07-10T11:51:12.894Z",
-  "sourceGeneratedAt": "2026-07-10T11:50:14.042Z",
+  "generatedAt": "2026-07-10T13:20:03.487Z",
+  "sourceGeneratedAt": "2026-07-10T13:19:00.709Z",
   "language": "zh-CN",
   "digestMode": "complete",
   "itemOrder": "published_at_desc_within_fixed_sections",
-  "itemCount": 15,
+  "itemCount": 19,
   "model": {
     "provider": "deepseek",
     "model": "deepseek-v4-flash",
@@ -15,29 +15,28 @@
     "apiBaseUrlConfigured": true,
     "requestCount": 5,
     "requestAttempts": 5,
-    "promptTokens": 10810,
-    "completionTokens": 5127,
-    "totalTokens": 15937,
-    "promptCacheHitTokens": 2816,
-    "promptCacheMissTokens": 7994,
-    "aiGeneratedItems": 15,
+    "promptTokens": 9847,
+    "completionTokens": 4953,
+    "totalTokens": 14800,
+    "promptCacheHitTokens": 2432,
+    "promptCacheMissTokens": 7415,
+    "aiGeneratedItems": 19,
     "editorialItems": 0,
     "fallbackItems": 0
   },
   "overview": {
-    "titleZh": "多肽药物研发期概览",
-    "summaryZh": "本期主要涵盖GLP-1/GIP类多肽药物在肥胖、糖尿病、心血管疾病等领域的临床进展与基础研究，包括礼来的市场拓展（Medicare桥接计划、Zepbound公众宣传）、多项临床试验（止吐机制、精准医学、膳食补充剂）以及多篇文献探讨真实世界联合用药、老年人注意事项、神经精神安全性等。方法学方面有环肽筛选与合成新技术，太空制药概念被提出。公司管线与临床监管共6条记录，文献与会议9条，专利与行业动态无记录。",
+    "titleZh": "多肽药物研发周报",
+    "summaryZh": "本期内容聚焦于GLP-1/GIP等肠促胰素类多肽药物在代谢疾病领域的临床与基础研究，以及多肽技术平台（如环肽合成、噬菌体展示筛选）的创新进展。临床方面涉及GLP-1类药物在肥胖、糖尿病、心血管疾病中的应用及安全性（如神经精神效应、微量元素缺乏、妊娠期暴露等）；文献方面包括真实世界研究、系统综述、病例报告及动物研究等。此外，本期还包括一项多肽放射性示踪剂的前列腺癌PET显像首次人体研究、一项关于肠道菌群与GLP-1分泌的研究，以及一款含肽护肤品的FDA标签更新。",
     "themes": [
-      "GLP-1/GIP药物在肥胖和糖尿病中的精准医学与真实世界证据",
-      "多肽药物的安全性与特殊人群应用（老年人、进食障碍风险）",
-      "新型多肽化学工具（环化、筛选、放射性示踪剂）",
-      "GLP-1药物的社会与家庭层面影响"
+      "GLP-1/GIP受体激动剂的临床应用与安全性评估",
+      "多肽药物筛选与合成技术（环肽、噬菌体展示、自动化合成）",
+      "GLP-1药物在特殊人群（老年人、妊娠期、厌食症）中的考量",
+      "多肽药物在肥胖和糖尿病中的个体化治疗与联合用药"
     ]
   },
   "categoryCounts": {
     "clinical_registry": 3,
-    "company_official": 2,
-    "literature": 9,
+    "literature": 15,
     "regulatory": 1
   },
   "sections": [
@@ -47,8 +46,8 @@
       "categories": [
         "company_official"
       ],
-      "itemCount": 2,
-      "summaryZh": "本期收录2条公司与管线记录，包括礼来发布Medicare GLP-1桥接计划信息及Zepbound全国性公众宣传活动，均为企业官方新闻稿。"
+      "itemCount": 0,
+      "summaryZh": "本期未收录公司与管线相关记录。"
     },
     {
       "id": "clinical",
@@ -58,7 +57,7 @@
         "regulatory"
       ],
       "itemCount": 4,
-      "summaryZh": "本期收录4条临床与监管记录：3项临床注册试验（GIP止吐机制、基因预测GLP-1/GIP反应、膳食补充剂调节GLP-1）和1项FDA标签更新（护肤品含多肽）。试验多数处于招募或完成阶段，无结果数据。"
+      "summaryZh": "本期收录4条临床与监管记录，包括：一项GIP止吐作用的早期临床试验（健康个体）、一项遗传预测GLP-1/GIP激动剂疗效的研究（招募中）、一项膳食补充剂对食欲激素影响的已完成试验，以及一款含肽护肤品的FDA标签更新。整体以代谢疾病相关早期临床探索为主，标签更新不涉及新疗效证据。"
     },
     {
       "id": "literature",
@@ -67,8 +66,8 @@
         "literature",
         "conference"
       ],
-      "itemCount": 9,
-      "summaryZh": "本期收录9条文献记录，涵盖GLP-1药物的真实世界联合使用、老年患者注意事项、神经精神结局、基础研究（活动性厌食症模型）、家庭影响，以及多肽化学方法（赖氨酸选择性环化、自动大环组装）和太空制药可行性分析。"
+      "itemCount": 15,
+      "summaryZh": "本期收录15条文献记录，涵盖GLP-1受体激动剂的真实世界联合用药（糖尿病合并心血管病）、老年人用药、神经精神安全性、中国人群Meta分析、妊娠期暴露、微量元素风险、运动性过敏反应等主题；还包括环肽合成新技术（基因编码环化、PMDA连接子）、太空多肽疗法、家庭层面影响、小鼠厌食症模型、肠道菌群与GLP-1分泌、以及前列腺癌PET显像研究。文献类型多样，包括综述、研究论文、病例系列等。"
     },
     {
       "id": "industry",
@@ -86,14 +85,14 @@
     {
       "sourceItemId": "f77e153d47de321a6013",
       "contentStatus": "ai_generated",
-      "titleZh": "肠道激素GIP增加内脏灌注对健康个体的止吐作用",
-      "summaryZh": "哥本哈根大学开展的一项临床试验，邀请患者入组，旨在研究葡萄糖依赖性促胰岛素多肽（GIP）增加内脏灌注对健康个体的止吐效果。干预措施包括GIP、GLP-1（7-36）酰胺、阿扑吗啡注射液和生理盐水（0.9% NaCl）。",
-      "whatItIsZh": "该条目是哥本哈根大学发起的一项临床注册试验（NCT07687589），目前状态为“邀请入组”，尚未提供试验阶段。",
-      "whyItMattersZh": "该研究探索GIP通过内脏灌注调节的止吐新机制，可能拓展多肽药物在止吐领域的应用。但证据仅限于注册信息，尚无结果数据。",
+      "titleZh": "肠激素GIP诱导的内脏灌注增加对健康个体的止吐作用",
+      "summaryZh": "哥本哈根大学开展的一项临床研究，旨在评估增加内脏灌注（由肠激素GIP诱导）对健康个体的止吐效果。研究处于邀请招募阶段，干预措施包括GIP、GLP-1 (7-36)酰胺、阿扑吗啡注射液和生理盐水。",
+      "whatItIsZh": "一项评估GIP通过增加内脏灌注发挥止吐作用的临床试验。",
+      "whyItMattersZh": "本研究探索了GIP除代谢调节外的新功能——止吐，可能拓展多肽药物的应用范围。但证据仅限于健康个体的早期研究，尚未获得临床结论。",
       "keyPoints": [
-        "NCT07687589，哥本哈根大学赞助，状态为邀请入组",
-        "主要干预为GIP，与GLP-1和阿扑吗啡对比",
-        "适应症为呕吐（Emesis）"
+        "来源：ClinicalTrials.gov，NCT07687589",
+        "状态：ENROLLING_BY_INVITATION",
+        "条件：呕吐"
       ],
       "originalTitle": "The Antiemetic Effects of Increased Splanchnic Perfusion, Induced by the Gut Hormone GIP, in Healthy Individuals",
       "originalSummary": "Sponsor: University of Copenhagen | Phase: NA | Status: ENROLLING_BY_INVITATION | Condition: Emesis | Interventions: Glucose-dependent Insulinotropic Polypeptide (GIP); GLP-1 (7-36) amide; Apomorphine Injectable Solution; Saline (0.9% NaCl)",
@@ -120,14 +119,14 @@
     {
       "sourceItemId": "4495716e4f8f5f5a05dc",
       "contentStatus": "ai_generated",
-      "titleZh": "精准肥胖医学：基因预测对GLP-1/GIP激动剂的反应",
-      "summaryZh": "雅典国立和卡波季斯特里安大学开展的一项临床试验，正在招募受试者，旨在通过遗传预测评估对司美格鲁肽或替尔泊肽的反应。研究涉及肥胖（障碍）、抗肥胖药物和精准医学。",
-      "whatItIsZh": "该条目是一项临床注册试验（NCT07653412），旨在探索基因预测方法在GLP-1/GIP激动剂治疗肥胖中的个体化应用。",
-      "whyItMattersZh": "该研究代表多肽药物在肥胖治疗中向精准医学方向发展，可能提高疗效并减少副作用。但目前仅处于招募阶段，尚无结果。",
+      "titleZh": "精准肥胖医学：GLP-1/GIP激动剂应答的遗传预测",
+      "summaryZh": "雅典国立卡波季斯特里安大学发起的一项研究，旨在通过遗传预测对司美格鲁肽或替尔泊肽的应答，实现肥胖精准医疗。研究处于招募中。",
+      "whatItIsZh": "一项探索遗传因素预测GLP-1/GIP激动剂（司美格鲁肽或替尔泊肽）疗效的临床试验。",
+      "whyItMattersZh": "该研究将推动肥胖治疗的个体化，可能提高多肽药物疗效并减少无效治疗。但尚处于招募阶段，结果未知。",
       "keyPoints": [
-        "NCT07653412，雅典大学赞助，正在招募",
-        "利用基因预测对司美格鲁肽或替尔泊肽的反应",
-        "适应症为肥胖"
+        "来源：ClinicalTrials.gov，NCT07653412",
+        "状态：RECRUITING",
+        "条件：肥胖；抗肥胖药物；精准医疗"
       ],
       "originalTitle": "Precision Obesity Medicine: Genetic Prediction of Response to GLP-1/GIP Agonists.",
       "originalSummary": "Sponsor: National and Kapodistrian University of Athens | Status: RECRUITING | Condition: Obesity (Disorder); Anti-obesity Agents; Precision Medicine | Interventions: Semaglutide or Tirzepatide",
@@ -155,13 +154,13 @@
       "sourceItemId": "aeb3a0cb64ab77923036",
       "contentStatus": "ai_generated",
       "titleZh": "膳食补充剂对超重和肥胖成人食欲调节激素的影响",
-      "summaryZh": "FFoQSI（奥地利饲料与食品质量安全创新能力中心）完成了一项临床试验，旨在评估含植物提取物的膳食补充剂对超重和肥胖成人食欲调节激素（如GLP-1）的影响。干预包括膳食补充剂和安慰剂。",
-      "whatItIsZh": "该条目是一项已完成的临床注册试验（NCT07240246），研究植物提取物膳食补充剂对GLP-1等激素的作用。",
-      "whyItMattersZh": "该研究探索非肽类膳食补充剂调节GLP-1的潜力，可能为肥胖干预提供新途径。但这是膳食补充剂而非多肽药物，且试验已完成但未公布结果。",
+      "summaryZh": "FFoQSI（奥地利饲料和食品质量、安全与创新能力中心）开展的一项已完成研究，评估含植物提取物的膳食补充剂与安慰剂对超重和肥胖成人GLP-1等激素的影响。",
+      "whatItIsZh": "一项评估膳食补充剂对食欲调节激素（如GLP-1）影响的已完成临床试验。",
+      "whyItMattersZh": "该研究探索了非药物干预对GLP-1的影响，可能为多肽药物辅助治疗提供背景。但为单一试验，且补充剂成分不详，结论适用性有限。",
       "keyPoints": [
-        "NCT07240246，FFoQSI赞助，已完成",
-        "干预为植物提取物膳食补充剂，对照安慰剂",
-        "关注GLP-1激素变化，适应症为超重和肥胖"
+        "来源：ClinicalTrials.gov，NCT07240246",
+        "状态：COMPLETED",
+        "条件：GLP-1；肥胖与超重；膳食补充剂"
       ],
       "originalTitle": "Effect of a Dietary Supplement on Hormones Involved in Appetite Regulation in Overweight and Obese Adults",
       "originalSummary": "Sponsor: FFoQSI - Austrian Competence Centre for Feed and Food Quality, Safety & Innovation | Phase: NA | Status: COMPLETED | Condition: GLP-1; Obesity & Overweight; Dietary Supplement | Interventions: Intervention: Dietary Supplement with Plant Extracts; Placebo",
@@ -186,50 +185,16 @@
       "evidenceLevel": null
     },
     {
-      "sourceItemId": "31333cce80cb6abd9aab",
-      "contentStatus": "ai_generated",
-      "titleZh": "Medicare Part D患者需知：获取Foundayo（orforglipron）和Zepbound（替尔泊肽）用于体重管理",
-      "summaryZh": "礼来公司宣布，新的Medicare GLP-1桥接计划自2026年7月1日起，使符合条件的Medicare Part D患者能够获得其肥胖药物——每日口服的Foundayo（orforglipron）和注射剂Zepbound（替尔泊肽）。礼来公司新闻稿发布。",
-      "whatItIsZh": "该条目是礼来公司发布的关于Medicare GLP-1桥接计划的新闻稿，旨在让患者了解获取orforglipron（口服GLP-1激动剂）和替尔泊肽（GIP/GLP-1双重激动剂）的途径。",
-      "whyItMattersZh": "该新闻表明礼来的多肽类肥胖药物正在扩大可及性，尤其是通过Medicare覆盖，可能显著增加患者群体。但这是新闻稿，证据为礼来单方声明，未提及具体覆盖率或定价细节。",
-      "keyPoints": [
-        "礼来宣布Medicare GLP-1桥接计划于2026年7月1日启动",
-        "涉及药物：orforglipron（口服）和tirzepatide（注射）",
-        "目标人群为Medicare Part D患者，用于体重管理"
-      ],
-      "originalTitle": "What Medicare Part D patients need to know about accessing Foundayo (orforglipron) and Zepbound (tirzepatide) for weight management",
-      "originalSummary": "A new Medicare pathway, the Medicare GLP-1 Bridge program, makes Lilly's obesity medicines – a daily pill or the number 1 most prescribed injectable – accessible to eligible Medicare Part D patients beginning July 1 INDIANAPOLIS, June 25, 2026 /PRNewswire/ -- Eli Lilly and Company (NYSE: LLY)",
-      "sourceUrl": "https://investor.lilly.com/news-releases/news-release-details/what-medicare-part-d-patients-need-know-about-accessing-foundayo",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "signalType": "pipeline_update",
-      "publishedAt": "2026-06-25T10:45:00.000Z",
-      "retrievedAt": null,
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "company": null,
-      "assetName": null,
-      "sponsor": null,
-      "indication": null,
-      "target": null,
-      "trialPhase": null,
-      "trialStatus": null,
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "evidenceLevel": null
-    },
-    {
       "sourceItemId": "2916ab336e20bc711c02",
       "contentStatus": "ai_generated",
-      "titleZh": "超越单类药物疗法：GLP-1受体激动剂与SGLT2抑制剂在2型糖尿病和动脉粥样硬化性心血管疾病中的真实世界联合使用",
-      "summaryZh": "一篇发表于《Advances in Therapy》的期刊文章，作者包括Vournas G等，探讨在2型糖尿病和动脉粥样硬化性心血管疾病中，GLP-1受体激动剂与SGLT2抑制剂的联合真实世界使用情况。DOI: 10.1007/s12325-026-03699-w，PMID: 42423950。",
-      "whatItIsZh": "该条目是一篇学术研究论文，分析真实世界中GLP-1受体激动剂与SGLT2抑制剂联合使用的效果和模式。",
-      "whyItMattersZh": "该研究提供真实世界证据，支持GLP-1类药物与SGLT2抑制剂联合在心血管疾病中的应用，可能优化临床实践。但单篇论文的证据强度有限，需更多验证。",
+      "titleZh": "超越单药治疗：GLP-1受体激动剂与SGLT2抑制剂在2型糖尿病和动脉粥样硬化性心血管疾病中的真实世界联合使用",
+      "summaryZh": "Adv Ther期刊发表的一篇文章，作者包括Vournas G等，研究了GLP-1受体激动剂与SGLT2抑制剂在真实世界中联合用于2型糖尿病和动脉粥样硬化性心血管疾病的情况。",
+      "whatItIsZh": "一篇关于GLP-1受体激动剂与SGLT2抑制剂联合使用的真实世界研究论文。",
+      "whyItMattersZh": "该研究提供了联合用药的临床实证，有助于优化糖尿病合并心血管疾病的治疗策略。但作为真实世界研究，存在混杂因素。",
       "keyPoints": [
-        "期刊文章，DOI: 10.1007/s12325-026-03699-w",
-        "焦点为GLP-1受体激动剂与SGLT2抑制剂联合使用",
-        "适应症为2型糖尿病和动脉粥样硬化性心血管疾病"
+        "来源：Adv Ther，DOI: 10.1007/s12325-026-03699-w",
+        "PMID: 42423950",
+        "类型：journal article"
       ],
       "originalTitle": "Beyond Single-Class Therapy: Real-World Combined Use of GLP-1 Receptor Agonists and SGLT2 Inhibitors in Type 2 Diabetes and Atherosclerotic Cardiovascular Disease.",
       "originalSummary": "Adv Ther | Vournas G, Sarvani A, Mavridou M, Tentolouris A, Doumas M, Liberopoulos EN, Kotsa K, Koufakis T. | journal article",
@@ -256,13 +221,14 @@
     {
       "sourceItemId": "c3a8996792276190e939",
       "contentStatus": "ai_generated",
-      "titleZh": "老年人使用 GLP-1 受体激动剂治疗肥胖和 2 型糖尿病的特殊注意事项",
-      "summaryZh": "该综述文章讨论了老年人使用 GLP-1 受体激动剂治疗肥胖和 2 型糖尿病的特殊注意事项。文章发表于 Adv Ther。",
-      "whatItIsZh": "这是一篇综述文章，系统总结了在老年患者中使用 GLP-1 受体激动剂的临床考量。",
-      "whyItMattersZh": "随着 GLP-1 药物在老年人群中使用增加，该综述提供了安全性、疗效及临床管理的循证建议，有助于指导该特殊人群的个体化治疗。证据为综述观点，需结合原始研究进一步评估。",
+      "titleZh": "在老年人中使用GLP-1受体激动剂治疗肥胖和2型糖尿病的特殊考量",
+      "summaryZh": "Adv Ther期刊发表的一篇综述，作者包括Pendrey AG等，讨论了在老年患者中使用GLP-1受体激动剂的特殊注意事项。",
+      "whatItIsZh": "一篇关于老年人使用GLP-1受体激动剂的综述文章。",
+      "whyItMattersZh": "该综述强调了老年人群用药的特殊性，为临床安全用药提供了参考。但为综述性质，不包含原始数据。",
       "keyPoints": [
-        "该综述聚焦老年人使用 GLP-1 受体激动剂的特殊注意事项",
-        "发表于 Adv Ther"
+        "来源：Adv Ther，DOI: 10.1007/s12325-026-03702-4",
+        "PMID: 42423951",
+        "类型：review; journal article"
       ],
       "originalTitle": "Special Considerations When Using GLP-1 Receptor Agonists in the Treatment of Obesity and Diabetes Mellitus Type 2 in Older Adults.",
       "originalSummary": "Adv Ther | Pendrey AG, Rivera Sierra JA, Alvarez Lobo FA, Ríos Herrera EJ, Fernandez Muñoz YM, Sevilla Martir JF. | review; journal article",
@@ -289,13 +255,13 @@
     {
       "sourceItemId": "aeec7b10951192f00da4",
       "contentStatus": "ai_generated",
-      "titleZh": "基因编码赖氨酸选择性光环化技术用于噬菌体展示筛选环肽结合物",
-      "summaryZh": "该研究开发了一种基因编码的赖氨酸选择性光环化方法，可应用于噬菌体展示筛选环肽结合物。论文发表于 Angew Chem Int Ed Engl。",
-      "whatItIsZh": "这是一项技术方法学研究，报道了一种新的化学策略用于合成和筛选环肽配体。",
-      "whyItMattersZh": "该技术通过遗传编码实现赖氨酸选择性环化，为环肽药物的发现提供了新工具，扩展了噬菌体展示的化学多样性。属于方法学突破，尚需验证其在药物开发中的实际效用。",
+      "titleZh": "基因编码的赖氨酸选择性光环化实现环肽结合子的噬菌体展示筛选",
+      "summaryZh": "该研究开发了一种基因编码的赖氨酸选择性光环化方法，使得能够通过噬菌体展示技术筛选环肽结合子。论文发表于《Angew Chem Int Ed Engl》。",
+      "whatItIsZh": "这是一篇关于新型环肽筛选技术的期刊文章。",
+      "whyItMattersZh": "该技术为环肽药物的发现提供了一种新的化学工具，可提高筛选效率，但尚处于基础研究阶段。",
       "keyPoints": [
-        "开发了基因编码的赖氨酸选择性光环化方法",
-        "可应用于噬菌体展示筛选环肽结合物"
+        "开发了基因编码的赖氨酸选择性光环化反应",
+        "实现了噬菌体展示筛选环肽结合子"
       ],
       "originalTitle": "Genetically Encoded Lysine-Selective Photocyclization Enables Phage Display Selection of Cyclic Peptide Binders.",
       "originalSummary": "Angew Chem Int Ed Engl | Yang XQ, Ming W, Zhang ZH, Liu X, Bai LW, Li ZH, Huang R, Chen XH, Lei X. | journal article",
@@ -323,12 +289,12 @@
       "sourceItemId": "d802e151290fac73eb82",
       "contentStatus": "ai_generated",
       "titleZh": "用于多年太空探索的按需多肽治疗：临床和操作相关性及重组生产可行性分析",
-      "summaryZh": "该研究分析了按需多肽治疗在多年太空探索中的临床和操作相关性，并探讨了重组生产的可行性。发表于 NPJ Microgravity。",
-      "whatItIsZh": "这是一篇研究论文，评估在太空任务中通过重组技术生产多肽药物的可行性及临床价值。",
-      "whyItMattersZh": "该研究为太空极端环境下的药物自给自足提供了新思路，将多肽药物生产与空间医学需求结合。目前仅停留在理论可行性分析，实际应用尚需更多工程验证。",
+      "summaryZh": "该研究分析了在多年太空探索任务中使用按需多肽治疗的临床和操作相关性，并评估了重组生产的可行性。论文发表于《NPJ Microgravity》。",
+      "whatItIsZh": "这是一篇探讨太空环境中多肽治疗可行性的期刊文章。",
+      "whyItMattersZh": "该研究为极端环境下的药物供应提供了新思路，但仅为理论分析，尚无实际应用验证。",
       "keyPoints": [
-        "分析按需多肽治疗用于多年太空探索的临床和操作相关性",
-        "探讨重组生产可行性"
+        "分析了多肽治疗在太空探索中的临床相关性",
+        "评估了重组多肽生产的可行性"
       ],
       "originalTitle": "On-demand peptide therapeutics for multi-year space exploration: analysis of clinical and operational relevance and recombinant production feasibility.",
       "originalSummary": "NPJ Microgravity | Donovan JJ, Ericson I, Wenthe A, Kovacs K, Emsley J, Williams PM. | journal article",
@@ -355,12 +321,13 @@
     {
       "sourceItemId": "ecc73a29e2d0a0436322",
       "contentStatus": "ai_generated",
-      "titleZh": "超越个体：照顾者使用 GLP-1 药物对家庭食物环境和儿童健康行为的影响",
-      "summaryZh": "该研究探讨了照顾者使用 GLP-1 药物时，其对家庭食物环境和儿童健康行为的影响。发表于 Child Obes。",
-      "whatItIsZh": "这是一篇研究论文，关注 GLP-1 使用者家庭层面的间接效应，尤其是对儿童的影响。",
-      "whyItMattersZh": "GLP-1 药物不仅影响使用者个体，还可能通过家庭食物环境改变对儿童健康产生连锁效应，提示临床和社会层面需要更全面的干预策略。该研究为观察性，因果关系尚需进一步验证。",
+      "titleZh": "超越个体：照顾者使用GLP-1对家庭食物环境和儿童健康行为的家庭层面影响",
+      "summaryZh": "该研究探讨了照顾者使用GLP-1受体激动剂后对家庭食物环境和儿童健康行为的影响。论文发表于《Child Obes》。",
+      "whatItIsZh": "这是一篇关于GLP-1药物对家庭影响的期刊文章。",
+      "whyItMattersZh": "该研究揭示了GLP-1药物的间接家庭效应，但仅为观察性研究，因果关系需进一步验证。",
       "keyPoints": [
-        "研究照顾者使用 GLP-1 药物对家庭食物环境和儿童健康行为的影响"
+        "照顾者使用GLP-1影响家庭食物环境",
+        "可能影响儿童健康行为"
       ],
       "originalTitle": "Beyond the Individual: Family-Level Impacts of Caregiver GLP-1 Use on Food Environments and Child Health Behaviors.",
       "originalSummary": "Child Obes | Granados I, Jake-Schoffman DE, Governale KM, Fedele DA, McVay MA. | journal article",
@@ -387,12 +354,12 @@
     {
       "sourceItemId": "0878293e4f4235c5b097",
       "contentStatus": "ai_generated",
-      "titleZh": "GLP-1 受体激动作用加重小鼠基于活动的厌食症",
-      "summaryZh": "该研究发现 GLP-1 受体激动作用会加重小鼠基于活动的厌食症模型症状。发表于 Int J Eat Disord。",
-      "whatItIsZh": "这是一项基础研究，在小鼠模型中测试 GLP-1 激动剂对活动性厌食症的影响。",
-      "whyItMattersZh": "结果提示 GLP-1 药物在易感个体中可能加剧进食障碍，为临床应用提供了安全性警示。该研究为动物实验，结果外推至人类需要谨慎。",
+      "titleZh": "GLP-1受体激动加剧小鼠活动性厌食症",
+      "summaryZh": "该研究发现GLP-1受体激动会加剧基于活动的小鼠厌食症模型。论文发表于《Int J Eat Disord》。",
+      "whatItIsZh": "这是一篇关于GLP-1药物在厌食症模型中作用的基础研究文章。",
+      "whyItMattersZh": "该发现提示GLP-1药物可能对厌食症患者有潜在风险，但仅为动物实验结果，临床意义需谨慎解读。",
       "keyPoints": [
-        "GLP-1 受体激动作用加重小鼠基于活动的厌食症"
+        "GLP-1受体激动加剧小鼠活动性厌食症"
       ],
       "originalTitle": "GLP-1 Receptor Agonism Exacerbates Activity-Based Anorexia in Mice.",
       "originalSummary": "Int J Eat Disord | Thakar A, Brown TE, Hentges ST. | journal article",
@@ -420,13 +387,12 @@
       "sourceItemId": "d74e3c72450a9ba01c32",
       "contentStatus": "ai_generated",
       "titleZh": "模块化PMDA连接子实现未保护肽的赖氨酸选择性环化和自动大环组装",
-      "summaryZh": "本研究开发了一种模块化PMDA连接子，可对未保护肽进行赖氨酸选择性环化，并实现自动大环组装。该工作发表于《美国化学会志》。",
-      "whatItIsZh": "一篇关于新肽环化连接子技术的学术论文，来自J Am Chem Soc。",
-      "whyItMattersZh": "该技术为多肽大环化提供了新的化学工具，可能简化合成流程并提高选择性，对多肽药物研发有潜在价值。证据限于学术研究阶段。",
+      "summaryZh": "该研究报道了一种模块化PMDA连接子，可实现未保护肽的赖氨酸选择性环化以及自动大环组装。论文发表于《J Am Chem Soc》。",
+      "whatItIsZh": "这是一篇关于多肽环化新技术的期刊文章。",
+      "whyItMattersZh": "该技术简化了环肽合成流程，有望推动自动化生产，但尚处于方法开发阶段。",
       "keyPoints": [
-        "模块化PMDA连接子可实现赖氨酸选择性环化",
-        "支持未保护肽的直接环化和自动化大环组装",
-        "发表于J Am Chem Soc，作者Wu J等"
+        "PMDA连接子实现选择性赖氨酸环化",
+        "支持自动大环组装"
       ],
       "originalTitle": "A Modular PMDA Linker Enables Lysine-Selective Cyclization of Unprotected Peptides and Automated Macrocycle Assembly.",
       "originalSummary": "J Am Chem Soc | Wu J, Zhan W, Yang X, Li C, Yang Q, Bao Z, Ren Q, Zhang Z. | journal article",
@@ -453,14 +419,14 @@
     {
       "sourceItemId": "bb12b1286252b001eef5",
       "contentStatus": "ai_generated",
-      "titleZh": "替尔泊肽、司美格鲁肽及其他GLP-1受体激动剂的神经精神结局",
-      "summaryZh": "该研究评估了替尔泊肽、司美格鲁肽等GLP-1受体激动剂的神经精神安全性结局。论文发表于Diabetes Obes Metab。",
-      "whatItIsZh": "一篇关于GLP-1受体激动剂神经精神结局的学术论文。",
-      "whyItMattersZh": "GLP-1药物使用广泛，其神经精神安全性是临床关注重点，该研究提供了相关证据。但具体结论需阅读全文确认，摘要未提供具体结果。",
+      "titleZh": "替西帕肽、司美格鲁肽及其他GLP-1受体激动剂的神经精神结局",
+      "summaryZh": "该论文发表于Diabetes Obes Metab，作者Chen SC等人，评估了替西帕肽、司美格鲁肽等GLP-1受体激动剂的神经精神结局。来源未提供具体结果或结论。",
+      "whatItIsZh": "这是一篇关于GLP-1受体激动剂神经精神安全性的期刊文章。",
+      "whyItMattersZh": "GLP-1RAs广泛用于糖尿病和肥胖，其神经精神效应是临床关注点；本文提示需关注该类药物的中枢神经安全性，但具体证据来自一项文献综述。",
       "keyPoints": [
-        "研究涉及替尔泊肽、司美格鲁肽等GLP-1受体激动剂",
-        "评估神经精神结局",
-        "发表于Diabetes Obes Metab"
+        "研究发表于Diabetes Obes Metab",
+        "DOI: 10.1111/dom.71088",
+        "PubMed ID: 42420795"
       ],
       "originalTitle": "Neuropsychiatric Outcomes With Tirzepatide, Semaglutide, and Other GLP-1 Receptor Agonists.",
       "originalSummary": "Diabetes Obes Metab | Chen SC, Wang TJ, Chou CK, Lee C. | journal article",
@@ -485,16 +451,220 @@
       "evidenceLevel": null
     },
     {
+      "sourceItemId": "394407974df32d712355",
+      "contentStatus": "ai_generated",
+      "titleZh": "GLP-1受体激动剂对中国超重或肥胖成人心血管代谢结局的有效性与安全性：系统综述与Meta分析",
+      "summaryZh": "该Meta分析发表于J Diabetes Metab Disord，作者Bilal AR等人，汇总了GLP-1RA在中国超重/肥胖成人中关于心血管代谢结局的疗效和安全性数据。来源未提供具体结果。",
+      "whatItIsZh": "这是一项针对中国人群的系统综述与Meta分析，关注GLP-1RAs的心血管代谢获益。",
+      "whyItMattersZh": "为中国超重/肥胖人群使用GLP-1RA提供循证证据，但分析基于既往研究，具体结论需查阅全文。",
+      "keyPoints": [
+        "发表于J Diabetes Metab Disord",
+        "DOI: 10.1007/s40200-026-02000-8",
+        "PubMed ID: 42422116"
+      ],
+      "originalTitle": "Efficacy and safety of GLP-1RA on cardio-metabolic outcomes in overweight or obese Chinese adults: a systematic review and meta-analysis.",
+      "originalSummary": "Journal: J Diabetes Metab Disord | Authors: Bilal AR, Sajid M, Arfin SMW, Bilal AR, Gaba H",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42422116/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-07-07T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1007/s40200-026-02000-8",
+      "pmid": "42422116",
+      "evidenceLevel": null
+    },
+    {
+      "sourceItemId": "13bf3670f965f809e4d1",
+      "contentStatus": "ai_generated",
+      "titleZh": "巴氏灭菌Akkermansia muciniphila MucT对代谢综合征患者胰岛素敏感性、体成分及GLP-1生成的影响：低基线肠道Akkermansia水平的影响",
+      "summaryZh": "该研究发表于Gut Microbes，作者Suenaert P等人，探讨了巴氏灭菌Akkermansia muciniphila对代谢综合征患者的胰岛素敏感性、体成分和GLP-1产生的作用。来源未提供具体结果。",
+      "whatItIsZh": "这是一项关于益生菌Akkermansia muciniphila对代谢健康影响的临床研究。",
+      "whyItMattersZh": "提示肠道菌群调节可能影响GLP-1分泌和代谢，为多肽药物之外的代谢干预提供新视角；但证据来自单一研究，且为干预性非药物研究。",
+      "keyPoints": [
+        "发表于Gut Microbes",
+        "DOI: 10.1080/19490976.2026.2690689",
+        "PubMed ID: 42343233"
+      ],
+      "originalTitle": "Effect of pasteurized Akkermansia muciniphila MucT on insulin sensitivity, body composition, and GLP-1 production in subjects with metabolic syndrome: impact of low baseline gut Akkermansia levels.",
+      "originalSummary": "Journal: Gut Microbes | Authors: Suenaert P, Segers A, Rymenans L, Devroye H, Moll JM",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42343233/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-06-24T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1080/19490976.2026.2690689",
+      "pmid": "42343233",
+      "evidenceLevel": null
+    },
+    {
+      "sourceItemId": "7a8f0704e5b51f7a9207",
+      "contentStatus": "ai_generated",
+      "titleZh": "对“GLP-1受体激动剂与Lp(a)升高的肥胖或糖尿病患者更好的心血管结局相关”的编辑评论",
+      "summaryZh": "这是一篇发表于Int J Cardiol的编辑评论，作者Jones GB，针对一项关于GLP-1RA在Lp(a)升高患者中心血管结局的多中心回顾性研究进行了讨论。来源未提供具体评论内容。",
+      "whatItIsZh": "这是一篇针对GLP-1RA与脂蛋白(a)相关心血管获益研究的编辑评论。",
+      "whyItMattersZh": "Lp(a)是心血管危险因素，GLP-1RA可能在该亚组中显示出选择性获益，但评论本身不提供原始数据，需参考被评论的研究。",
+      "keyPoints": [
+        "发表于Int J Cardiol",
+        "DOI: 10.1016/j.ijcard.2026.134632",
+        "PubMed ID: 42331181"
+      ],
+      "originalTitle": "Editorial on \"GLP-1 receptor agonists associated with better cardiovascular outcomes in obese or diabetic patients with elevated lip(a) levels: A multicenter retrospective study\" IJCJOURNAL-D-26-01993R1.",
+      "originalSummary": "Journal: Int J Cardiol | Authors: Jones GB",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42331181/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-06-22T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1016/j.ijcard.2026.134632",
+      "pmid": "42331181",
+      "evidenceLevel": null
+    },
+    {
+      "sourceItemId": "c66cf6826f93753c8c00",
+      "contentStatus": "ai_generated",
+      "titleZh": "GLP-1受体和双肠促胰素激动剂在肥胖中的微量元素风险：机制途径、临床信号及监测框架",
+      "summaryZh": "该论文发表于Obes Pillars，作者Simancas-Racines D等人，探讨了GLP-1RA和双肠促胰素激动剂在肥胖治疗中可能带来的微量元素缺乏风险、机制路径、临床信号以及监测框架。来源未提供具体结果。",
+      "whatItIsZh": "这是一篇关于GLP-1类药物导致微量元素缺乏风险的综述论文。",
+      "whyItMattersZh": "随着GLP-1类药物的广泛使用，其营养相关副作用（如微量元素缺乏）日益受到关注，本文提出了监测框架，但属于观点性综述，需临床验证。",
+      "keyPoints": [
+        "发表于Obes Pillars",
+        "DOI: 10.1016/j.obpill.2026.100290",
+        "PubMed ID: 42382663"
+      ],
+      "originalTitle": "Micronutrient risk with GLP-1 receptor and dual incretin agonists in obesity: Mechanistic pathways, clinical signals, and a monitoring framework.",
+      "originalSummary": "Journal: Obes Pillars | Authors: Simancas-Racines D, Campuzano-Donoso M, Rossetti G, Cobellis L, Pilone V",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42382663/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1016/j.obpill.2026.100290",
+      "pmid": "42382663",
+      "evidenceLevel": null
+    },
+    {
+      "sourceItemId": "64716917c58d463a496c",
+      "contentStatus": "ai_generated",
+      "titleZh": "妊娠期GLP-1受体激动剂暴露后的产科和医学结局：病例系列",
+      "summaryZh": "该病例系列研究探讨了妊娠期间暴露于GLP-1受体激动剂的产科和医学结局，发表于《Case Rep Womens Health》。作者为Wong K等人。",
+      "whatItIsZh": "这是一篇关于妊娠期使用GLP-1受体激动剂后母婴结局的病例系列报告。",
+      "whyItMattersZh": "该研究提供了妊娠期GLP-1受体激动剂安全性的初步证据，但仅限于病例系列，样本量有限，无法得出因果结论。",
+      "keyPoints": [
+        "文献来源为PubMed，DOI:10.1016/j.crwh.2026.e00831",
+        "发表于2026年6月18日",
+        "作者：Wong K, Al-Amri H, Werlang A"
+      ],
+      "originalTitle": "Obstetrical and medical outcomes following GLP-1 receptor agonist exposure in pregnancy: a case series.",
+      "originalSummary": "Journal: Case Rep Womens Health | Authors: Wong K, Al-Amri H, Werlang A",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42376629/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1016/j.crwh.2026.e00831",
+      "pmid": "42376629",
+      "evidenceLevel": null
+    },
+    {
+      "sourceItemId": "159de225baf40edb276b",
+      "contentStatus": "ai_generated",
+      "titleZh": "GIP/GLP-1受体激动剂作为辅助因素的运动诱发过敏反应：一例报告",
+      "summaryZh": "该病例报告描述了一例因GIP/GLP-1受体激动剂作为辅助因素而诱发的运动性过敏反应，发表于《J Allergy Clin Immunol Glob》。作者为Chong AC等人。",
+      "whatItIsZh": "这是一例关于运动性过敏反应与GIP/GLP-1受体激动剂使用相关的病例报告。",
+      "whyItMattersZh": "该报告提示GLP-1受体激动剂可能作为运动性过敏反应的辅助因素，但仅为单例报告，需进一步研究验证。",
+      "keyPoints": [
+        "文献来源为PubMed，DOI:10.1016/j.jacig.2026.100751",
+        "发表于2026年6月13日",
+        "作者：Chong AC, Elshaer A, Diaz-Menindez M, Squire JD, Wonnaparhown AM"
+      ],
+      "originalTitle": "Exercise-induced anaphylaxis with a cofactor of GIP/GLP-1 receptor agonist: A case report.",
+      "originalSummary": "Journal: J Allergy Clin Immunol Glob | Authors: Chong AC, Elshaer A, Diaz-Menindez M, Squire JD, Wonnaparhown AM",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42405354/",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "signalType": "paper",
+      "publishedAt": "2026-06-13T00:00:00.000Z",
+      "retrievedAt": null,
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "company": null,
+      "assetName": null,
+      "sponsor": null,
+      "indication": null,
+      "target": null,
+      "trialPhase": null,
+      "trialStatus": null,
+      "nctId": null,
+      "doi": "10.1016/j.jacig.2026.100751",
+      "pmid": "42405354",
+      "evidenceLevel": null
+    },
+    {
       "sourceItemId": "5d577c4e93fe3fd1d218",
       "contentStatus": "ai_generated",
       "titleZh": "FDA标签更新：No7 Lift and Luminate Triple Action Day Cream SPF 30",
-      "summaryZh": "No7 Lift and Luminate Triple Action Day Cream SPF 30获得FDA标签更新，该产品含有多肽（MATRIXYL 3000 PLUS）等成分，宣称可减少皱纹、紧致肌肤、均匀肤色。",
-      "whatItIsZh": "一个护肤品的FDA标签更新记录，成分包含多肽。",
-      "whyItMattersZh": "该产品含有多肽活性成分（如MATRIXYL 3000 PLUS），虽为非处方护肤品，反映多肽在化妆品领域的应用趋势，但非药品，不构成药物研发进展。信息来源为openFDA。",
+      "summaryZh": "No7 Lift and Luminate Triple Action Day Cream SPF 30的FDA标签更新，包含使用说明、防晒措施及成分信息。产品宣称含有类蛇毒肽（Matrixyl 3000 Plus）等抗皱成分。",
+      "whatItIsZh": "这是一款含有肽类成分的护肤品的FDA标签更新信息。",
+      "whyItMattersZh": "该产品含有肽类成分（Matrixyl 3000 Plus），但标签更新不涉及临床疗效证据，仅为法规要求的内容更新。",
       "keyPoints": [
-        "产品含MATRIXYL 3000 PLUS多肽技术",
-        "宣称2周后皱纹减少、肤色更均匀",
-        "为防晒日霜，非药品"
+        "来源为openFDA药物标签，资产名：No7 Lift and Luminate Triple Action Day Cream SPF 30",
+        "更新日期为2026年7月7日",
+        "产品宣称含抗皱肽技术，但具体数据未提供"
       ],
       "originalTitle": "FDA label update: No7 Lift and Luminate Triple Action Day Cream SPF 30",
       "originalSummary": "Directions Directions - apply liberally 15 minutes before sun exposure. - reapply at least every 2 hours. - use a water resistant sunscreen if swimming or sweating. - children under 6 months of age: Ask a doctor. - Sun Protection Measures. Spending time in the sun increases your risk of skin cancer and early skin aging. To decrease this risk, regularly use a sunscreen with a Broad Spectrum SPF value of 15 or higher and other sun protection measures including: - limit time in the sun, especially from 10 a.m.-2 p.m. - wear long-sleeved shirts, pants, hats and sunglasses | Description SKIN TONE LOOKS MORE EVEN IN 2 WEEKS No7 Lift & Luminate TRIPLE ACTION Day Cream Sunscreen Broad Spectrum SPF 30 Wrinkles appear visibly reduced, skin feels firmer and skin tone looks more even. 50 ml e 1.69 US Fl. Oz. TRIPLE ACTION results, instant hydration, for visibly younger looking skin. Lift & Luminate TRIPLE ACTION Day Cream combines the protective power of SPF 30, our unique Double Defence technology and our No7 age defying ingredients to reduce 3 key signs of ageing: wrinkles appear visibly reduced, skin feels firmer and skin tone looks more even. Instantly skin looks and feels hydrated. After 2 weeks wrinkles appear visibly reduced, skin feels firmer, and skin tone looks more even. Formulated with: - Pearls. This day cream leaves skin with a healthy looking radiant glow. - Double Defence Technology. This day cream helps protect the skin from environmental stressors. - Firming Complex: A hydrating blend of hibiscus peptides and Hyaluronic Acid. - Brightening Complex: Our unique blend of Emblica and Vitamin C. - MATRIXYL 3000 PLUS: Our next generation anti-wrinkle peptide technology. For best results: Use every morning after cleansing and applying Lift & Luminate TRIPLE ACTION Serum. Apply evenly over your face and neck, avoiding the eye area. Suitable for Sensitive Skin",
@@ -521,14 +691,14 @@
     {
       "sourceItemId": "6a7adcf03c9a02dd487f",
       "contentStatus": "ai_generated",
-      "titleZh": "[68Ga]Ga-OncoACP3-DOTA PET在前列腺癌患者中的首次人体动力学、药代动力学和剂量学研究",
-      "summaryZh": "该研究首次在人体中评估了新型前列腺酸性磷酸酶（ACP3）靶向放射性配体[68Ga]Ga-OncoACP3-DOTA的动力学、药代动力学和辐射剂量学。7名转移性去势抵抗性前列腺癌患者接受了动态或多时间点PET/CT扫描。",
-      "whatItIsZh": "一篇关于新型靶向多肽放射性示踪剂的首次人体临床研究论文，来自Journal of Nuclear Medicine。",
-      "whyItMattersZh": "该示踪剂针对ACP3靶点，是一种多肽放射性药物，用于前列腺癌成像。首次人体数据对其临床转化至关重要，但样本量小（7例），结果有限。",
+      "titleZh": "首次人体[68Ga]Ga-OncoACP3-DOTA PET在前列腺癌患者中的动力学、药代动力学和辐射剂量学研究",
+      "summaryZh": "该研究首次在人体中使用[68Ga]Ga-OncoACP3-DOTA PET/CT对转移性去势抵抗性前列腺癌患者进行动态扫描，评估了其动力学、药代动力学和辐射剂量学特征。结果显示，该示踪剂在转移灶中摄取随时间增加，肿瘤-背景比显著升高，平均有效剂量为0.0192 mSv/MBq。",
+      "whatItIsZh": "这是一项关于新型前列腺酸性磷酸酶（ACP3）靶向放射性配体[68Ga]Ga-OncoACP3-DOTA PET显像的首次人体研究。",
+      "whyItMattersZh": "该研究验证了新型多肽放射性示踪剂在前列腺癌显像中的潜力，但样本量仅7例，且未提供与标准显像方法的比较数据。",
       "keyPoints": [
-        "新型ACP3靶向多肽放射性示踪剂首次人体研究",
-        "纳入7名转移性去势抵抗性前列腺癌患者",
-        "平均有效剂量为0.0192 mSv/MBq"
+        "来源为Journal of Nuclear Medicine RSS，发表于2026年7月1日",
+        "研究对象：7名转移性去势抵抗性前列腺癌患者",
+        "平均有效剂量：0.0192 mSv/MBq，标准注射剂量下总有效剂量为3.50 mSv"
       ],
       "originalTitle": "Dynamics, Pharmacokinetics, and Dosimetry of First-in-Human [68Ga]Ga-OncoACP3-DOTA PET in Patients with Prostate Cancer",
       "originalSummary": "This study aimed to investigate the dynamics, pharmacokinetic characteristics, and radiation dosimetry of [ 68 Ga]Ga-OncoACP3-DOTA, a novel prostatic acid phosphatase (ACP3)-targeted radioligand, in patients with metastatic castration-resistant prostate cancer. Methods: Seven patients with metastatic castration-resistant prostate cancer had dynamic or multiple-time-point PET/CT scans after intravenous injection of [ 68 Ga]Ga-OncoACP3-DOTA available. Five patients had early dynamic scans over the thorax, and 6 had dynamic whole-body PET scans during the first hour after injection. Five patients underwent an additional late-time-point whole-body PET scan (median, 3.2 h postinjection). SUVs for volumes of interest were determined for normal organs and metastases, and uptake dynamics and tumor-to-background ratios were calculated. Pharmacokinetic modeling was performed for multiple compartment models and evaluated in accordance with the Akaike information criterion. Dosimetry calculations were performed using MIRDfit and MIRDcalc, with time-integrated activity coefficients scaled to the International Commission on Radiological Protection 133 Adult Male Reference Phantom. Results: [ 68 Ga]Ga-OncoACP3-DOTA displayed declining uptake in most organs, except for organs involved in excretion, and stable uptake was observed only in the prostate. Dual renal and hepatobiliary excretion was noted. Declining blood kinetics were well-fitted by a triexponential function. Metastases showed an increase in uptake from early to late time points, with intensely increasing tumor-to-background ratios. Pharmacokinetic modeling indicated that a 2-tissue compartment model with irreversible binding was most appropriate for describing metastatic uptake. Bone and lymph node metastases exhibited significant differences in K 1 and K i values. The mean effective dose was 0.0192 mSv/MBq, resulting in an effective dose of 3.50 mSv for a standard injection of 2.5 MBq/kg. The highest absorbed doses wer",
@@ -551,50 +721,16 @@
       "doi": null,
       "pmid": null,
       "evidenceLevel": null
-    },
-    {
-      "sourceItemId": "37a538c862e7f03af4a2",
-      "contentStatus": "ai_generated",
-      "titleZh": "Zepbound®（替尔泊肽）与沙奎尔·奥尼尔启动全国性宣传活动",
-      "summaryZh": "礼来公司与NBA传奇沙奎尔·奥尼尔推出全国性宣传活动“Watch This”，奥尼尔公开谈论其困扰多年的中度阻塞性睡眠呼吸暂停（OSA）是可治疗的。Zepbound（替尔泊肽）是首个且唯一获批用于肥胖成人中度至重度OSA的处方药。",
-      "whatItIsZh": "礼来公司关于Zepbound（替尔泊肽）的新闻稿，宣布与沙奎尔·奥尼尔合作开展公众教育活动。",
-      "whyItMattersZh": "替尔泊肽作为多肽药物（GIP/GLP-1受体激动剂），新适应症OSA刚获批，该活动旨在提高公众认知。来源为礼来官方新闻，应视为企业营销信息。",
-      "keyPoints": [
-        "Zepbound（替尔泊肽）用于中度至重度OSA伴肥胖",
-        "与沙奎尔·奥尼尔合作开展全国性活动",
-        "信息来源：礼来官方新闻稿"
-      ],
-      "originalTitle": "Zepbound® (tirzepatide) and Shaquille O'Neal launch national campaign after NBA legend learns the obstructive sleep apnea he has lived with for years is treatable",
-      "originalSummary": "In the national campaign Watch This, O'Neal gets real about living with moderate obstructive sleep apnea (OSA) and the moment he decided to do something about it Zepbound ® (tirzepatide) is the first and only prescription medicine for moderate-to-severe OSA in adults with obesity and should be used",
-      "sourceUrl": "https://investor.lilly.com/news-releases/news-release-details/zepbound-tirzepatide-and-shaquille-oneal-launch-national",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "signalType": "company_news",
-      "publishedAt": "2026-06-10T13:30:00.000Z",
-      "retrievedAt": null,
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "company": null,
-      "assetName": null,
-      "sponsor": null,
-      "indication": null,
-      "target": null,
-      "trialPhase": null,
-      "trialStatus": null,
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "evidenceLevel": null
     }
   ],
   "sourceStats": {
-    "keptItems": 15,
-    "rawItems": 33,
+    "keptItems": 19,
+    "rawItems": 36,
     "sourcesQueried": 8,
-    "sourcesWithResults": 2,
-    "sourcesFailed": 0,
+    "sourcesWithResults": 1,
+    "sourcesFailed": 1,
     "apiSourcesQueried": 9,
-    "apiSourcesWithResults": 3,
+    "apiSourcesWithResults": 4,
     "apiSourcesFailed": 1,
     "tavilySitesQueried": 4,
     "tavilySitesWithResults": 0,
@@ -602,12 +738,21 @@
   },
   "sourceHealthcheck": {
     "catalog_source": "local_repo",
-    "warnings": [],
+    "warnings": [
+      "RSS 源「Eli Lilly News Releases」抓取失败：HTTP 0: This operation was aborted",
+      "RSS 源「Fierce Biotech」抓取 25 条但全部因日期/链接缺失被丢弃（missing_date 25）",
+      "RSS 源「Fierce Pharma」抓取 25 条但全部因日期/链接缺失被丢弃（missing_date 25）",
+      "API 源「SEC EDGAR Peptide Full Text」抓取失败：HTTP 500",
+      "站点搜索 源「Novo Nordisk Pipeline」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）",
+      "站点搜索 源「Eli Lilly Pipeline and IR」抓取 2 条但全部因日期/链接缺失被丢弃（missing_date 2）",
+      "站点搜索 源「Novartis Radioligand Pipeline」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）",
+      "站点搜索 源「FDA Peptide Regulatory」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）"
+    ],
     "per_source": {
       "Eli Lilly News Releases": {
-        "fetched": 10,
-        "candidates": 2,
-        "error": null
+        "fetched": 0,
+        "candidates": 0,
+        "error": "HTTP 0: This operation was aborted"
       },
       "Nature Medicine RSS": {
         "fetched": 8,
@@ -658,12 +803,12 @@
       },
       "PubMed Peptide Drug Development": {
         "fetched": 80,
-        "candidates": 0,
+        "candidates": 6,
         "error": null
       },
       "Europe PMC Peptide Drug Development": {
         "fetched": 50,
-        "candidates": 26,
+        "candidates": 25,
         "error": null
       },
       "Crossref Peptide Drug Metadata": {
@@ -679,7 +824,7 @@
       "SEC EDGAR Peptide Full Text": {
         "fetched": 0,
         "candidates": 0,
-        "error": "HTTP 403"
+        "error": "HTTP 500"
       },
       "bioRxiv API Peptide Drug Leads": {
         "fetched": 30,
@@ -715,8 +860,6 @@
       }
     },
     "filtered_by_source_reason": {
-      "rss:Eli Lilly News Releases:keyword": 7,
-      "rss:Eli Lilly News Releases:date": 1,
       "rss:Nature Medicine RSS:keyword": 8,
       "rss:Journal of Nuclear Medicine RSS:keyword": 24,
       "rss:Journal of Nuclear Medicine RSS:global_keyword": 7,
@@ -730,9 +873,11 @@
       "rss:BioPharma Dive:keyword": 9,
       "rss:BioPharma Dive:global_keyword": 1,
       "api_clinical_trials:ClinicalTrials.gov Obesity Incretins:duplicate": 2,
-      "api_pubmed:PubMed Peptide Drug Development:missing_date": 80,
+      "api_pubmed:PubMed Peptide Drug Development:global_keyword": 3,
+      "api_pubmed:PubMed Peptide Drug Development:date": 71,
       "api_europe_pmc:Europe PMC Peptide Drug Development:date": 4,
       "api_europe_pmc:Europe PMC Peptide Drug Development:global_keyword": 20,
+      "api_europe_pmc:Europe PMC Peptide Drug Development:duplicate": 1,
       "api_crossref:Crossref Peptide Drug Metadata:date": 23,
       "api_crossref:Crossref Peptide Drug Metadata:missing_date": 27,
       "api_openfda:openFDA Drug Labels Peptide Watch:keyword": 98,
@@ -745,28 +890,29 @@
       "tavily:FDA Peptide Regulatory:missing_date": 3
     },
     "filtered_out_by_missing_url": 0,
-    "filtered_out_by_missing_date": 168,
+    "filtered_out_by_missing_date": 88,
     "filtered_out_by_imprecise_date": 0,
-    "filtered_out_by_date": 88,
+    "filtered_out_by_date": 158,
     "filtered_out_by_global_exclude": 4,
     "filtered_out_by_source_exclude": 0,
-    "filtered_out_by_keyword": 201,
+    "filtered_out_by_keyword": 194,
     "filtered_out_by_required_keyword": 1,
-    "filtered_out_by_global_keyword": 28,
-    "filtered_out_by_duplicate": 3,
+    "filtered_out_by_global_keyword": 31,
+    "filtered_out_by_duplicate": 4,
     "filtered_out_by_duplicate_title": 0,
+    "filtered_out_by_already_published": 0,
     "top3_categories": [
       [
         "literature",
-        9
+        15
       ],
       [
         "clinical_registry",
         3
       ],
       [
-        "company_official",
-        2
+        "regulatory",
+        1
       ]
     ],
     "top3_scores": [

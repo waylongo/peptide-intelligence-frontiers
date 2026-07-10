@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-10T11:50:14.042Z",
+  "generatedAt": "2026-07-10T13:19:00.709Z",
   "lookbackDays": 30,
   "items": [
     {
@@ -78,32 +78,6 @@
         "category:clinical_registry",
         "peptide:GLP-1",
         "id:nct"
-      ],
-      "selectionStatus": "selected"
-    },
-    {
-      "title": "What Medicare Part D patients need to know about accessing Foundayo (orforglipron) and Zepbound (tirzepatide) for weight management",
-      "url": "https://investor.lilly.com/news-releases/news-release-details/what-medicare-part-d-patients-need-know-about-accessing-foundayo",
-      "publishedAt": "2026-06-25T10:45:00.000Z",
-      "summary": "A new Medicare pathway, the Medicare GLP-1 Bridge program, makes Lilly's obesity medicines – a daily pill or the number 1 most prescribed injectable – accessible to eligible Medicare Part D patients beginning July 1 INDIANAPOLIS, June 25, 2026 /PRNewswire/ -- Eli Lilly and Company (NYSE: LLY)",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "signalType": "pipeline_update",
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "trialPhase": null,
-      "sponsor": null,
-      "company": null,
-      "assetName": null,
-      "score": 5.9,
-      "scoreReasons": [
-        "priority:P0",
-        "category:company_official",
-        "peptide:GLP-1",
-        "company:Eli Lilly"
       ],
       "selectionStatus": "selected"
     },
@@ -316,6 +290,162 @@
       "selectionStatus": "selected"
     },
     {
+      "title": "Efficacy and safety of GLP-1RA on cardio-metabolic outcomes in overweight or obese Chinese adults: a systematic review and meta-analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42422116/",
+      "publishedAt": "2026-07-07T00:00:00.000Z",
+      "summary": "Journal: J Diabetes Metab Disord | Authors: Bilal AR, Sajid M, Arfin SMW, Bilal AR, Gaba H",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1007/s40200-026-02000-8",
+      "pmid": "42422116",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Effect of pasteurized Akkermansia muciniphila MucT on insulin sensitivity, body composition, and GLP-1 production in subjects with metabolic syndrome: impact of low baseline gut Akkermansia levels.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42343233/",
+      "publishedAt": "2026-06-24T00:00:00.000Z",
+      "summary": "Journal: Gut Microbes | Authors: Suenaert P, Segers A, Rymenans L, Devroye H, Moll JM",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1080/19490976.2026.2690689",
+      "pmid": "42343233",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Editorial on \"GLP-1 receptor agonists associated with better cardiovascular outcomes in obese or diabetic patients with elevated lip(a) levels: A multicenter retrospective study\" IJCJOURNAL-D-26-01993R1.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42331181/",
+      "publishedAt": "2026-06-22T00:00:00.000Z",
+      "summary": "Journal: Int J Cardiol | Authors: Jones GB",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.ijcard.2026.134632",
+      "pmid": "42331181",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Micronutrient risk with GLP-1 receptor and dual incretin agonists in obesity: Mechanistic pathways, clinical signals, and a monitoring framework.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42382663/",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "summary": "Journal: Obes Pillars | Authors: Simancas-Racines D, Campuzano-Donoso M, Rossetti G, Cobellis L, Pilone V",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.obpill.2026.100290",
+      "pmid": "42382663",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Obstetrical and medical outcomes following GLP-1 receptor agonist exposure in pregnancy: a case series.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42376629/",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "summary": "Journal: Case Rep Womens Health | Authors: Wong K, Al-Amri H, Werlang A",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.crwh.2026.e00831",
+      "pmid": "42376629",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Exercise-induced anaphylaxis with a cofactor of GIP/GLP-1 receptor agonist: A case report.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42405354/",
+      "publishedAt": "2026-06-13T00:00:00.000Z",
+      "summary": "Journal: J Allergy Clin Immunol Glob | Authors: Chong AC, Elshaer A, Diaz-Menindez M, Squire JD, Wonnaparhown AM",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.jacig.2026.100751",
+      "pmid": "42405354",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
       "title": "FDA label update: No7 Lift and Luminate Triple Action Day Cream SPF 30",
       "url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=328f96bc-fb68-33dc-e063-6294a90aecfa",
       "publishedAt": "2026-07-07T00:00:00.000Z",
@@ -362,30 +492,6 @@
         "priority:P1",
         "category:literature",
         "peptide:RDC"
-      ],
-      "selectionStatus": "selected"
-    },
-    {
-      "title": "Zepbound® (tirzepatide) and Shaquille O'Neal launch national campaign after NBA legend learns the obstructive sleep apnea he has lived with for years is treatable",
-      "url": "https://investor.lilly.com/news-releases/news-release-details/zepbound-tirzepatide-and-shaquille-oneal-launch-national",
-      "publishedAt": "2026-06-10T13:30:00.000Z",
-      "summary": "In the national campaign Watch This, O'Neal gets real about living with moderate obstructive sleep apnea (OSA) and the moment he decided to do something about it Zepbound ® (tirzepatide) is the first and only prescription medicine for moderate-to-severe OSA in adults with obesity and should be used",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "signalType": "company_news",
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "trialPhase": null,
-      "sponsor": null,
-      "company": null,
-      "assetName": null,
-      "score": 4,
-      "scoreReasons": [
-        "priority:P0",
-        "category:company_official"
       ],
       "selectionStatus": "selected"
     }
@@ -467,58 +573,6 @@
           "category:clinical_registry",
           "peptide:GLP-1",
           "id:nct"
-        ],
-        "selectionStatus": "selected"
-      }
-    ],
-    "company_official": [
-      {
-        "title": "What Medicare Part D patients need to know about accessing Foundayo (orforglipron) and Zepbound (tirzepatide) for weight management",
-        "url": "https://investor.lilly.com/news-releases/news-release-details/what-medicare-part-d-patients-need-know-about-accessing-foundayo",
-        "publishedAt": "2026-06-25T10:45:00.000Z",
-        "summary": "A new Medicare pathway, the Medicare GLP-1 Bridge program, makes Lilly's obesity medicines – a daily pill or the number 1 most prescribed injectable – accessible to eligible Medicare Part D patients beginning July 1 INDIANAPOLIS, June 25, 2026 /PRNewswire/ -- Eli Lilly and Company (NYSE: LLY)",
-        "sourceName": "Eli Lilly News Releases",
-        "sourceCategory": "company_official",
-        "sourcePriority": "P0",
-        "retrievalMethod": "rss",
-        "signalType": "pipeline_update",
-        "nctId": null,
-        "doi": null,
-        "pmid": null,
-        "trialPhase": null,
-        "sponsor": null,
-        "company": null,
-        "assetName": null,
-        "score": 5.9,
-        "scoreReasons": [
-          "priority:P0",
-          "category:company_official",
-          "peptide:GLP-1",
-          "company:Eli Lilly"
-        ],
-        "selectionStatus": "selected"
-      },
-      {
-        "title": "Zepbound® (tirzepatide) and Shaquille O'Neal launch national campaign after NBA legend learns the obstructive sleep apnea he has lived with for years is treatable",
-        "url": "https://investor.lilly.com/news-releases/news-release-details/zepbound-tirzepatide-and-shaquille-oneal-launch-national",
-        "publishedAt": "2026-06-10T13:30:00.000Z",
-        "summary": "In the national campaign Watch This, O'Neal gets real about living with moderate obstructive sleep apnea (OSA) and the moment he decided to do something about it Zepbound ® (tirzepatide) is the first and only prescription medicine for moderate-to-severe OSA in adults with obesity and should be used",
-        "sourceName": "Eli Lilly News Releases",
-        "sourceCategory": "company_official",
-        "sourcePriority": "P0",
-        "retrievalMethod": "rss",
-        "signalType": "company_news",
-        "nctId": null,
-        "doi": null,
-        "pmid": null,
-        "trialPhase": null,
-        "sponsor": null,
-        "company": null,
-        "assetName": null,
-        "score": 4,
-        "scoreReasons": [
-          "priority:P0",
-          "category:company_official"
         ],
         "selectionStatus": "selected"
       }
@@ -733,6 +787,162 @@
         "selectionStatus": "selected"
       },
       {
+        "title": "Efficacy and safety of GLP-1RA on cardio-metabolic outcomes in overweight or obese Chinese adults: a systematic review and meta-analysis.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42422116/",
+        "publishedAt": "2026-07-07T00:00:00.000Z",
+        "summary": "Journal: J Diabetes Metab Disord | Authors: Bilal AR, Sajid M, Arfin SMW, Bilal AR, Gaba H",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1007/s40200-026-02000-8",
+        "pmid": "42422116",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
+        "title": "Effect of pasteurized Akkermansia muciniphila MucT on insulin sensitivity, body composition, and GLP-1 production in subjects with metabolic syndrome: impact of low baseline gut Akkermansia levels.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42343233/",
+        "publishedAt": "2026-06-24T00:00:00.000Z",
+        "summary": "Journal: Gut Microbes | Authors: Suenaert P, Segers A, Rymenans L, Devroye H, Moll JM",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1080/19490976.2026.2690689",
+        "pmid": "42343233",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
+        "title": "Editorial on \"GLP-1 receptor agonists associated with better cardiovascular outcomes in obese or diabetic patients with elevated lip(a) levels: A multicenter retrospective study\" IJCJOURNAL-D-26-01993R1.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42331181/",
+        "publishedAt": "2026-06-22T00:00:00.000Z",
+        "summary": "Journal: Int J Cardiol | Authors: Jones GB",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1016/j.ijcard.2026.134632",
+        "pmid": "42331181",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
+        "title": "Micronutrient risk with GLP-1 receptor and dual incretin agonists in obesity: Mechanistic pathways, clinical signals, and a monitoring framework.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42382663/",
+        "publishedAt": "2026-06-18T00:00:00.000Z",
+        "summary": "Journal: Obes Pillars | Authors: Simancas-Racines D, Campuzano-Donoso M, Rossetti G, Cobellis L, Pilone V",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1016/j.obpill.2026.100290",
+        "pmid": "42382663",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
+        "title": "Obstetrical and medical outcomes following GLP-1 receptor agonist exposure in pregnancy: a case series.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42376629/",
+        "publishedAt": "2026-06-18T00:00:00.000Z",
+        "summary": "Journal: Case Rep Womens Health | Authors: Wong K, Al-Amri H, Werlang A",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1016/j.crwh.2026.e00831",
+        "pmid": "42376629",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
+        "title": "Exercise-induced anaphylaxis with a cofactor of GIP/GLP-1 receptor agonist: A case report.",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42405354/",
+        "publishedAt": "2026-06-13T00:00:00.000Z",
+        "summary": "Journal: J Allergy Clin Immunol Glob | Authors: Chong AC, Elshaer A, Diaz-Menindez M, Squire JD, Wonnaparhown AM",
+        "sourceName": "PubMed Peptide Drug Development",
+        "sourceCategory": "literature",
+        "sourcePriority": "P0",
+        "retrievalMethod": "api_pubmed",
+        "signalType": "paper",
+        "nctId": null,
+        "doi": "10.1016/j.jacig.2026.100751",
+        "pmid": "42405354",
+        "trialPhase": null,
+        "sponsor": null,
+        "company": null,
+        "assetName": null,
+        "score": 5.1,
+        "scoreReasons": [
+          "priority:P0",
+          "category:literature",
+          "peptide:GLP-1",
+          "id:doi"
+        ],
+        "selectionStatus": "selected"
+      },
+      {
         "title": "Dynamics, Pharmacokinetics, and Dosimetry of First-in-Human [68Ga]Ga-OncoACP3-DOTA PET in Patients with Prostate Cancer",
         "url": "http://jnm.snmjournals.org/cgi/content/short/67/7/1079?rss=1",
         "publishedAt": "2026-07-01T12:18:50.000Z",
@@ -787,56 +997,6 @@
     ]
   },
   "candidateItems": [
-    {
-      "title": "What Medicare Part D patients need to know about accessing Foundayo (orforglipron) and Zepbound (tirzepatide) for weight management",
-      "url": "https://investor.lilly.com/news-releases/news-release-details/what-medicare-part-d-patients-need-know-about-accessing-foundayo",
-      "publishedAt": "2026-06-25T10:45:00.000Z",
-      "summary": "A new Medicare pathway, the Medicare GLP-1 Bridge program, makes Lilly's obesity medicines – a daily pill or the number 1 most prescribed injectable – accessible to eligible Medicare Part D patients beginning July 1 INDIANAPOLIS, June 25, 2026 /PRNewswire/ -- Eli Lilly and Company (NYSE: LLY)",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "signalType": "pipeline_update",
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "trialPhase": null,
-      "sponsor": null,
-      "company": null,
-      "assetName": null,
-      "score": 5.9,
-      "scoreReasons": [
-        "priority:P0",
-        "category:company_official",
-        "peptide:GLP-1",
-        "company:Eli Lilly"
-      ],
-      "selectionStatus": "selected"
-    },
-    {
-      "title": "Zepbound® (tirzepatide) and Shaquille O'Neal launch national campaign after NBA legend learns the obstructive sleep apnea he has lived with for years is treatable",
-      "url": "https://investor.lilly.com/news-releases/news-release-details/zepbound-tirzepatide-and-shaquille-oneal-launch-national",
-      "publishedAt": "2026-06-10T13:30:00.000Z",
-      "summary": "In the national campaign Watch This, O'Neal gets real about living with moderate obstructive sleep apnea (OSA) and the moment he decided to do something about it Zepbound ® (tirzepatide) is the first and only prescription medicine for moderate-to-severe OSA in adults with obesity and should be used",
-      "sourceName": "Eli Lilly News Releases",
-      "sourceCategory": "company_official",
-      "sourcePriority": "P0",
-      "retrievalMethod": "rss",
-      "signalType": "company_news",
-      "nctId": null,
-      "doi": null,
-      "pmid": null,
-      "trialPhase": null,
-      "sponsor": null,
-      "company": null,
-      "assetName": null,
-      "score": 4,
-      "scoreReasons": [
-        "priority:P0",
-        "category:company_official"
-      ],
-      "selectionStatus": "selected"
-    },
     {
       "title": "Dynamics, Pharmacokinetics, and Dosimetry of First-in-Human [68Ga]Ga-OncoACP3-DOTA PET in Patients with Prostate Cancer",
       "url": "http://jnm.snmjournals.org/cgi/content/short/67/7/1079?rss=1",
@@ -937,6 +1097,162 @@
         "category:clinical_registry",
         "peptide:GLP-1",
         "id:nct"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Effect of pasteurized Akkermansia muciniphila MucT on insulin sensitivity, body composition, and GLP-1 production in subjects with metabolic syndrome: impact of low baseline gut Akkermansia levels.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42343233/",
+      "publishedAt": "2026-06-24T00:00:00.000Z",
+      "summary": "Journal: Gut Microbes | Authors: Suenaert P, Segers A, Rymenans L, Devroye H, Moll JM",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1080/19490976.2026.2690689",
+      "pmid": "42343233",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Efficacy and safety of GLP-1RA on cardio-metabolic outcomes in overweight or obese Chinese adults: a systematic review and meta-analysis.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42422116/",
+      "publishedAt": "2026-07-07T00:00:00.000Z",
+      "summary": "Journal: J Diabetes Metab Disord | Authors: Bilal AR, Sajid M, Arfin SMW, Bilal AR, Gaba H",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1007/s40200-026-02000-8",
+      "pmid": "42422116",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Editorial on \"GLP-1 receptor agonists associated with better cardiovascular outcomes in obese or diabetic patients with elevated lip(a) levels: A multicenter retrospective study\" IJCJOURNAL-D-26-01993R1.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42331181/",
+      "publishedAt": "2026-06-22T00:00:00.000Z",
+      "summary": "Journal: Int J Cardiol | Authors: Jones GB",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.ijcard.2026.134632",
+      "pmid": "42331181",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Exercise-induced anaphylaxis with a cofactor of GIP/GLP-1 receptor agonist: A case report.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42405354/",
+      "publishedAt": "2026-06-13T00:00:00.000Z",
+      "summary": "Journal: J Allergy Clin Immunol Glob | Authors: Chong AC, Elshaer A, Diaz-Menindez M, Squire JD, Wonnaparhown AM",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.jacig.2026.100751",
+      "pmid": "42405354",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Micronutrient risk with GLP-1 receptor and dual incretin agonists in obesity: Mechanistic pathways, clinical signals, and a monitoring framework.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42382663/",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "summary": "Journal: Obes Pillars | Authors: Simancas-Racines D, Campuzano-Donoso M, Rossetti G, Cobellis L, Pilone V",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.obpill.2026.100290",
+      "pmid": "42382663",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
+      ],
+      "selectionStatus": "selected"
+    },
+    {
+      "title": "Obstetrical and medical outcomes following GLP-1 receptor agonist exposure in pregnancy: a case series.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42376629/",
+      "publishedAt": "2026-06-18T00:00:00.000Z",
+      "summary": "Journal: Case Rep Womens Health | Authors: Wong K, Al-Amri H, Werlang A",
+      "sourceName": "PubMed Peptide Drug Development",
+      "sourceCategory": "literature",
+      "sourcePriority": "P0",
+      "retrievalMethod": "api_pubmed",
+      "signalType": "paper",
+      "nctId": null,
+      "doi": "10.1016/j.crwh.2026.e00831",
+      "pmid": "42376629",
+      "trialPhase": null,
+      "sponsor": null,
+      "company": null,
+      "assetName": null,
+      "score": 5.1,
+      "scoreReasons": [
+        "priority:P0",
+        "category:literature",
+        "peptide:GLP-1",
+        "id:doi"
       ],
       "selectionStatus": "selected"
     },
@@ -1383,32 +1699,6 @@
       "selectionStatus": "source_cap"
     },
     {
-      "title": "Efficacy and safety of GLP-1RA on cardio-metabolic outcomes in overweight or obese Chinese adults: a systematic review and meta-analysis.",
-      "url": "https://doi.org/10.1007/s40200-026-02000-8",
-      "publishedAt": "2026-07-07T00:00:00.000Z",
-      "summary": "J Diabetes Metab Disord | Bilal AR, Sajid M, Arfin SMW, Bilal AR, Gaba H, Qureshi S, Farooq Z, Inam MH, Aminpoor H, Waqas SA. | review; journal article",
-      "sourceName": "Europe PMC Peptide Drug Development",
-      "sourceCategory": "literature",
-      "sourcePriority": "P0",
-      "retrievalMethod": "api_europe_pmc",
-      "signalType": "paper",
-      "nctId": null,
-      "doi": "10.1007/s40200-026-02000-8",
-      "pmid": "42422116",
-      "trialPhase": null,
-      "sponsor": null,
-      "company": null,
-      "assetName": null,
-      "score": 5.1,
-      "scoreReasons": [
-        "priority:P0",
-        "category:literature",
-        "peptide:GLP-1",
-        "id:doi"
-      ],
-      "selectionStatus": "source_cap"
-    },
-    {
       "title": "Computationally engineered cyclic peptides reduce prion levels in vitro",
       "url": "https://doi.org/10.64898/2026.07.03.736251",
       "publishedAt": "2026-07-07T00:00:00.000Z",
@@ -1643,36 +1933,32 @@
     }
   ],
   "candidateStats": {
-    "rawCandidates": 33,
-    "selectedItems": 15,
+    "rawCandidates": 36,
+    "selectedItems": 19,
     "byCategory": {
-      "company_official": 2,
-      "literature": 27,
+      "literature": 32,
       "clinical_registry": 3,
       "regulatory": 1
     },
     "selectedByCategory": {
       "clinical_registry": 3,
-      "company_official": 2,
-      "literature": 9,
+      "literature": 15,
       "regulatory": 1
     },
     "bySignalType": {
-      "pipeline_update": 1,
-      "company_news": 1,
-      "paper": 27,
+      "paper": 32,
       "clinical_trial": 3,
       "regulatory": 1
     }
   },
   "stats": {
-    "keptItems": 15,
-    "rawItems": 33,
+    "keptItems": 19,
+    "rawItems": 36,
     "sourcesQueried": 8,
-    "sourcesWithResults": 2,
-    "sourcesFailed": 0,
+    "sourcesWithResults": 1,
+    "sourcesFailed": 1,
     "apiSourcesQueried": 9,
-    "apiSourcesWithResults": 3,
+    "apiSourcesWithResults": 4,
     "apiSourcesFailed": 1,
     "tavilySitesQueried": 4,
     "tavilySitesWithResults": 0,
@@ -1680,12 +1966,21 @@
   },
   "healthcheck": {
     "catalog_source": "local_repo",
-    "warnings": [],
+    "warnings": [
+      "RSS 源「Eli Lilly News Releases」抓取失败：HTTP 0: This operation was aborted",
+      "RSS 源「Fierce Biotech」抓取 25 条但全部因日期/链接缺失被丢弃（missing_date 25）",
+      "RSS 源「Fierce Pharma」抓取 25 条但全部因日期/链接缺失被丢弃（missing_date 25）",
+      "API 源「SEC EDGAR Peptide Full Text」抓取失败：HTTP 500",
+      "站点搜索 源「Novo Nordisk Pipeline」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）",
+      "站点搜索 源「Eli Lilly Pipeline and IR」抓取 2 条但全部因日期/链接缺失被丢弃（missing_date 2）",
+      "站点搜索 源「Novartis Radioligand Pipeline」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）",
+      "站点搜索 源「FDA Peptide Regulatory」抓取 3 条但全部因日期/链接缺失被丢弃（missing_date 3）"
+    ],
     "per_source": {
       "Eli Lilly News Releases": {
-        "fetched": 10,
-        "candidates": 2,
-        "error": null
+        "fetched": 0,
+        "candidates": 0,
+        "error": "HTTP 0: This operation was aborted"
       },
       "Nature Medicine RSS": {
         "fetched": 8,
@@ -1736,12 +2031,12 @@
       },
       "PubMed Peptide Drug Development": {
         "fetched": 80,
-        "candidates": 0,
+        "candidates": 6,
         "error": null
       },
       "Europe PMC Peptide Drug Development": {
         "fetched": 50,
-        "candidates": 26,
+        "candidates": 25,
         "error": null
       },
       "Crossref Peptide Drug Metadata": {
@@ -1757,7 +2052,7 @@
       "SEC EDGAR Peptide Full Text": {
         "fetched": 0,
         "candidates": 0,
-        "error": "HTTP 403"
+        "error": "HTTP 500"
       },
       "bioRxiv API Peptide Drug Leads": {
         "fetched": 30,
@@ -1793,8 +2088,6 @@
       }
     },
     "filtered_by_source_reason": {
-      "rss:Eli Lilly News Releases:keyword": 7,
-      "rss:Eli Lilly News Releases:date": 1,
       "rss:Nature Medicine RSS:keyword": 8,
       "rss:Journal of Nuclear Medicine RSS:keyword": 24,
       "rss:Journal of Nuclear Medicine RSS:global_keyword": 7,
@@ -1808,9 +2101,11 @@
       "rss:BioPharma Dive:keyword": 9,
       "rss:BioPharma Dive:global_keyword": 1,
       "api_clinical_trials:ClinicalTrials.gov Obesity Incretins:duplicate": 2,
-      "api_pubmed:PubMed Peptide Drug Development:missing_date": 80,
+      "api_pubmed:PubMed Peptide Drug Development:global_keyword": 3,
+      "api_pubmed:PubMed Peptide Drug Development:date": 71,
       "api_europe_pmc:Europe PMC Peptide Drug Development:date": 4,
       "api_europe_pmc:Europe PMC Peptide Drug Development:global_keyword": 20,
+      "api_europe_pmc:Europe PMC Peptide Drug Development:duplicate": 1,
       "api_crossref:Crossref Peptide Drug Metadata:date": 23,
       "api_crossref:Crossref Peptide Drug Metadata:missing_date": 27,
       "api_openfda:openFDA Drug Labels Peptide Watch:keyword": 98,
@@ -1823,28 +2118,29 @@
       "tavily:FDA Peptide Regulatory:missing_date": 3
     },
     "filtered_out_by_missing_url": 0,
-    "filtered_out_by_missing_date": 168,
+    "filtered_out_by_missing_date": 88,
     "filtered_out_by_imprecise_date": 0,
-    "filtered_out_by_date": 88,
+    "filtered_out_by_date": 158,
     "filtered_out_by_global_exclude": 4,
     "filtered_out_by_source_exclude": 0,
-    "filtered_out_by_keyword": 201,
+    "filtered_out_by_keyword": 194,
     "filtered_out_by_required_keyword": 1,
-    "filtered_out_by_global_keyword": 28,
-    "filtered_out_by_duplicate": 3,
+    "filtered_out_by_global_keyword": 31,
+    "filtered_out_by_duplicate": 4,
     "filtered_out_by_duplicate_title": 0,
+    "filtered_out_by_already_published": 0,
     "top3_categories": [
       [
         "literature",
-        9
+        15
       ],
       [
         "clinical_registry",
         3
       ],
       [
-        "company_official",
-        2
+        "regulatory",
+        1
       ]
     ],
     "top3_scores": [
