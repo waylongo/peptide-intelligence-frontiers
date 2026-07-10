@@ -51,7 +51,7 @@ V1 prioritizes public/free sources. Key-required, paid, or fragile sources are d
 
 7. Chinese weekly digest materialization
    scripts/generate-digest.js -> digest-peptides-zh.json
-   default: complete source fallback; DeepSeek adapter reserved but disabled
+   default: DeepSeek V4 Flash Chinese materialization; complete source fallback remains available locally
 
 8. Public web digest
    archive/digests/YYYY-MM-DD.json -> scripts/build-site.js -> GitHub Pages
@@ -67,7 +67,9 @@ https://waylongo.github.io/peptide-intelligence-frontiers/
 
 The site is a static Chinese weekly digest. GitHub Actions updates it every Monday after feed generation. It keeps every valid feed item, groups records into fixed editorial sections, preserves source links and identifiers, and does not expose search, ranking, or conversational features.
 
-`config/digest.json` reserves `deepseek-v4-flash` as the future organizer. The provider is currently `none`, its API fields are blank, and `scripts/generate-digest.js` emits a complete source-backed fallback. The current issue can also load a date-matched Chinese editorial seed from `config/editorial-seed-zh.json`; unmatched or future items remain explicit source fallbacks until the model adapter is enabled. The public site never receives an API key and never calls a model at page-view time.
+`config/digest.json` uses `deepseek-v4-flash` through the official OpenAI-compatible Chat Completions endpoint. GitHub Actions reads `DEEPSEEK_API_KEY` from the repository Actions secrets, batches all valid feed items, requests JSON Chinese editorial fields, validates that no item was omitted, and then creates the static site. The public site never receives an API key and never calls a model at page-view time.
+
+If DeepSeek authentication, balance, availability, JSON structure, or completeness validation fails, the weekly workflow stops before commit and deployment. The previously published issue therefore remains online instead of being replaced by a partial or untranslated issue. For local development without a key, use `--provider=none`; a date-matched seed from `config/editorial-seed-zh.json` may supply editorial content for fixtures and previews.
 
 Chinese materialized items support `titleZh`, `whatItIsZh`, `whyItMattersZh`, `summaryZh`, and `keyPoints`. The site renders only fixed sections that contain records in the current issue; empty sections remain in the data contract but are omitted from the page and issue index.
 

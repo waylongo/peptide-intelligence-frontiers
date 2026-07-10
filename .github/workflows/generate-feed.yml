@@ -58,9 +58,9 @@ jobs:
         run: node scripts/check-feed-quality.js --strict
 
       - name: Generate Chinese weekly digest
-        # DeepSeek is intentionally disabled for now. This produces a complete
-        # source-backed fallback and keeps the model adapter ready for later.
-        run: node scripts/generate-digest.js --provider=none
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: node scripts/generate-digest.js --provider=deepseek
 
       - name: Check digest completeness
         run: node scripts/check-digest-quality.js
@@ -94,6 +94,8 @@ jobs:
           console.log(`- Digest language: ${digest.language || 'unknown'}`);
           console.log(`- Digest items: ${digest.itemCount ?? 'unknown'}`);
           console.log(`- Digest model status: ${digest.model?.status || 'unknown'}`);
+          console.log(`- DeepSeek requests: ${digest.model?.requestCount ?? 0} (${digest.model?.requestAttempts ?? 0} attempts)`);
+          console.log(`- DeepSeek tokens: ${digest.model?.totalTokens ?? 0}`);
           if (warnings.length) {
             console.log('');
             console.log('### Warnings');

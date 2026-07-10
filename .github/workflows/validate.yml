@@ -36,6 +36,7 @@ jobs:
           node --check scripts/archive-digest.js
           node --check scripts/build-site.js
           node scripts/generate-feed.js --self-test
+          node scripts/generate-digest.js --self-test
 
       - name: Validate static artifacts
         run: |

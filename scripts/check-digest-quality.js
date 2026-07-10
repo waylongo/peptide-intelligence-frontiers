@@ -78,6 +78,13 @@ for (const item of feed.items) {
 
 const sectionTotal = (digest.sections || []).reduce((sum, section) => sum + Number(section.itemCount || 0), 0);
 if (sectionTotal !== digest.items.length) throw new Error(`section count mismatch: sections=${sectionTotal}, items=${digest.items.length}`);
+if (digest.model?.status === 'ready') {
+  if (digest.model?.provider !== 'deepseek') throw new Error('ready digest must use the deepseek provider');
+  const nonAiItems = digest.items.filter(item => item.contentStatus !== 'ai_generated');
+  if (nonAiItems.length) throw new Error(`ready digest contains ${nonAiItems.length} non-AI items`);
+  if (digest.model.aiGeneratedItems !== digest.items.length) throw new Error('ready digest aiGeneratedItems mismatch');
+  if (digest.model.fallbackItems !== 0) throw new Error('ready digest must not contain fallback items');
+}
 
 console.log(JSON.stringify({
   status: 'ok',

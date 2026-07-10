@@ -1,12 +1,18 @@
 {
   "schemaVersion": 1,
   "language": "zh-CN",
-  "provider": "none",
+  "provider": "deepseek",
   "model": "deepseek-v4-flash",
   "editorialSeed": "config/editorial-seed-zh.json",
   "api": {
-    "baseUrl": "",
-    "chatCompletionsPath": ""
+    "baseUrl": "https://api.deepseek.com",
+    "chatCompletionsPath": "/chat/completions",
+    "thinking": "disabled",
+    "batchSize": 5,
+    "maxTokens": 12000,
+    "overviewMaxTokens": 4000,
+    "timeoutMs": 120000,
+    "maxRetries": 3
   },
   "editorial": {
     "preserveAllItems": true,
