@@ -49,8 +49,12 @@ V1 prioritizes public/free sources. Key-required, paid, or fragile sources are d
    templates/slides.html -> pif-YYYY-MM-slides.html
    scripts/export-slides-pdf.sh -> pif-YYYY-MM-slides.pdf
 
-7. Public web digest
-   archive/feeds/YYYY-MM-DD.json -> scripts/build-site.js -> GitHub Pages
+7. Chinese weekly digest materialization
+   scripts/generate-digest.js -> digest-peptides-zh.json
+   default: complete source fallback; DeepSeek adapter reserved but disabled
+
+8. Public web digest
+   archive/digests/YYYY-MM-DD.json -> scripts/build-site.js -> GitHub Pages
 ```
 
 By default, `/pif` reads the central feed through the GitHub raw CDN. Use `--no-remote` for local fallback.
@@ -61,12 +65,18 @@ The weekly feed is also published as a static GitHub Pages site:
 
 https://waylongo.github.io/peptide-intelligence-frontiers/
 
-The site is generated without model calls. It renders the structured feed into a Chinese-first intelligence page with Top Signals, category sections, client-side filtering, source links, evidence metadata, score reasons, and feed healthcheck details.
+The site is a static Chinese weekly digest. GitHub Actions updates it every Monday after feed generation. It keeps every valid feed item, groups records into fixed editorial sections, preserves source links and identifiers, and does not expose search, ranking, or conversational features.
+
+`config/digest.json` reserves `deepseek-v4-flash` as the future organizer. The provider is currently `none`, its API fields are blank, and `scripts/generate-digest.js` emits a complete source-backed fallback. The current issue can also load a date-matched Chinese editorial seed from `config/editorial-seed-zh.json`; unmatched or future items remain explicit source fallbacks until the model adapter is enabled. The public site never receives an API key and never calls a model at page-view time.
+
+Chinese materialized items support `titleZh`, `whatItIsZh`, `whyItMattersZh`, `summaryZh`, and `keyPoints`. The site renders only fixed sections that contain records in the current issue; empty sections remain in the data contract but are omitted from the page and issue index.
 
 Generated public data:
 
-- `/data/latest.json`: latest `feed-peptides.json` schema.
-- `/data/archive/YYYY-MM-DD.json`: archived weekly feed snapshots.
+- `/data/latest.json`: latest raw `feed-peptides.json` schema.
+- `/data/digest-latest.json`: latest Chinese weekly digest schema.
+- `/data/archive/YYYY-MM-DD.json`: archived raw feed snapshots.
+- `/data/digest-archive/YYYY-MM-DD.json`: archived weekly digest snapshots.
 - `/archive/`: dated archive index.
 - `/archive/YYYY-MM-DD/`: rendered historical weekly page.
 
@@ -74,6 +84,9 @@ Local web build:
 
 ```bash
 node scripts/archive-feed.js
+node scripts/generate-digest.js --provider=none
+node scripts/check-digest-quality.js
+node scripts/archive-digest.js
 node scripts/build-site.js --strict --out=_site
 ```
 
@@ -123,9 +136,15 @@ node --check scripts/generate-feed.js
 node --check scripts/prepare-digest.js
 node --check scripts/check-feed-quality.js
 node --check scripts/archive-feed.js
+node --check scripts/generate-digest.js
+node --check scripts/check-digest-quality.js
+node --check scripts/archive-digest.js
 node --check scripts/build-site.js
 node scripts/generate-feed.js --self-test
 node scripts/prepare-digest.js --no-remote --days=30
 node scripts/check-feed-quality.js --feed=feed-peptides.json
+node scripts/generate-digest.js --provider=none
+node scripts/check-digest-quality.js
+node scripts/archive-digest.js
 node scripts/build-site.js --strict --out=_site
 ```

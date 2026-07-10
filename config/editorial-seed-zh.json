@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "issueDate": "2026-07-09",
+  "overview": {
+    "titleZh": "本周多肽药物研发情报",
+    "summaryZh": "本期内容集中在两条主线：临床登记侧关注 GIP/GLP-1 相关机制、精准用药和健康经济学问题；研究文献侧覆盖 GLP-1 的神经精神、妊娠与家庭层面影响，以及宏环肽合成和靶向放射性配体影像。来源未提供公司管线、监管、专利或 BD 新记录，因此页面仅展示实际有内容的栏目。",
+    "themes": [
+      "GLP-1/GIP 从体重终点延伸到安全性、行为和精准用药问题",
+      "宏环肽自动化合成与按需生产继续拓展多肽工程边界",
+      "ACP3 靶向放射性配体进入首次人体影像与剂量学评估"
+    ]
+  },
+  "sectionSummaries": {
+    "clinical": "4 条临床登记分别关注 GIP 与呕吐机制、遗传因素对 GLP-1/GIP 药物反应的预测、膳食补充剂对食欲激素的影响，以及肥胖药物的临床与经济结局。它们均为研究登记，不代表已经获得阳性结果。",
+    "literature": "9 条研究记录覆盖 GLP-1 的神经精神、妊娠、家庭与进食行为议题，同时包括宏环肽合成、太空任务中的按需多肽生产，以及 ACP3 靶向放射性配体的首次人体影像研究。"
+  },
+  "items": {
+    "https://clinicaltrials.gov/study/NCT07687589": {
+      "titleZh": "GIP 诱导内脏灌注增加的止吐效应研究",
+      "summaryZh": "一项在健康受试者中研究 GIP、内脏灌注与呕吐反应关系的临床登记。",
+      "whatItIsZh": "University of Copenhagen 发起的邀请入组研究，干预包括 GIP、GLP-1 (7-36) amide、apomorphine 和生理盐水，目的是观察 GIP 相关内脏灌注变化与呕吐反应之间的关系。",
+      "whyItMattersZh": "恶心和呕吐是肠促胰素相关治疗的重要耐受性问题。该研究若能澄清胃肠激素、血流变化与呕吐反应的联系，可为理解和管理相关症状提供机制线索；登记信息尚未提供研究结果。",
+      "keyPoints": ["NCT07687589", "状态：ENROLLING_BY_INVITATION", "阶段：NA"]
+    },
+    "https://clinicaltrials.gov/study/NCT07653412": {
+      "titleZh": "利用遗传信息预测肥胖患者对 GLP-1/GIP 激动剂的反应",
+      "summaryZh": "一项探索遗传特征能否预测 semaglutide 或 tirzepatide 治疗反应的肥胖精准医学研究。",
+      "whatItIsZh": "National and Kapodistrian University of Athens 发起的招募中研究，面向接受 semaglutide 或 tirzepatide 的肥胖人群，评估遗传因素与治疗反应之间的关系。",
+      "whyItMattersZh": "同类药物在个体间可能出现不同反应。若遗传特征具有预测价值，未来可能支持患者分层和更有针对性的治疗选择；目前来源仅证明研究正在开展，尚无预测效果数据。",
+      "keyPoints": ["NCT07653412", "状态：RECRUITING", "干预：Semaglutide 或 Tirzepatide"]
+    },
+    "https://clinicaltrials.gov/study/NCT07240246": {
+      "titleZh": "植物提取物膳食补充剂对超重及肥胖成人食欲激素的影响",
+      "summaryZh": "一项比较植物提取物膳食补充剂与安慰剂对食欲调节激素影响的已完成研究。",
+      "whatItIsZh": "FFoQSI 发起的已完成研究，在超重或肥胖成人中比较植物提取物膳食补充剂与安慰剂，并观察包括 GLP-1 在内的食欲调节激素。",
+      "whyItMattersZh": "该研究有助于判断营养干预是否会影响内源性食欲激素，但它不是 GLP-1 药物试验，不能据此推断多肽药物的减重效果。登记页未提供结果。",
+      "keyPoints": ["NCT07240246", "状态：COMPLETED", "干预：植物提取物膳食补充剂与安慰剂"]
+    },
+    "https://clinicaltrials.gov/study/NCT07640139": {
+      "titleZh": "肥胖药物对临床与经济结局影响的评估",
+      "summaryZh": "一项评估 GLP-1 和 GLP-1/GIP 类肥胖治疗临床及经济结果的研究登记。",
+      "whatItIsZh": "Indiana University 发起的邀请入组研究，关注使用 GLP-1 或 GLP-1/GIP 类肠促胰素治疗后产生的临床结局和经济结局。",
+      "whyItMattersZh": "研究视角从体重和代谢指标延伸到医疗利用与经济影响，可能为支付、可及性和真实世界价值评估提供资料；当前登记没有公布具体结果。",
+      "keyPoints": ["NCT07640139", "状态：ENROLLING_BY_INVITATION", "干预：GLP-1 和 GLP-1/GIP 类治疗"]
+    },
+    "https://doi.org/10.1038/s41526-026-00630-z": {
+      "titleZh": "多年太空探索中的按需多肽治疗与现场生产可行性",
+      "summaryZh": "一篇分析长期太空任务中按需多肽治疗价值及重组生产可行性的论文。",
+      "whatItIsZh": "发表于 NPJ Microgravity 的研究文章，从临床需求和任务运行角度讨论多年太空探索中按需生产多肽治疗药物的相关性，并分析重组生产的可行性。",
+      "whyItMattersZh": "长期任务面临药品储存期限、补给和载荷限制，现场生产可能改变多肽药物的供应方式。当前来源只提供文献元数据，具体生产系统、产量和验证结果需要阅读全文。",
+      "keyPoints": ["期刊：NPJ Microgravity", "DOI：10.1038/s41526-026-00630-z", "研究类型：journal article"]
+    },
+    "https://doi.org/10.1177/21532176261467610": {
+      "titleZh": "照护者使用 GLP-1 药物对家庭饮食环境与儿童健康行为的影响",
+      "summaryZh": "一篇把 GLP-1 使用影响从个人扩展到家庭环境和儿童行为的研究文章。",
+      "whatItIsZh": "发表于 Child Obes 的文章，研究照护者使用 GLP-1 相关药物后，家庭食物环境以及儿童健康行为可能发生的变化。",
+      "whyItMattersZh": "它关注药物使用的家庭层面外溢效应，可补充传统体重和代谢终点之外的真实世界观察；来源元数据未提供研究设计、样本量或结果，不能据标题判断效应方向。",
+      "keyPoints": ["期刊：Child Obes", "DOI：10.1177/21532176261467610", "研究类型：journal article"]
+    },
+    "https://doi.org/10.1002/eat.70169": {
+      "titleZh": "GLP-1 受体激动在小鼠中加重活动性厌食",
+      "summaryZh": "一项关注 GLP-1 受体激动与小鼠活动性厌食关系的动物研究。",
+      "whatItIsZh": "发表于 Int J Eat Disord 的动物研究，题目报告 GLP-1 receptor agonism 在小鼠活动性厌食模型中使相关表现加重。",
+      "whyItMattersZh": "该结果提示在进食障碍背景下需要进一步研究 GLP-1 通路的行为和安全性影响。不过这是小鼠研究，不能直接外推到人类用药，效应大小和实验条件需阅读全文确认。",
+      "keyPoints": ["研究对象：小鼠", "期刊：Int J Eat Disord", "DOI：10.1002/eat.70169"]
+    },
+    "https://doi.org/10.1021/jacs.6c09909": {
+      "titleZh": "PMDA 连接子实现未保护多肽的赖氨酸选择性环化与自动化宏环组装",
+      "summaryZh": "一项面向宏环肽合成的新型连接子与自动化组装方法研究。",
+      "whatItIsZh": "发表于 J Am Chem Soc 的方法学论文，提出模块化 PMDA linker，用于未保护多肽的 lysine-selective cyclization，并支持自动化 macrocycle assembly。",
+      "whyItMattersZh": "选择性环化和自动化组装可能降低宏环肽库构建与合成开发的操作复杂度，为发现和制造流程提供新工具；方法适用范围、收率和可放大性仍需以全文数据判断。",
+      "keyPoints": ["期刊：J Am Chem Soc", "DOI：10.1021/jacs.6c09909", "技术：赖氨酸选择性环化"]
+    },
+    "https://doi.org/10.1111/dom.71088": {
+      "titleZh": "Tirzepatide、Semaglutide 及其他 GLP-1 受体激动剂的神经精神结局",
+      "summaryZh": "一篇比较多种 GLP-1 相关治疗神经精神结局的研究文章。",
+      "whatItIsZh": "发表于 Diabetes Obes Metab 的文章，关注 tirzepatide、semaglutide 和其他 GLP-1 receptor agonists 使用者的 neuropsychiatric outcomes。",
+      "whyItMattersZh": "神经精神结局关系到这类药物的长期获益—风险判断和临床监测。来源元数据没有提供研究设计、效应值或混杂因素处理方式，因此暂不能判断风险方向和因果关系。",
+      "keyPoints": ["期刊：Diabetes Obes Metab", "DOI：10.1111/dom.71088", "关注点：神经精神结局"]
+    },
+    "https://doi.org/10.1038/s41366-026-02136-w": {
+      "titleZh": "对 GLP-1 类似物联合 Bupropion/Naltrexone 减重研究统计分析的质疑",
+      "summaryZh": "一封针对既有回顾性队列研究统计方法提出疑问的评论文章。",
+      "whatItIsZh": "发表于 Int J Obes 的 letter/comment，讨论一项“GLP-1 analogue 联合 bupropion/naltrexone 对体重减轻影响”的回顾性队列研究，并对其统计分析提出担忧。",
+      "whyItMattersZh": "它提示联合治疗结论可能受分析方法影响。在原研究回应或重新分析前，相关效果估计应谨慎解释；这篇内容本身是方法学评论，不是新的疗效试验。",
+      "keyPoints": ["文章类型：letter / comment", "期刊：Int J Obes", "DOI：10.1038/s41366-026-02136-w"]
+    },
+    "https://doi.org/10.1038/s41598-026-61582-8": {
+      "titleZh": "母体暴露于 GLP-1 受体激动剂后的妊娠结局：系统综述与 Meta 分析",
+      "summaryZh": "一项汇总母体 GLP-1 受体激动剂暴露与妊娠结局证据的系统综述和 Meta 分析。",
+      "whatItIsZh": "发表于 Sci Rep 的系统综述与 meta-analysis，整合母体使用 GLP-1 receptor agonists 后的妊娠结局资料。",
+      "whyItMattersZh": "妊娠暴露证据直接关系到用药咨询和安全性评估。系统汇总有助于识别现有信号与证据缺口，但来源元数据未提供纳入研究数量、效应值或偏倚评估，结论需阅读全文。",
+      "keyPoints": ["研究类型：系统综述与 Meta 分析", "期刊：Sci Rep", "DOI：10.1038/s41598-026-61582-8"]
+    },
+    "https://doi.org/10.1016/j.neubiorev.2026.106846": {
+      "titleZh": "PMOS 中神经内分泌—食欲—心理健康三角及 GLP-1 受体激动剂的意义",
+      "summaryZh": "一篇从神经内分泌、食欲和心理健康联系讨论 GLP-1 治疗意义的综述。",
+      "whatItIsZh": "发表于 Neurosci Biobehav Rev 的综述文章，围绕 PMOS 中 neuroendocrine、appetite 与 mental health 三者的联系，讨论 GLP-1 receptor agonist therapy 的潜在意义。",
+      "whyItMattersZh": "该视角把代谢治疗与心理健康问题放在同一框架中，有助于提出跨领域研究问题；综述属于证据整合与观点分析，不能视为 GLP-1 治疗在 PMOS 中已经有效的临床证明。",
+      "keyPoints": ["文章类型：review", "期刊：Neurosci Biobehav Rev", "DOI：10.1016/j.neubiorev.2026.106846"]
+    },
+    "http://jnm.snmjournals.org/cgi/content/short/67/7/1079?rss=1": {
+      "titleZh": "首次人体 [68Ga]Ga-OncoACP3-DOTA PET 的药代动力学与剂量学研究",
+      "summaryZh": "一项在转移性去势抵抗性前列腺癌患者中开展的 ACP3 靶向放射性配体首次人体 PET 研究。",
+      "whatItIsZh": "研究在 7 名 metastatic castration-resistant prostate cancer 患者中评估 [68Ga]Ga-OncoACP3-DOTA 的动态分布、药代动力学和辐射剂量。来源摘要报告转移灶摄取随时间增加，标准注射对应的有效剂量为 3.50 mSv。",
+      "whyItMattersZh": "这是 ACP3 靶向放射性配体进入人体影像和剂量学验证的早期证据，可帮助判断靶点成像潜力和后续开发条件；样本仅 7 人，且研究评价的是 PET 成像与剂量学，不代表治疗有效性。",
+      "keyPoints": ["首次人体研究，7 名患者", "平均有效剂量：0.0192 mSv/MBq", "标准注射有效剂量：3.50 mSv"]
+    }
+  }
+}

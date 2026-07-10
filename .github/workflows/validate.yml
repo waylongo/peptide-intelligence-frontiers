@@ -31,6 +31,9 @@ jobs:
           node --check scripts/generate-feed.js
           node --check scripts/check-feed-quality.js
           node --check scripts/archive-feed.js
+          node --check scripts/generate-digest.js
+          node --check scripts/check-digest-quality.js
+          node --check scripts/archive-digest.js
           node --check scripts/build-site.js
           node scripts/generate-feed.js --self-test
 
@@ -43,18 +46,25 @@ jobs:
             'README.md',
             'SKILL.md',
             'config/sources.json',
+            'config/digest.json',
+            'config/editorial-seed-zh.json',
             'feed-peptides.json',
+            'digest-peptides-zh.json',
             'state-feed.json',
             'scripts/prepare-digest.js',
             'scripts/generate-feed.js',
             'scripts/check-feed-quality.js',
             'scripts/archive-feed.js',
+            'scripts/generate-digest.js',
+            'scripts/check-digest-quality.js',
+            'scripts/archive-digest.js',
             'scripts/build-site.js',
             'prompts/digest-intro.md',
             'prompts/summarize-papers.md',
             'prompts/summarize-official.md',
             'prompts/summarize-news.md',
-            'prompts/translate.md'
+            'prompts/translate.md',
+            'prompts/generate-digest-zh.md'
           ];
 
           for (const file of requiredFiles) {
@@ -103,15 +113,31 @@ jobs:
 
           const state = JSON.parse(fs.readFileSync('state-feed.json', 'utf8'));
           if (!state || typeof state !== 'object') throw new Error('state-feed.json must be an object');
+
+          const digest = JSON.parse(fs.readFileSync('digest-peptides-zh.json', 'utf8'));
+          if (digest.language !== 'zh-CN') throw new Error('digest language must be zh-CN');
+          if (digest.digestMode !== 'complete') throw new Error('digest mode must be complete');
+          if (!Array.isArray(digest.items)) throw new Error('digest items must be an array');
           NODE
 
       - name: Check feed quality
         run: node scripts/check-feed-quality.js
 
+      - name: Check digest completeness
+        run: node scripts/check-digest-quality.js
+
       - name: Build static site
         run: |
-          node scripts/archive-feed.js --archive-dir=/tmp/pif-archive
-          node scripts/build-site.js --archive-dir=/tmp/pif-archive --out=/tmp/pif-site --strict
+          node scripts/generate-digest.js --provider=none --out=/tmp/pif-digest.json
+          node scripts/check-digest-quality.js --digest=/tmp/pif-digest.json
+          node scripts/archive-feed.js --archive-dir=/tmp/pif-feed-archive
+          node scripts/archive-digest.js --digest=/tmp/pif-digest.json --archive-dir=/tmp/pif-digest-archive
+          node scripts/build-site.js \
+            --digest=/tmp/pif-digest.json \
+            --archive-dir=/tmp/pif-feed-archive \
+            --digest-archive-dir=/tmp/pif-digest-archive \
+            --out=/tmp/pif-site \
+            --strict
 
       - name: Smoke test local fallback
         run: |

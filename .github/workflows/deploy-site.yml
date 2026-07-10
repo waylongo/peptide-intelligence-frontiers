@@ -5,9 +5,12 @@ on:
     branches:
       - main
     paths:
-      - "feed-peptides.json"
+      - "digest-peptides-zh.json"
       - "archive/feeds/**"
+      - "archive/digests/**"
       - "scripts/build-site.js"
+      - "config/digest.json"
+      - "config/editorial-seed-zh.json"
       - ".github/workflows/deploy-site.yml"
   workflow_dispatch:
 

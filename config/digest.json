@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "language": "zh-CN",
+  "provider": "none",
+  "model": "deepseek-v4-flash",
+  "editorialSeed": "config/editorial-seed-zh.json",
+  "api": {
+    "baseUrl": "",
+    "chatCompletionsPath": ""
+  },
+  "editorial": {
+    "preserveAllItems": true,
+    "enableRanking": false,
+    "categoryOrder": [
+      "company_official",
+      "clinical_registry",
+      "regulatory",
+      "literature",
+      "conference",
+      "patent",
+      "industry_news",
+      "knowledgebase"
+    ]
+  }
+}
