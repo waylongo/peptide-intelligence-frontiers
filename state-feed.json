@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-10T13:19:00.709Z",
+  "generatedAt": "2026-07-13T01:05:15.358Z",
   "lookbackDays": 30,
-  "lastItemCount": 19,
+  "lastItemCount": 15,
   "publishedKeys": {
     "nct:NCT07687589": "2026-07-10",
     "nct:NCT07653412": "2026-07-10",
@@ -21,6 +21,21 @@
     "doi:10.1016/j.crwh.2026.e00831": "2026-07-10",
     "doi:10.1016/j.jacig.2026.100751": "2026-07-10",
     "url:https://dailymed.nlm.nih.gov/dailymed/lookup.cfm": "2026-07-10",
-    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1079": "2026-07-10"
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1079": "2026-07-10",
+    "doi:10.1016/j.stemcr.2026.103008": "2026-07-13",
+    "doi:10.1186/s13041-026-01329-8": "2026-07-13",
+    "doi:10.1016/j.amjcard.2026.06.029": "2026-07-13",
+    "doi:10.1007/s00198-026-08134-y": "2026-07-13",
+    "doi:10.1093/oncolo/oyag268": "2026-07-13",
+    "doi:10.1007/s10072-026-09238-3": "2026-07-13",
+    "doi:10.1007/164_2026_821": "2026-07-13",
+    "doi:10.1186/s12886-026-05122-y": "2026-07-13",
+    "doi:10.1016/j.metop.2026.100484": "2026-07-13",
+    "doi:10.1016/j.obpill.2026.100291": "2026-07-13",
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1012": "2026-07-13",
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1037": "2026-07-13",
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1109": "2026-07-13",
+    "url:https://www.fiercepharma.com/pharma/more-az-china-deals-kailera-hengrui-oral-glp-1-data-scrutiny-chinese-trials": "2026-07-13",
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1102": "2026-07-13"
   }
 }
