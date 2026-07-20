@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-13T01:05:15.358Z",
+  "generatedAt": "2026-07-20T03:03:42.144Z",
   "lookbackDays": 30,
-  "lastItemCount": 15,
+  "lastItemCount": 6,
   "publishedKeys": {
     "nct:NCT07687589": "2026-07-10",
     "nct:NCT07653412": "2026-07-10",
@@ -36,6 +36,12 @@
     "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1037": "2026-07-13",
     "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1109": "2026-07-13",
     "url:https://www.fiercepharma.com/pharma/more-az-china-deals-kailera-hengrui-oral-glp-1-data-scrutiny-chinese-trials": "2026-07-13",
-    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1102": "2026-07-13"
+    "url:http://jnm.snmjournals.org/cgi/content/short/67/7/1102": "2026-07-13",
+    "nct:NCT02363335": "2026-07-20",
+    "nct:NCT07703683": "2026-07-20",
+    "nct:NCT06982378": "2026-07-20",
+    "doi:10.1016/j.obpill.2026.100295": "2026-07-20",
+    "doi:10.1016/j.obpill.2026.100292": "2026-07-20",
+    "url:https://www.fiercepharma.com/pharma/novo-gets-head-start-lilly-europe-ec-approval-wegovy-pill-0": "2026-07-20"
   }
 }
