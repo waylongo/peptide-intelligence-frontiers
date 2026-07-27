@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-20T03:03:42.144Z",
+  "generatedAt": "2026-07-27T01:08:58.483Z",
   "lookbackDays": 30,
-  "lastItemCount": 6,
+  "lastItemCount": 14,
   "publishedKeys": {
     "nct:NCT07687589": "2026-07-10",
     "nct:NCT07653412": "2026-07-10",
@@ -42,6 +42,20 @@
     "nct:NCT06982378": "2026-07-20",
     "doi:10.1016/j.obpill.2026.100295": "2026-07-20",
     "doi:10.1016/j.obpill.2026.100292": "2026-07-20",
-    "url:https://www.fiercepharma.com/pharma/novo-gets-head-start-lilly-europe-ec-approval-wegovy-pill-0": "2026-07-20"
+    "url:https://www.fiercepharma.com/pharma/novo-gets-head-start-lilly-europe-ec-approval-wegovy-pill-0": "2026-07-20",
+    "doi:10.1136/bmjopen-2026-120259": "2026-07-27",
+    "doi:10.64898/2026.07.22.26358702": "2026-07-27",
+    "doi:10.1097/mat.0000000000002804": "2026-07-27",
+    "doi:10.1001/jama.2026.9487": "2026-07-27",
+    "doi:10.2337/db25-1009": "2026-07-27",
+    "doi:10.1007/s11739-026-04468-x": "2026-07-27",
+    "doi:10.1016/j.appet.2026.108723": "2026-07-27",
+    "doi:10.1016/s2215-0366(26)00223-3": "2026-07-27",
+    "doi:10.1080/19490976.2026.2687937": "2026-07-27",
+    "doi:10.1016/j.bioorg.2026.110210": "2026-07-27",
+    "url:https://www.biopharmadive.com/news/lilly-retatrutide-fda-application-obesity-drug-results/825987/": "2026-07-27",
+    "url:https://www.fiercebiotech.com/biotech/lillys-triple-g-drug-hits-226-weight-loss-cardio-risk-impact-disappoints": "2026-07-27",
+    "url:https://www.medrxiv.org/content/10.64898/2026.07.22.26358702v1": "2026-07-27",
+    "url:https://www.fiercepharma.com/pharma/fda-adcomm-advisers-recommend-removal-restrictions-1st-7-peptides": "2026-07-27"
   }
 }
