@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T01:08:58.483Z",
+  "generatedAt": "2026-08-03T01:06:54.233Z",
   "lookbackDays": 30,
   "lastItemCount": 14,
   "publishedKeys": {
@@ -56,6 +56,20 @@
     "url:https://www.biopharmadive.com/news/lilly-retatrutide-fda-application-obesity-drug-results/825987/": "2026-07-27",
     "url:https://www.fiercebiotech.com/biotech/lillys-triple-g-drug-hits-226-weight-loss-cardio-risk-impact-disappoints": "2026-07-27",
     "url:https://www.medrxiv.org/content/10.64898/2026.07.22.26358702v1": "2026-07-27",
-    "url:https://www.fiercepharma.com/pharma/fda-adcomm-advisers-recommend-removal-restrictions-1st-7-peptides": "2026-07-27"
+    "url:https://www.fiercepharma.com/pharma/fda-adcomm-advisers-recommend-removal-restrictions-1st-7-peptides": "2026-07-27",
+    "nct:NCT06374875": "2026-08-03",
+    "doi:10.1002/jcph.70224": "2026-08-03",
+    "doi:10.1186/s40842-026-00312-5": "2026-08-03",
+    "doi:10.1016/j.freeradbiomed.2026.08.002": "2026-08-03",
+    "doi:10.1016/j.appet.2026.108732": "2026-08-03",
+    "doi:10.1093/ejendo/lvag135": "2026-08-03",
+    "doi:10.1007/s00417-026-07430-x": "2026-08-03",
+    "doi:10.1177/00333549261464876": "2026-08-03",
+    "doi:10.1186/s40842-026-00318-z": "2026-08-03",
+    "url:https://www.biorxiv.org/content/10.64898/2026.07.28.741376v1": "2026-08-03",
+    "url:https://www.sec.gov/Archives/edgar/data/1607678/000119312526323652/": "2026-08-03",
+    "url:https://www.fiercebiotech.com/biotech/eli-lilly-rides-launch-success-and-development-timelines-top-new-ranking-worlds-most": "2026-08-03",
+    "url:https://www.fiercebiotech.com/biotech/altimmunes-next-gen-glp-1-curbs-heavy-drinking-unequivocal-ph-2-alcohol-use-disorder-win": "2026-08-03",
+    "url:https://www.fiercepharma.com/pharma/psychedelics-peptides-and-glp-1s": "2026-08-03"
   }
 }
