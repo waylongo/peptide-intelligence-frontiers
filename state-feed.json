@@ -1,14 +1,8 @@
 {
-  "generatedAt": "2026-08-16T23:45:25.382Z",
+  "generatedAt": "2026-08-23T23:46:49.851Z",
   "lookbackDays": 30,
-  "lastItemCount": 11,
+  "lastItemCount": 16,
   "publishedKeys": {
-    "nct:NCT02363335": "2026-07-20",
-    "nct:NCT07703683": "2026-07-20",
-    "nct:NCT06982378": "2026-07-20",
-    "doi:10.1016/j.obpill.2026.100295": "2026-07-20",
-    "doi:10.1016/j.obpill.2026.100292": "2026-07-20",
-    "url:https://www.fiercepharma.com/pharma/novo-gets-head-start-lilly-europe-ec-approval-wegovy-pill-0": "2026-07-20",
     "doi:10.1136/bmjopen-2026-120259": "2026-07-27",
     "doi:10.64898/2026.07.22.26358702": "2026-07-27",
     "doi:10.1097/mat.0000000000002804": "2026-07-27",
@@ -63,6 +57,22 @@
     "doi:10.1177/0310057x261460073": "2026-08-16",
     "doi:10.1177/0310057x261460074": "2026-08-16",
     "url:https://www.fiercepharma.com/pharma/obesity-not-zero-sum-game-patients-crave-optionality-novo-ceo-says-reuters": "2026-08-16",
-    "url:https://www.biorxiv.org/content/10.64898/2026.08.12.744519v1": "2026-08-16"
+    "url:https://www.biorxiv.org/content/10.64898/2026.08.12.744519v1": "2026-08-16",
+    "nct:NCT02363335": "2026-08-23",
+    "nct:NCT07777575": "2026-08-23",
+    "doi:10.1016/s2213-8587(26)00160-9": "2026-08-23",
+    "doi:10.1016/j.jad.2026.122407": "2026-08-23",
+    "doi:10.1007/s12325-026-03750-w": "2026-08-23",
+    "doi:10.1007/s00210-026-05813-9": "2026-08-23",
+    "doi:10.64898/2026.08.20.746104": "2026-08-23",
+    "doi:10.1016/j.ejim.2026.107164": "2026-08-23",
+    "doi:10.1016/j.appet.2026.108759": "2026-08-23",
+    "doi:10.1001/jama.2026.12059": "2026-08-23",
+    "url:https://www.fiercepharma.com/pharma/novo-nordisk-kicks-trial-testing-smaller-doses-wegovy-pill": "2026-08-23",
+    "url:https://www.biorxiv.org/content/10.64898/2026.08.21.746227v1": "2026-08-23",
+    "url:https://www.medrxiv.org/content/10.64898/2026.08.19.26360839v1": "2026-08-23",
+    "url:https://www.biopharmadive.com/news/glp-1-market-cost-prescribing-preferences/828424/": "2026-08-23",
+    "url:https://www.fiercebiotech.com/biotech/amylyx-speeds-toward-approval-glp-1-inhibitor-halves-blood-sugar-crashes-ph-3-win": "2026-08-23",
+    "url:https://www.fiercepharma.com/pharma/what-did-we-learn-big-pharmas-q2-results": "2026-08-23"
   }
 }
