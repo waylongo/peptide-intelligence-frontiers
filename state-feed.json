@@ -1,19 +1,8 @@
 {
-  "generatedAt": "2026-09-14T01:25:01.701Z",
+  "generatedAt": "2026-09-21T01:23:50.374Z",
   "lookbackDays": 30,
-  "lastItemCount": 10,
+  "lastItemCount": 9,
   "publishedKeys": {
-    "nct:NCT06820281": "2026-08-16",
-    "doi:10.1038/s41392-026-02859-2": "2026-08-16",
-    "doi:10.1007/s11892-026-01639-0": "2026-08-16",
-    "doi:10.1002/mco2.70902": "2026-08-16",
-    "doi:10.1016/j.cct.2026.108437": "2026-08-16",
-    "doi:10.1001/jama.2026.12052": "2026-08-16",
-    "doi:10.1227/neu.0000000000004193": "2026-08-16",
-    "doi:10.1177/0310057x261460073": "2026-08-16",
-    "doi:10.1177/0310057x261460074": "2026-08-16",
-    "url:https://www.fiercepharma.com/pharma/obesity-not-zero-sum-game-patients-crave-optionality-novo-ceo-says-reuters": "2026-08-16",
-    "url:https://www.biorxiv.org/content/10.64898/2026.08.12.744519v1": "2026-08-16",
     "nct:NCT02363335": "2026-08-23",
     "nct:NCT07777575": "2026-08-23",
     "doi:10.1016/s2213-8587(26)00160-9": "2026-08-23",
@@ -67,6 +56,15 @@
     "doi:10.1136/gutjnl-2026-340031": "2026-09-14",
     "doi:10.1016/j.bj.2026.101037": "2026-09-14",
     "doi:10.1016/j.clindermatol.2026.09.003": "2026-09-14",
-    "doi:10.1016/j.jinorgbio.2026.113445": "2026-09-14"
+    "doi:10.1016/j.jinorgbio.2026.113445": "2026-09-14",
+    "nct:NCT06820281": "2026-09-21",
+    "doi:10.1016/j.dadr.2026.100474": "2026-09-21",
+    "doi:10.1016/j.obpill.2026.100331": "2026-09-21",
+    "doi:10.1016/j.obpill.2026.100327": "2026-09-21",
+    "url:https://dailymed.nlm.nih.gov/dailymed/lookup.cfm": "2026-09-21",
+    "url:https://www.fiercebiotech.com/research/artelos-ex-astrazeneca-cannabinoid-agonist-holds-its-own-against-glp1s-obese-mice": "2026-09-21",
+    "url:https://www.fiercebiotech.com/pharma/still-bull-novos-ceo-honoring-heritage-and-planning-future-amid-corporate-rebrand": "2026-09-21",
+    "url:https://www.fiercepharma.com/pharma/still-bull-novos-ceo-honoring-heritage-and-planning-future-amid-corporate-rebrand": "2026-09-21",
+    "url:https://www.biopharmadive.com/news/novo-orbis-macrocyclic-peptides-oral-obesity-drugs/830645/": "2026-09-21"
   }
 }
