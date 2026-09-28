@@ -1,24 +1,8 @@
 {
-  "generatedAt": "2026-09-21T01:23:50.374Z",
+  "generatedAt": "2026-09-28T01:53:56.137Z",
   "lookbackDays": 30,
   "lastItemCount": 9,
   "publishedKeys": {
-    "nct:NCT02363335": "2026-08-23",
-    "nct:NCT07777575": "2026-08-23",
-    "doi:10.1016/s2213-8587(26)00160-9": "2026-08-23",
-    "doi:10.1016/j.jad.2026.122407": "2026-08-23",
-    "doi:10.1007/s12325-026-03750-w": "2026-08-23",
-    "doi:10.1007/s00210-026-05813-9": "2026-08-23",
-    "doi:10.64898/2026.08.20.746104": "2026-08-23",
-    "doi:10.1016/j.ejim.2026.107164": "2026-08-23",
-    "doi:10.1016/j.appet.2026.108759": "2026-08-23",
-    "doi:10.1001/jama.2026.12059": "2026-08-23",
-    "url:https://www.fiercepharma.com/pharma/novo-nordisk-kicks-trial-testing-smaller-doses-wegovy-pill": "2026-08-23",
-    "url:https://www.biorxiv.org/content/10.64898/2026.08.21.746227v1": "2026-08-23",
-    "url:https://www.medrxiv.org/content/10.64898/2026.08.19.26360839v1": "2026-08-23",
-    "url:https://www.biopharmadive.com/news/glp-1-market-cost-prescribing-preferences/828424/": "2026-08-23",
-    "url:https://www.fiercebiotech.com/biotech/amylyx-speeds-toward-approval-glp-1-inhibitor-halves-blood-sugar-crashes-ph-3-win": "2026-08-23",
-    "url:https://www.fiercepharma.com/pharma/what-did-we-learn-big-pharmas-q2-results": "2026-08-23",
     "nct:NCT07787936": "2026-08-31",
     "doi:10.1002/pds.70472": "2026-08-31",
     "doi:10.2337/dbi26-0037": "2026-08-31",
@@ -65,6 +49,15 @@
     "url:https://www.fiercebiotech.com/research/artelos-ex-astrazeneca-cannabinoid-agonist-holds-its-own-against-glp1s-obese-mice": "2026-09-21",
     "url:https://www.fiercebiotech.com/pharma/still-bull-novos-ceo-honoring-heritage-and-planning-future-amid-corporate-rebrand": "2026-09-21",
     "url:https://www.fiercepharma.com/pharma/still-bull-novos-ceo-honoring-heritage-and-planning-future-amid-corporate-rebrand": "2026-09-21",
-    "url:https://www.biopharmadive.com/news/novo-orbis-macrocyclic-peptides-oral-obesity-drugs/830645/": "2026-09-21"
+    "url:https://www.biopharmadive.com/news/novo-orbis-macrocyclic-peptides-oral-obesity-drugs/830645/": "2026-09-21",
+    "nct:NCT07777575": "2026-09-28",
+    "doi:10.20944/preprints202609.2026.v1": "2026-09-28",
+    "doi:10.1002/joa3.70455": "2026-09-28",
+    "doi:10.1016/j.bioflm.2026.100400": "2026-09-28",
+    "doi:10.1101/2025.09.26.25336579": "2026-09-28",
+    "url:https://www.fiercepharma.com/marketing/eli-lilly-blasted-promotional-and-emotive-language-glp-1-press-release": "2026-09-28",
+    "url:https://www.fiercepharma.com/pharma/eli-lilly-ceo-touts-70-share-medicare-glp-1-program-reaches-700k-seniors": "2026-09-28",
+    "url:https://www.sec.gov/Archives/edgar/data/1607678/000119312526397219/": "2026-09-28",
+    "url:https://www.fiercepharma.com/pharma/fierce-pharma-week-look-biggest-trends-campaigns-and-conversations": "2026-09-28"
   }
 }
